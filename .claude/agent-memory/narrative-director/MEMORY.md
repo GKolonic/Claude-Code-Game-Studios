@@ -1,0 +1,1 @@
+- [The Faithful — Project Overview](project_the_faithful.md) — core concept, all four pillars, player fantasy, two-scale architecture, current pre-production stage

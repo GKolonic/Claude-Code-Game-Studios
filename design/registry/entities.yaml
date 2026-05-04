@@ -37,7 +37,7 @@
 #   Each entry: name, status, source, referenced_by[], attributes{}, added, revised
 
 version: 1
-last_updated: ""
+last_updated: "2026-04-20"
 
 # ─── ENTITIES ────────────────────────────────────────────────────────────────
 # Named game-world objects: enemies, NPCs, characters, factions, bosses.
@@ -139,7 +139,151 @@ formulas: []
 #
 # Required fields: name, status, source, referenced_by, value, unit, added
 
-constants: []
+constants:
+  - name: GameConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+    value: "Autoload singleton"
+    unit: "GDScript Autoload"
+    notes: "Single access point for all tuning values. All gameplay systems call
+      GameConfig.[domain].[field] — never read .tres files directly."
+    added: 2026-04-20
+    revised: ""
+
+  - name: ConversionConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+      - design/gdd/dialogue-content-database.md
+    value: "res://assets/data/config/conversion_config.tres"
+    unit: "Resource path"
+    notes: "Domain: base_success_chance, trait_modifier_weight, approach_cooldown_turns,
+      hard_mode_base_modifier, max_approaches_per_npc. Consumed by Conversion Logic Engine."
+    added: 2026-04-20
+    revised: ""
+
+  - name: ConversionOutcome
+    status: active
+    source: design/gdd/dialogue-content-database.md
+    referenced_by:
+      - design/gdd/dialogue-content-database.md
+      - design/gdd/rival-faith-system.md
+    value: "PERSUADED | SOFTENED | RESISTED | HARDENED"
+    unit: "GDScript enum"
+    notes: "Canonical 4-value enum for conversion attempt results. Owned by Dialogue Content
+      Database. Referenced by Dialogue & Conversion System (outcome resolution), Conversion
+      Logic Engine (output type), Conversion UI (outcome display), Rival Faith System (rival
+      outcome application). CONVERTED was renamed to PERSUADED (flagged in NPC Character
+      System GDD Rule 9) to eliminate naming collision with BeliefState.CONVERTED.
+      All systems must use these four values — do not add variants without updating this registry."
+    added: 2026-04-20
+    revised: "2026-04-26"
+
+  - name: DialogueDatabase
+    status: active
+    source: design/gdd/dialogue-content-database.md
+    referenced_by:
+      - design/gdd/dialogue-content-database.md
+    value: "Autoload singleton"
+    unit: "GDScript Autoload"
+    notes: "Read-only content registry for all player-facing text. API: get_approach_lines(approach),
+      get_outcome_summary(approach, outcome), get_npc_flavour(archetype), get_rival_lines(approach),
+      is_loaded(). Loads from res://assets/data/dialogue/dialogue_database.tres at startup.
+      Never call DialogueDatabase methods before is_loaded() returns true."
+    added: 2026-04-20
+    revised: ""
+
+  - name: TraitConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+    value: "res://assets/data/config/trait_config.tres"
+    unit: "Resource path"
+    notes: "Domain: common/uncommon/rare trait weights, traits_per_npc min/max.
+      Consumed by NPC Character System."
+    added: 2026-04-20
+    revised: ""
+
+  - name: FaithSpreadConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+    value: "res://assets/data/config/faith_spread_config.tres"
+    unit: "Resource path"
+    notes: "Domain: passive_spread_radius, spread_rate_per_tick, attrition_rate_per_tick,
+      spread_tick_interval_sec. Consumed by Faith Spread System."
+    added: 2026-04-20
+    revised: ""
+
+  - name: RivalFaithConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+    value: "res://assets/data/config/rival_faith_config.tres"
+    unit: "Resource path"
+    notes: "Domain: aggression_interval_turns, reharden_strength, counter_approach_random_weight.
+      Consumed by Rival Faith System."
+    added: 2026-04-20
+    revised: ""
+
+  - name: ProgressionConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+      - design/gdd/game-state-manager.md
+    value: "res://assets/data/config/progression_config.tres"
+    unit: "Resource path"
+    notes: "Domain: faith_power_per_conversion, missionary/court/crusade unlock thresholds,
+      village_win_conversion_pct. Consumed by Multi-path Expansion System, Game State Manager,
+      HUD & Progress System."
+    added: 2026-04-20
+    revised: ""
+
+  - name: GameStateManager
+    status: active
+    source: design/gdd/game-state-manager.md
+    referenced_by:
+      - design/gdd/game-state-manager.md
+    value: "Autoload singleton"
+    unit: "GDScript Autoload"
+    notes: "Turn lifecycle authority. Signals: village_ready, turn_advancing, turn_advanced,
+      village_won, village_lost, faith_power_changed, village_clearing, village_cleared.
+      API: request_end_turn(), get_turn_number(), get_faith_power(), get_gsm_state().
+      Must be listed in Project Settings after NPCRegistry and DialogueConversionSystem."
+    added: 2026-04-25
+    revised: ""
+
+  - name: GSMState
+    status: active
+    source: design/gdd/game-state-manager.md
+    referenced_by:
+      - design/gdd/game-state-manager.md
+    value: "UNINITIALIZED | IDLE | IN_SESSION | TURN_ADVANCING | VILLAGE_WON | VILLAGE_LOST"
+    unit: "GDScript enum"
+    notes: "Six-state machine for the Game State Manager. Consumed by Village Map UI
+      (End Turn button gating), HUD & Progress System (state display), and Save & Load
+      System (save-state serialization and restoration). Referenced by get_gsm_state()."
+    added: 2026-04-25
+    revised: ""
+
+  - name: UITimingConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+    value: "res://assets/data/config/ui_timing_config.tres"
+    unit: "Resource path"
+    notes: "Domain: dialogue_line_hold_sec, outcome_display_hold_sec, scene_transition_duration_sec,
+      portrait_expression_hold_frames. Consumed by Dialogue & Conversion System, Conversion UI."
+    added: 2026-04-20
+    revised: ""
 
 # Example:
 #
