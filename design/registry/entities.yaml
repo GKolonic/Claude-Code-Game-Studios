@@ -106,7 +106,62 @@ items: []
 #   output_range[min, max], added
 # Optional: expression (the actual formula), notes
 
-formulas: []
+formulas:
+  - name: conversion_fraction
+    status: active
+    source: design/gdd/hud-progress-system.md
+    referenced_by:
+      - design/gdd/hud-progress-system.md
+    variables:
+      - converted_count
+      - total_npc_count
+    output_range: [0.0, 1.0]
+    expression: "converted_count / total_npc_count"
+    notes: "HUD F1 — read-only re-derivation for the chronicle card's souls line ('N of M
+      souls'); the GSM owns win/loss evaluation (its Formula 1, >= inclusive). Never rendered
+      as a percentage numeral. total_npc_count = 0 unreachable (GSM EC-1 rejects zero-NPC
+      villages at initialize_village())."
+    added: 2026-08-09
+    revised: ""
+
+  - name: rival_activity_rate
+    status: active
+    source: design/gdd/hud-progress-system.md
+    referenced_by:
+      - design/gdd/hud-progress-system.md
+    variables:
+      - W
+      - turn_i
+      - n
+      - count
+      - rate
+      - gauge
+    output_range: ["QUIET", "ACTIVE"]
+    expression: "W = GameConfig.rival.aggression_interval_turns; stamp turn_i on rival_acted; prune turn_i <= n - W on turn_advanced(n); count = clamp(stamps.size(), 0, W); rate = count / W; gauge = QUIET if count == 0 else ACTIVE"
+    notes: "HUD F2 — presence gauge, not a pressure percentage (one rival at MVP makes rate
+      near-binary). W default 6 per game-config.md; RFS GDD lists 3 — discrepancy flagged for
+      /consistency-check (2026-08-09), HUD reads the field at call time."
+    added: 2026-08-09
+    revised: ""
+
+  - name: chronicle_card_alpha
+    status: active
+    source: design/gdd/hud-progress-system.md
+    referenced_by:
+      - design/gdd/hud-progress-system.md
+    variables:
+      - t
+      - D_in
+      - D_hold
+      - D_fade
+      - D_total
+    output_range: [0.0, 1.0]
+    expression: "a(t) = t/D_in for 0 <= t < D_in; 1 for D_in <= t < D_in + D_hold; 1 - (t - D_in - D_hold)/D_fade for D_in + D_hold <= t <= D_total; 0 for t > D_total; D_in = 0.25s; D_hold = GameConfig.hud.chronicle_card_hold_sec (4.0s); D_fade = GameConfig.hud.chronicle_card_fade_ms / 1000.0 (0.4s)"
+    notes: "HUD F3 — chronicle card alpha envelope (modulate.a, linear ramps only). Applied
+      identically to WON and LOST cards. Reduced-motion override: skip D_in, hold, fade over
+      HUDConfig.reduced_motion_card_fade_ms (100ms); shimmer disabled. Card non-interactive."
+    added: 2026-08-09
+    revised: ""
 
 # Example:
 #
@@ -225,12 +280,15 @@ constants:
     source: design/gdd/game-config.md
     referenced_by:
       - design/gdd/game-config.md
+      - design/gdd/hud-progress-system.md
     value: "res://assets/data/config/rival_faith_config.tres"
     unit: "Resource path"
     notes: "Domain: aggression_interval_turns, reharden_strength, counter_approach_random_weight.
-      Consumed by Rival Faith System."
+      Consumed by Rival Faith System. HUD reads aggression_interval_turns as its F2 window W.
+      NOTE: aggression_interval_turns default is 6 here vs 3 in rival-faith-system.md — flagged
+      for /consistency-check (2026-08-09), not edited."
     added: 2026-04-20
-    revised: ""
+    revised: "2026-08-09"
 
   - name: ProgressionConfig
     status: active
@@ -238,13 +296,14 @@ constants:
     referenced_by:
       - design/gdd/game-config.md
       - design/gdd/game-state-manager.md
+      - design/gdd/hud-progress-system.md
     value: "res://assets/data/config/progression_config.tres"
     unit: "Resource path"
     notes: "Domain: faith_power_per_conversion, missionary/court/crusade unlock thresholds,
       village_win_conversion_pct. Consumed by Multi-path Expansion System, Game State Manager,
       HUD & Progress System."
     added: 2026-04-20
-    revised: ""
+    revised: "2026-08-09"
 
   - name: GameStateManager
     status: active
@@ -265,13 +324,14 @@ constants:
     source: design/gdd/game-state-manager.md
     referenced_by:
       - design/gdd/game-state-manager.md
+      - design/gdd/hud-progress-system.md
     value: "UNINITIALIZED | IDLE | IN_SESSION | TURN_ADVANCING | VILLAGE_WON | VILLAGE_LOST"
     unit: "GDScript enum"
     notes: "Six-state machine for the Game State Manager. Consumed by Village Map UI
       (End Turn button gating), HUD & Progress System (state display), and Save & Load
       System (save-state serialization and restoration). Referenced by get_gsm_state()."
     added: 2026-04-25
-    revised: ""
+    revised: "2026-08-09"
 
   - name: UITimingConfig
     status: active
@@ -283,6 +343,21 @@ constants:
     notes: "Domain: dialogue_line_hold_sec, outcome_display_hold_sec, scene_transition_duration_sec,
       portrait_expression_hold_frames. Consumed by Dialogue & Conversion System, Conversion UI."
     added: 2026-04-20
+    revised: ""
+
+  - name: HUDConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+      - design/gdd/hud-progress-system.md
+    value: "res://assets/data/config/hud_config.tres"
+    unit: "Resource path"
+    notes: "9th config domain (added 2026-08-09 by the HUD & Progress System GDD). Domain:
+      top_strip_height_dp, chronicle_card_hold_sec, chronicle_card_fade_ms,
+      chronicle_card_fade_in_ms, reduced_motion_card_fade_ms. Consumed by HUD & Progress System;
+      top_strip_height_dp is a cross-system layout contract consumed by Village Map View (F1)."
+    added: 2026-08-09
     revised: ""
 
 # Example:

@@ -13,7 +13,7 @@ Game Config is the single external data file that holds every tunable value in T
 
 ## Overview
 
-Game Config is The Faithful's tuning infrastructure. Every balance value, timing constant, probability modifier, and threshold used by gameplay systems is stored in external Godot `.tres` resource files organised by domain (conversion, traits, faith spread, rival faith, progression, UI timing, portrait, village map). An Autoload singleton named `GameConfig` loads these files at startup, validates ranges, and exposes typed accessors to the rest of the game. Systems never read from files directly — they call `GameConfig.conversion.base_success_chance` and receive a float. This separation means designers can change any number without touching GDScript, and the entire tuning surface is visible in the Godot editor's resource inspector rather than buried in code.
+Game Config is The Faithful's tuning infrastructure. Every balance value, timing constant, probability modifier, and threshold used by gameplay systems is stored in external Godot `.tres` resource files organised by domain (conversion, traits, faith spread, rival faith, progression, UI timing, portrait, village map, hud). An Autoload singleton named `GameConfig` loads these files at startup, validates ranges, and exposes typed accessors to the rest of the game. Systems never read from files directly — they call `GameConfig.conversion.base_success_chance` and receive a float. This separation means designers can change any number without touching GDScript, and the entire tuning surface is visible in the Godot editor's resource inspector rather than buried in code.
 
 ## Player Fantasy
 
@@ -25,7 +25,7 @@ The player never directly experiences Game Config — they experience its effect
 
 1. **No hardcoded values.** Every numeric constant used in gameplay logic must be sourced from a GameConfig domain. The only exceptions are pure mathematical constants (e.g., `PI`, array indices, loop bounds) and strings used as dictionary keys. If a programmer hardcodes a balance value, it is a bug.
 
-2. **Eight config domains.** All tuning values are grouped into exactly eight `Resource` subclasses, each in its own `.tres` file:
+2. **Nine config domains.** All tuning values are grouped into exactly nine `Resource` subclasses, each in its own `.tres` file:
    - `ConversionConfig` — approach success rates, trait modifier weights, cooldown durations
    - `TraitConfig` — trait rarity weights, archetype trait counts, modifier magnitudes
    - `FaithSpreadConfig` — passive spread radius, spread rate per tick, attrition rate
@@ -34,6 +34,7 @@ The player never directly experiences Game Config — they experience its effect
    - `UITimingConfig` — dialogue display durations, transition timings, animation hold frames
    - `PortraitConfig` — dissolve timings, conversion overlay colour/timing, reduced-motion overrides (`res://assets/data/config/portrait_config.tres`)
    - `VillageMapConfig` — map layout grid, ink-bleed envelope, rival-marker dwell/fade, return-halo tints (`res://assets/data/config/village_map_config.tres`)
+   - `HUDConfig` — top-strip height, chronicle card timings, reduced-motion card fade (`res://assets/data/config/hud_config.tres`)
 
 3. **Pull pattern.** Systems read config values on demand by calling `GameConfig.[domain].[field]`. Config does not push values to systems, emit signals on load, or cache values inside callers. This prevents stale-value bugs.
 
@@ -50,7 +51,7 @@ The player never directly experiences Game Config — they experience its effect
 | State | Description | Entry Condition | Exit Condition |
 |---|---|---|---|
 | `UNLOADED` | No config data in memory | Game start | `GameConfig._ready()` is called |
-| `LOADING` | Reading `.tres` files from disk | Autoload `_ready()` begins | All 8 domain files parsed |
+| `LOADING` | Reading `.tres` files from disk | Autoload `_ready()` begins | All 9 domain files parsed |
 | `LOADED` | All domains validated and accessible | All files parsed and validated | Game exits, or hot-reload triggered |
 | `HOT_RELOADING` | A domain file changed (editor only) | File watcher detects a `.tres` save | Domain re-validated and swapped |
 
@@ -69,7 +70,7 @@ The game's `_ready()` calls in other Autoloads must not complete until `GameConf
 | Conversion UI | Direct consumer | `UITimingConfig` — transition timings, animation holds |
 | Portrait & Expression System | Direct consumer | `PortraitConfig` — dissolve timings, overlay colour/timing, reduced-motion overrides |
 | Village Map View | Direct consumer | `VillageMapConfig` — map layout grid, ink-bleed envelope, rival-marker dwell/fade, return-halo tints |
-| HUD & Progress System | Direct consumer | `ProgressionConfig` — milestone thresholds for progress display |
+| HUD & Progress System | Direct consumer | `ProgressionConfig` — milestone thresholds for progress display; `HUDConfig` — strip height, chronicle card timings |
 | Game State Manager | Indirect consumer | Reads progression thresholds via GameConfig to evaluate win conditions |
 | Save & Load System | Non-consumer | Config is not saved with game state — it is always reloaded from `.tres` files |
 | All other systems | No direct dependency | Systems that do not consume tuning values do not reference GameConfig |
@@ -184,6 +185,18 @@ if loaded_value != file_value:
 
 *Proposed by the Village Map View GDD (system #13). `ink_bleed_color` ships as `#E6BE64` per OQ-5 resolution (Art-Director-confirmable, non-blocking). Added 2026-08-09.*
 
+**HUDConfig**
+
+| Field | Min | Max | Default | Required |
+|---|---|---|---|---|
+| `top_strip_height_dp` | 44 | 64 | 56 | Yes |
+| `chronicle_card_hold_sec` | 3.0 | 6.0 | 4.0 | Yes |
+| `chronicle_card_fade_ms` | 200 | 800 | 400 | Yes |
+| `chronicle_card_fade_in_ms` | 100 | 400 | 250 | Yes |
+| `reduced_motion_card_fade_ms` | 0 | 500 | 100 | Yes |
+
+*Proposed by the HUD & Progress System GDD (system #14). Strip height is a cross-system layout contract consumed by the Village Map View (F1 top inset); card timings drive the chronicle card envelope (F3). Added 2026-08-09.*
+
 ## Edge Cases
 
 **EC-1: Missing `.tres` file.** If a domain file cannot be found at startup, `GameConfig` logs a hard error and the game halts with a descriptive message: `"GameConfig: Required file res://assets/data/config/conversion_config.tres not found."` The game must not continue with missing config — a missing file means an unknown tuning state, which is worse than a crash.
@@ -222,7 +235,7 @@ None. Game Config has zero dependencies. It is the foundation layer.
 - Conversion UI — `UITimingConfig`
 - Portrait & Expression System — `PortraitConfig`
 - Village Map View — `VillageMapConfig`
-- HUD & Progress System — `ProgressionConfig`
+- HUD & Progress System — `ProgressionConfig`, `HUDConfig`
 - Game State Manager — `ProgressionConfig` (win condition thresholds)
 
 **Transitive dependents (depend on a direct consumer):**
@@ -236,7 +249,7 @@ None. Game Config has zero dependencies. It is the foundation layer.
 
 ## Tuning Knobs
 
-All fields in all eight domains are tuning knobs. Future GDDs should reference this document when listing their tuning knobs — they do not need to re-specify range/default for values that live here.
+All fields in all nine domains are tuning knobs. Future GDDs should reference this document when listing their tuning knobs — they do not need to re-specify range/default for values that live here.
 
 **High-priority knobs for first playtest:**
 
@@ -251,10 +264,12 @@ All fields in all eight domains are tuning knobs. Future GDDs should reference t
 | `faith_power_per_conversion` | ProgressionConfig | 10 | 5–20 | Economy rate — how fast expansion paths unlock |
 | `dialogue_line_hold_sec` | UITimingConfig | 2.0 | 1.0–3.5 | Pacing feel of the conversation screen |
 
+> `HUDConfig` (9th domain, added by the HUD & Progress System GDD — system #14) is a high-priority presentation knob source: `top_strip_height_dp` (56, 44–64) is a cross-system layout contract consumed by the Village Map View as its map-rect top inset (F1) — verify it against the VMV grid at 64dp + large font scale on min devices; `chronicle_card_hold_sec` (4.0, 3.0–6.0) paces the win/loss chronicle beat. Added 2026-08-09.
+
 ## Acceptance Criteria
 
 **AC-1: Load on startup**
-Given a project with valid `.tres` files for all 8 domains,
+Given a project with valid `.tres` files for all 9 domains,
 When the game launches,
 Then `GameConfig` is in `LOADED` state before any other Autoload calls its `_ready()`.
 
@@ -298,9 +313,9 @@ Given a saved game file,
 When the file is inspected,
 Then it contains no config values — only game state (NPC belief states, faith power, etc.).
 
-**AC-10: All 8 domains accessible**
+**AC-10: All 9 domains accessible**
 Given `GameConfig` is `LOADED`,
-When each domain accessor is called (`GameConfig.conversion`, `GameConfig.traits`, `GameConfig.faith_spread`, `GameConfig.rival_faith`, `GameConfig.progression`, `GameConfig.ui_timing`, `GameConfig.portraits`, `GameConfig.map`),
+When each domain accessor is called (`GameConfig.conversion`, `GameConfig.traits`, `GameConfig.faith_spread`, `GameConfig.rival_faith`, `GameConfig.progression`, `GameConfig.ui_timing`, `GameConfig.portraits`, `GameConfig.map`, `GameConfig.hud`),
 Then each returns a non-null Resource object with all required fields populated.
 
 ## Open Questions

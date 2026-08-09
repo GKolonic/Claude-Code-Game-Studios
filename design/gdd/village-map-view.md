@@ -166,7 +166,7 @@ func _refresh_markers() -> void
 ### F1 — Grid Position to Screen Anchor
 
 ```
-map_rect   = safe_area_rect inset by top HUD strip and bottom control strip
+map_rect   = safe_area_rect inset by HUD.get_top_strip_height_dp() and bottom control strip
 cell_w_dp  = map_rect.width  / map_grid_columns
 cell_h_dp  = map_rect.height / map_grid_rows
 anchor_dp(col, row) = map_rect.position + ((col + 0.5) * cell_w_dp, (row + 0.5) * cell_h_dp)
@@ -182,7 +182,7 @@ anchor_dp(col, row) = map_rect.position + ((col + 0.5) * cell_w_dp, (row + 0.5) 
 | `cell_w_dp` / `cell_h_dp` | cell size | float | ≥ 88dp each at defaults | 4×6 over a ~360×600dp map rect → ~90×100dp cells; an 80dp thumbnail fits with margin |
 | `anchor_dp` | marker center | Vector2 | inside `map_rect` | Marker Control centered here; clamped so the full 80×80dp rect stays inside `map_rect` |
 
-**Output range:** every anchor lies inside the map rect. Authoring validation at `village_ready` rejects (debug warning + clamp) any `map_position` whose anchor would overlap the End Turn zone or the top HUD strip.
+**Output range:** every anchor lies inside the map rect. Authoring validation at `village_ready` rejects (debug warning + clamp) any `map_position` whose anchor would overlap the End Turn zone or the top HUD strip (height = `HUD.get_top_strip_height_dp()` — dynamic, font-scale safe).
 
 ### F2 — Duplicate Grid Position Resolution
 
@@ -353,7 +353,7 @@ a(t) = A_max                          for t ∈ [0, D − T_fade)
 
 | Element | Constraint |
 |---|---|
-| Screen | Full safe-area portrait view; top strip reserved for HUD & Progress System (#14); bottom-center strip for End Turn. No scroll/pan/zoom at MVP. |
+| Screen | Full safe-area portrait view; top strip reserved for HUD & Progress System (#14) at `HUD.get_top_strip_height_dp()` (F1 top inset — dynamic, font-scale safe); bottom-center strip for End Turn. No scroll/pan/zoom at MVP. |
 | Tap targets | All registered targets ≥ 44×44dp (thumbnails 80×80dp; End Turn ≥44×44dp). Approachable markers + End Turn registered in `_ready()`/build; unregistered on teardown/state change (MTF consuming-system contract). |
 | Approachability | Four distinct states (active / cooldown / locked / converted) — never conflated; non-approachable markers not registered (miss = silence + no haptic). |
 | Numbers | No `approach_count` anywhere; no cooldown numerals; no conversion percentages. The map is a face-surface, not a scoreboard. |
