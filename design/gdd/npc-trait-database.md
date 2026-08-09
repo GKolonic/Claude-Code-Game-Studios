@@ -2,7 +2,7 @@
 
 > **Status**: Designed
 > **Author**: Design session + systems-designer agent
-> **Last Updated**: 2026-04-20
+> **Last Updated**: 2026-08-09
 > **Implements Pillar**: Pillar 1 — Every Soul Has a Story; Pillar 2 — Many Roads to the Divine
 
 ## Summary
@@ -337,6 +337,8 @@ Each trait entry lists: Name, ID, Rarity, Description, and an Affinity table wit
 
 Each archetype defines a social role in the village, which traits are weighted toward it, and its social influence weight (how much converting this NPC radiates toward neighbors — consumed by the Faith Spread System).
 
+Archetype definitions also carry `portrait_asset_path` and `social_influence_weight` — both owned by the NPC Character System GDD; the Trait Database does not define them.
+
 A social influence weight of `1.0` is baseline (average NPC). Values above `1.0` mean conversion ripples further through the community; values below `1.0` mean conversion is more personally contained.
 
 ---
@@ -414,7 +416,7 @@ Revelation triggers are defined in the NPC Character System and Dialogue & Conve
 | NPC Character System | Reads the full catalogue and per-archetype filtered lists to construct each new NPC's trait set via weighted random assignment. Owns hidden/revealed state per NPC. | `get_all_traits()`, `get_traits_by_rarity(rarity)`, `get_traits_for_archetype(archetype_id)` |
 | Conversion Logic Engine | Reads approach-trait affinity values during conversion probability calculation. Calls the database for each trait the target NPC carries. | `get_affinity(trait_id, approach)` |
 | Dialogue & Conversion System | Reads trait display names and descriptions to populate the NPC inspect panel. Only requests data for traits marked REVEALED by the NPC Character System. | `get_trait(id)` — display fields only |
-| Portrait & Expression System | Reads archetype tags and specific trait IDs to select NPC portrait variants and emotional expression states. | `get_trait(id)` — archetype_tags field |
+| Portrait & Expression System | **Prospective (post-MVP)** — no MVP reads. Trait-driven micro-expressions would read archetype tags / trait IDs for expression selection; MVP expression selection is belief/outcome-driven only (Portrait & Expression System GDD Rule 6). | `get_trait(id)` — archetype_tags field (post-MVP) |
 | Faith Spread System | Does not read from the Trait Database directly. It reads per-NPC social influence weights from the NPC Character System, which are derived from archetype definitions (stored in NPC Character System, not here). | No direct interface |
 | Rival Faith System | Does not read from the Trait Database directly. It uses the Conversion Logic Engine, which reads affinities on its behalf. | No direct interface |
 | Save & Load System | Does not save or load trait definitions. Trait records are static config. The save file stores only NPC trait assignment IDs and reveal states (owned by NPC Character System). | No direct interface |
@@ -552,7 +554,7 @@ None. The NPC Trait Database has zero upstream dependencies. It is a Foundation 
 | NPC Character System | Full trait catalogue, per-rarity lists, per-archetype filtered lists, rarity weights | Direct — reads at NPC generation time and any time a new NPC is created |
 | Conversion Logic Engine | Per-trait affinity values for a specific approach | Direct — reads on every conversion attempt |
 | Dialogue & Conversion System | Trait display name and description (revealed traits only) | Direct — reads when populating NPC inspect panel |
-| Portrait & Expression System | Trait archetype tags, specific trait IDs | Direct — reads when selecting portrait and expression assets |
+| Portrait & Expression System | Trait archetype tags, specific trait IDs | Prospective (post-MVP) — no MVP reads. Trait-driven micro-expressions would read archetype tags / trait IDs for expression selection; MVP expression selection is belief/outcome-driven only (Portrait & Expression System GDD Rule 6) |
 | Faith Spread System | No direct dependency | Indirect — receives social influence weights from NPC Character System, which are archetype-level data not stored here |
 | Rival Faith System | No direct dependency | Indirect — operates through Conversion Logic Engine |
 | Save & Load System | No dependency at runtime | Indirect — save files contain trait ID strings; loading resolves them through NPC Character System, which calls this database |

@@ -2,7 +2,7 @@
 
 > **Status**: Designed
 > **Author**: Design session + systems-designer agent
-> **Last Updated**: 2026-04-20
+> **Last Updated**: 2026-08-09
 > **Implements Pillar**: All pillars (infrastructure — enables tuning without code changes)
 
 ## Summary
@@ -13,7 +13,7 @@ Game Config is the single external data file that holds every tunable value in T
 
 ## Overview
 
-Game Config is The Faithful's tuning infrastructure. Every balance value, timing constant, probability modifier, and threshold used by gameplay systems is stored in external Godot `.tres` resource files organised by domain (conversion, traits, faith spread, rival faith, progression, UI timing). An Autoload singleton named `GameConfig` loads these files at startup, validates ranges, and exposes typed accessors to the rest of the game. Systems never read from files directly — they call `GameConfig.conversion.base_success_chance` and receive a float. This separation means designers can change any number without touching GDScript, and the entire tuning surface is visible in the Godot editor's resource inspector rather than buried in code.
+Game Config is The Faithful's tuning infrastructure. Every balance value, timing constant, probability modifier, and threshold used by gameplay systems is stored in external Godot `.tres` resource files organised by domain (conversion, traits, faith spread, rival faith, progression, UI timing, portrait). An Autoload singleton named `GameConfig` loads these files at startup, validates ranges, and exposes typed accessors to the rest of the game. Systems never read from files directly — they call `GameConfig.conversion.base_success_chance` and receive a float. This separation means designers can change any number without touching GDScript, and the entire tuning surface is visible in the Godot editor's resource inspector rather than buried in code.
 
 ## Player Fantasy
 
@@ -25,13 +25,14 @@ The player never directly experiences Game Config — they experience its effect
 
 1. **No hardcoded values.** Every numeric constant used in gameplay logic must be sourced from a GameConfig domain. The only exceptions are pure mathematical constants (e.g., `PI`, array indices, loop bounds) and strings used as dictionary keys. If a programmer hardcodes a balance value, it is a bug.
 
-2. **Six config domains.** All tuning values are grouped into exactly six `Resource` subclasses, each in its own `.tres` file:
+2. **Seven config domains.** All tuning values are grouped into exactly seven `Resource` subclasses, each in its own `.tres` file:
    - `ConversionConfig` — approach success rates, trait modifier weights, cooldown durations
    - `TraitConfig` — trait rarity weights, archetype trait counts, modifier magnitudes
    - `FaithSpreadConfig` — passive spread radius, spread rate per tick, attrition rate
    - `RivalFaithConfig` — rival aggression interval, counter-approach selection weights, re-hardening strength
    - `ProgressionConfig` — faith power thresholds, milestone unlock triggers, expansion path costs
    - `UITimingConfig` — dialogue display durations, transition timings, animation hold frames
+   - `PortraitConfig` — dissolve timings, conversion overlay colour/timing, reduced-motion overrides (`res://assets/data/config/portrait_config.tres`)
 
 3. **Pull pattern.** Systems read config values on demand by calling `GameConfig.[domain].[field]`. Config does not push values to systems, emit signals on load, or cache values inside callers. This prevents stale-value bugs.
 
@@ -48,7 +49,7 @@ The player never directly experiences Game Config — they experience its effect
 | State | Description | Entry Condition | Exit Condition |
 |---|---|---|---|
 | `UNLOADED` | No config data in memory | Game start | `GameConfig._ready()` is called |
-| `LOADING` | Reading `.tres` files from disk | Autoload `_ready()` begins | All 6 domain files parsed |
+| `LOADING` | Reading `.tres` files from disk | Autoload `_ready()` begins | All 7 domain files parsed |
 | `LOADED` | All domains validated and accessible | All files parsed and validated | Game exits, or hot-reload triggered |
 | `HOT_RELOADING` | A domain file changed (editor only) | File watcher detects a `.tres` save | Domain re-validated and swapped |
 
@@ -65,6 +66,7 @@ The game's `_ready()` calls in other Autoloads must not complete until `GameConf
 | Multi-path Expansion System | Direct consumer | `ProgressionConfig` — faith power thresholds, expansion costs |
 | Dialogue & Conversion System | Direct consumer | `UITimingConfig` — dialogue hold durations |
 | Conversion UI | Direct consumer | `UITimingConfig` — transition timings, animation holds |
+| Portrait & Expression System | Direct consumer | `PortraitConfig` — dissolve timings, overlay colour/timing, reduced-motion overrides |
 | HUD & Progress System | Direct consumer | `ProgressionConfig` — milestone thresholds for progress display |
 | Game State Manager | Indirect consumer | Reads progression thresholds via GameConfig to evaluate win conditions |
 | Save & Load System | Non-consumer | Config is not saved with game state — it is always reloaded from `.tres` files |
@@ -140,6 +142,22 @@ if loaded_value != file_value:
 | `scene_transition_duration_sec` | 0.1 | 2.0 | 0.5 | Yes |
 | `portrait_expression_hold_frames` | 1 | 120 | 30 | Yes |
 
+**PortraitConfig**
+
+| Field | Min | Max | Default | Required |
+|---|---|---|---|---|
+| `dissolve_duration_ms` | 150 | 800 | 350 | Yes |
+| `conversion_dissolve_duration_ms` | 200 | 1000 | 400 | Yes |
+| `conversion_overlay_color` | Color | Color | `Color8(242, 163, 60)` (#F2A33C warm amber) | Yes |
+| `conversion_overlay_surge_alpha` | 0.20 | 0.80 | 0.55 | Yes |
+| `conversion_overlay_surge_ms` | 50 | 500 | 150 | Yes |
+| `conversion_overlay_hold_ms` | 0 | 300 | 50 | Yes |
+| `conversion_overlay_fade_ms` | 100 | 1500 | 500 | Yes |
+| `reduced_motion_dissolve_ms` | 0 | 200 | 0 | Yes |
+| `reduced_motion_overlay_fade_ms` | 0 | 500 | 100 | Yes |
+
+*No change to `UITimingConfig.portrait_expression_hold_frames` (1–120, default 30) — already present; it is now also consumed by the Portrait & Expression System as the expression hold window.*
+
 ## Edge Cases
 
 **EC-1: Missing `.tres` file.** If a domain file cannot be found at startup, `GameConfig` logs a hard error and the game halts with a descriptive message: `"GameConfig: Required file res://assets/data/config/conversion_config.tres not found."` The game must not continue with missing config — a missing file means an unknown tuning state, which is worse than a crash.
@@ -158,6 +176,8 @@ if loaded_value != file_value:
 
 **EC-8: Hot-reload failure (editor only).** If a `.tres` file is saved in a temporarily invalid state (mid-edit), the hot-reload validation fails. `GameConfig` logs a warning, discards the reload, and retains the last valid domain state. The `config_reloaded` signal is not emitted for failed reloads.
 
+**EC-9: Cross-field inconsistency in PortraitConfig overlay timings.** Per the EC-7 precedent, PortraitConfig overlay phase timings (`conversion_overlay_surge_ms`, `conversion_overlay_hold_ms`, `conversion_overlay_fade_ms`) are validated individually, not cross-field. If a tuning error ever makes the phases inconsistent, the Portrait & Expression System's F4 formula clamps the total overlay lifetime.
+
 ## Dependencies
 
 ### Upstream (what this system depends on)
@@ -174,6 +194,7 @@ None. Game Config has zero dependencies. It is the foundation layer.
 - Multi-path Expansion System — `ProgressionConfig`
 - Dialogue & Conversion System — `UITimingConfig`
 - Conversion UI — `UITimingConfig`
+- Portrait & Expression System — `PortraitConfig`
 - HUD & Progress System — `ProgressionConfig`
 - Game State Manager — `ProgressionConfig` (win condition thresholds)
 
@@ -188,7 +209,7 @@ None. Game Config has zero dependencies. It is the foundation layer.
 
 ## Tuning Knobs
 
-All fields in all six domains are tuning knobs. Future GDDs should reference this document when listing their tuning knobs — they do not need to re-specify range/default for values that live here.
+All fields in all seven domains are tuning knobs. Future GDDs should reference this document when listing their tuning knobs — they do not need to re-specify range/default for values that live here.
 
 **High-priority knobs for first playtest:**
 
@@ -206,7 +227,7 @@ All fields in all six domains are tuning knobs. Future GDDs should reference thi
 ## Acceptance Criteria
 
 **AC-1: Load on startup**
-Given a project with valid `.tres` files for all 6 domains,
+Given a project with valid `.tres` files for all 7 domains,
 When the game launches,
 Then `GameConfig` is in `LOADED` state before any other Autoload calls its `_ready()`.
 
@@ -250,9 +271,9 @@ Given a saved game file,
 When the file is inspected,
 Then it contains no config values — only game state (NPC belief states, faith power, etc.).
 
-**AC-10: All 6 domains accessible**
+**AC-10: All 7 domains accessible**
 Given `GameConfig` is `LOADED`,
-When each domain accessor is called (`GameConfig.conversion`, `GameConfig.traits`, `GameConfig.faith_spread`, `GameConfig.rival_faith`, `GameConfig.progression`, `GameConfig.ui_timing`),
+When each domain accessor is called (`GameConfig.conversion`, `GameConfig.traits`, `GameConfig.faith_spread`, `GameConfig.rival_faith`, `GameConfig.progression`, `GameConfig.ui_timing`, `GameConfig.portraits`),
 Then each returns a non-null Resource object with all required fields populated.
 
 ## Open Questions

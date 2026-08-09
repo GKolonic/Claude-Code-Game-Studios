@@ -2,7 +2,7 @@
 
 > **Status**: Complete
 > **Author**: Design session + agents
-> **Last Updated**: 2026-04-24
+> **Last Updated**: 2026-08-09
 > **Implements Pillar**: Pillar 1 — Every Soul Has a Story; Pillar 4 — History Writes Itself
 
 ## Overview
@@ -95,6 +95,12 @@ The seven archetype definitions, with social influence weights and trait bonuses
 | `SCHOLAR` | Scholar | 1.8 | intellectually_restless +35%, cynical +15%, seeker +15%, visionary +10%, proud +10% |
 | `WIDOW` | Widow | 0.9 | bereaved +40%, lonely +25%, broken_by_loss +20%, mortal_minded +15%, superstitious +10% |
 | `NOBLE` | Noble | 2.5 | proud +30%, ambitious +20%, status_hungry +25%, intellectually_restless +10%, loyal_to_community +10% |
+
+**`portrait_asset_path` format contract** (consumed by the Portrait & Expression System):
+- Value is a **directory** path: `res://assets/portraits/{archetype_id}/` (lowercase archetype slug).
+- Required field — no default; every archetype definition must set it.
+- Must contain exactly six files named `{expression_key}.png` for the six MVP expression keys (`closed_resistant`, `neutral_listening`, `considering_uncertain`, `open_receptive`, `withdrawn_resistant`, `moved_convinced`).
+- Debug-only validation at `initialize_village()`: `DirAccess.dir_exists_absolute(path)` — log a warning (do not crash) if missing; the Portrait & Expression System fallback covers runtime (its EC-6/EC-7).
 
 ---
 
