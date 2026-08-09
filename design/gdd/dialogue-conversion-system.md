@@ -307,7 +307,7 @@ Next call: `eligible = {0, 1, 2} \ {0, 2} = {1}` → forced selection of index 1
 ## Edge Cases
 
 **EC-1. Player taps a non-approachable NPC.**
-Session does not begin. `get_approachable_npcs()` check fails. No state change, no UI transition. Tap targets for non-approachable NPCs should be disabled by the Conversion UI — this is a defense, not the primary gate.
+Session does not begin. `get_approachable_npcs()` check fails. No state change, no UI transition. Tap targets for non-approachable NPCs should be disabled by the Village Map View — this is a defense, not the primary gate.
 
 **EC-2. `DialogueDatabase.is_loaded()` returns false at session start.**
 System logs an error; session does not begin; player stays on map. A false `is_loaded()` is a startup blocker that should have been caught before the village map is reachable. If somehow reached, no content call is made and no session state is set.

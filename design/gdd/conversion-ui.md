@@ -133,14 +133,14 @@ ConversationScreen (Control, full rect, CanvasLayer above map)
 | `OPENING` | → `APPROACH_SELECTION` | Scene `_ready()` completes; portrait shown (E1) |
 | `OPENING` | → `HIDDEN` (abort) | `get_npc(npc_id)` returns null (EC-6) — `cancel_session()`, scene freed |
 | `APPROACH_SELECTION` | → `APPROACH_CONFIRMED` | Player taps an approach button → `select_approach()` (E2) |
-| `APPROACH_SELECTION` | → `HIDDEN` | Back → `cancel_session()`; scene freed (inspect reveals persist) |
+| `APPROACH_SELECTION` | → `HIDDEN` | Back → `cancel_session()`; scene freed (inspect reveals persist); `conversation_closed` emitted |
 | `APPROACH_SELECTION` | (stays) | Inspect reveal — card animates, alignment recomputed |
 | `APPROACH_CONFIRMED` | → `LINE_DISPLAYING` | Confirm hold elapses; approach line displayed |
 | `LINE_DISPLAYING` | → `RESOLVING` | Dialogue-line hold elapses; outcome resolution in progress |
 | `RESOLVING` | → `OUTCOME_DISPLAY` | `outcome_resolved` received |
 | `OUTCOME_DISPLAY` | (→ `CONVERSION_MOMENT` sub-phase) | PERSUADED + `belief_state == CONVERTED` |
 | `OUTCOME_DISPLAY` | → `CLOSING` | Outcome hold(s) elapse → `session_complete` |
-| `CLOSING` | → `HIDDEN` | Page-turn completes; scene freed; blocking layer popped |
+| `CLOSING` | → `HIDDEN` | Page-turn completes; scene freed; blocking layer popped; `conversation_closed` emitted |
 | any | → `HIDDEN` (defensive) | `village_cleared()` while scene alive (EC-8) |
 
 ### Interactions with Other Systems
@@ -166,7 +166,9 @@ ConversationScreen (Control, full rect, CanvasLayer above map)
 func begin_conversation(npc_id: String) -> void   # calls DCS.begin_session(npc_id)
 
 # Presentation signals
-signal conversation_closed()   # emitted after teardown — map resumes interaction
+signal conversation_closed()   # emitted after teardown on EVERY teardown path — session-complete,
+                               # back/cancel, AND defensive village-clear (VMV depends on it as its
+                               # single resume signal — Village Map View GDD AC-06)
 ```
 
 ## Formulas
@@ -290,7 +292,7 @@ T_open(t) = T_base − 150K   if cue_active
 
 **EC-7. Reduced motion enabled.** P&E snaps expressions and trims the overlay (P&E Rule 12); the UI snaps trait-card reveals (F3 override), shortens the conversion lighting surge to a static-warm fade (F4 override), and skips the page-turn's motion component (instant transition). All colour cues remain — colour is never the sole signal (P&E EC-9: audio + lighting give a second channel).
 
-**EC-8. `village_cleared()` while a session scene is alive.** Unreachable in normal play (clear runs only after win/loss, and win/loss run during turn processing, never mid-session). Defensive: the UI frees the scene immediately, pops the blocking layer, makes no NPCRegistry calls. DCS resets its recency state on the same signal (GSM Rule 7); any partially-won session is discarded (NPC state unchanged — `apply_conversion_outcome` never ran).
+**EC-8. `village_cleared()` while a session scene is alive.** Unreachable in normal play (clear runs only after win/loss, and win/loss run during turn processing, never mid-session). Defensive: the UI frees the scene immediately, pops the blocking layer, makes no NPCRegistry calls, and **emits `conversation_closed`** so the map never waits on a signal that will not arrive (Village Map View GDD AC-06/EC-11 — the map treats a stale-id close as a no-op). DCS resets its recency state on the same signal (GSM Rule 7); any partially-won session is discarded (NPC state unchanged — `apply_conversion_outcome` never ran).
 
 **EC-9. App backgrounded mid-session.** On focus-out, the UI cancels the active presentation hold timer; on focus-in, it restarts the same hold from its current state and recomputes the layout against the current safe area. If the process is killed: Save & Load restores `IN_SESSION → IDLE` (Save & Load Rule 6) — the conversation is not restored, the player returns to the map, and no dialogue is shown; a kill inside `RESOLVING` is covered by the DCS pending-session sentinel (RESISTED, no benefit). Timers cannot fire while suspended.
 

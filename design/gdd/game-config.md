@@ -13,7 +13,7 @@ Game Config is the single external data file that holds every tunable value in T
 
 ## Overview
 
-Game Config is The Faithful's tuning infrastructure. Every balance value, timing constant, probability modifier, and threshold used by gameplay systems is stored in external Godot `.tres` resource files organised by domain (conversion, traits, faith spread, rival faith, progression, UI timing, portrait). An Autoload singleton named `GameConfig` loads these files at startup, validates ranges, and exposes typed accessors to the rest of the game. Systems never read from files directly — they call `GameConfig.conversion.base_success_chance` and receive a float. This separation means designers can change any number without touching GDScript, and the entire tuning surface is visible in the Godot editor's resource inspector rather than buried in code.
+Game Config is The Faithful's tuning infrastructure. Every balance value, timing constant, probability modifier, and threshold used by gameplay systems is stored in external Godot `.tres` resource files organised by domain (conversion, traits, faith spread, rival faith, progression, UI timing, portrait, village map). An Autoload singleton named `GameConfig` loads these files at startup, validates ranges, and exposes typed accessors to the rest of the game. Systems never read from files directly — they call `GameConfig.conversion.base_success_chance` and receive a float. This separation means designers can change any number without touching GDScript, and the entire tuning surface is visible in the Godot editor's resource inspector rather than buried in code.
 
 ## Player Fantasy
 
@@ -25,7 +25,7 @@ The player never directly experiences Game Config — they experience its effect
 
 1. **No hardcoded values.** Every numeric constant used in gameplay logic must be sourced from a GameConfig domain. The only exceptions are pure mathematical constants (e.g., `PI`, array indices, loop bounds) and strings used as dictionary keys. If a programmer hardcodes a balance value, it is a bug.
 
-2. **Seven config domains.** All tuning values are grouped into exactly seven `Resource` subclasses, each in its own `.tres` file:
+2. **Eight config domains.** All tuning values are grouped into exactly eight `Resource` subclasses, each in its own `.tres` file:
    - `ConversionConfig` — approach success rates, trait modifier weights, cooldown durations
    - `TraitConfig` — trait rarity weights, archetype trait counts, modifier magnitudes
    - `FaithSpreadConfig` — passive spread radius, spread rate per tick, attrition rate
@@ -33,6 +33,7 @@ The player never directly experiences Game Config — they experience its effect
    - `ProgressionConfig` — faith power thresholds, milestone unlock triggers, expansion path costs
    - `UITimingConfig` — dialogue display durations, transition timings, animation hold frames
    - `PortraitConfig` — dissolve timings, conversion overlay colour/timing, reduced-motion overrides (`res://assets/data/config/portrait_config.tres`)
+   - `VillageMapConfig` — map layout grid, ink-bleed envelope, rival-marker dwell/fade, return-halo tints (`res://assets/data/config/village_map_config.tres`)
 
 3. **Pull pattern.** Systems read config values on demand by calling `GameConfig.[domain].[field]`. Config does not push values to systems, emit signals on load, or cache values inside callers. This prevents stale-value bugs.
 
@@ -49,7 +50,7 @@ The player never directly experiences Game Config — they experience its effect
 | State | Description | Entry Condition | Exit Condition |
 |---|---|---|---|
 | `UNLOADED` | No config data in memory | Game start | `GameConfig._ready()` is called |
-| `LOADING` | Reading `.tres` files from disk | Autoload `_ready()` begins | All 7 domain files parsed |
+| `LOADING` | Reading `.tres` files from disk | Autoload `_ready()` begins | All 8 domain files parsed |
 | `LOADED` | All domains validated and accessible | All files parsed and validated | Game exits, or hot-reload triggered |
 | `HOT_RELOADING` | A domain file changed (editor only) | File watcher detects a `.tres` save | Domain re-validated and swapped |
 
@@ -67,6 +68,7 @@ The game's `_ready()` calls in other Autoloads must not complete until `GameConf
 | Dialogue & Conversion System | Direct consumer | `UITimingConfig` — dialogue hold durations |
 | Conversion UI | Direct consumer | `UITimingConfig` — transition timings, animation holds |
 | Portrait & Expression System | Direct consumer | `PortraitConfig` — dissolve timings, overlay colour/timing, reduced-motion overrides |
+| Village Map View | Direct consumer | `VillageMapConfig` — map layout grid, ink-bleed envelope, rival-marker dwell/fade, return-halo tints |
 | HUD & Progress System | Direct consumer | `ProgressionConfig` — milestone thresholds for progress display |
 | Game State Manager | Indirect consumer | Reads progression thresholds via GameConfig to evaluate win conditions |
 | Save & Load System | Non-consumer | Config is not saved with game state — it is always reloaded from `.tres` files |
@@ -163,6 +165,25 @@ if loaded_value != file_value:
 
 *No change to `UITimingConfig.portrait_expression_hold_frames` (1–120, default 30) — already present; it is now also consumed by the Portrait & Expression System as the expression hold window.*
 
+**VillageMapConfig**
+
+| Field | Min | Max | Default | Required |
+|---|---|---|---|---|
+| `map_grid_columns` | 3 | 6 | 4 | Yes |
+| `map_grid_rows` | 5 | 8 | 6 | Yes |
+| `ink_bleed_duration_ms` | 1500 | 2000 | 1750 | Yes |
+| `ink_bleed_opacity` | 0.30 | 0.40 | 0.35 | Yes |
+| `ink_bleed_color` | Color | Color | `Color8(230, 190, 100)` (#E6BE64 Scripture Gold) | Yes |
+| `ink_bleed_max_radius_dp` | 160 | 400 | 260 | Yes |
+| `rival_marker_dwell_sec` | 1.0 | 8.0 | 4.0 | Yes |
+| `rival_marker_fade_ms` | 100 | 600 | 300 | Yes |
+| `return_halo_advance_color` | Color | Color | `Color8(242, 193, 78)` (warm gold) | Yes |
+| `return_halo_regress_color` | Color | Color | `Color8(90, 122, 154)` (cool blue-grey) | Yes |
+| `return_halo_max_alpha` | 0.05 | 0.25 | 0.12 | Yes |
+| `reduced_motion_ink_fade_ms` | 0 | 500 | 100 | Yes |
+
+*Proposed by the Village Map View GDD (system #13). `ink_bleed_color` ships as `#E6BE64` per OQ-5 resolution (Art-Director-confirmable, non-blocking). Added 2026-08-09.*
+
 ## Edge Cases
 
 **EC-1: Missing `.tres` file.** If a domain file cannot be found at startup, `GameConfig` logs a hard error and the game halts with a descriptive message: `"GameConfig: Required file res://assets/data/config/conversion_config.tres not found."` The game must not continue with missing config — a missing file means an unknown tuning state, which is worse than a crash.
@@ -200,6 +221,7 @@ None. Game Config has zero dependencies. It is the foundation layer.
 - Dialogue & Conversion System — `UITimingConfig`
 - Conversion UI — `UITimingConfig`
 - Portrait & Expression System — `PortraitConfig`
+- Village Map View — `VillageMapConfig`
 - HUD & Progress System — `ProgressionConfig`
 - Game State Manager — `ProgressionConfig` (win condition thresholds)
 
@@ -214,7 +236,7 @@ None. Game Config has zero dependencies. It is the foundation layer.
 
 ## Tuning Knobs
 
-All fields in all seven domains are tuning knobs. Future GDDs should reference this document when listing their tuning knobs — they do not need to re-specify range/default for values that live here.
+All fields in all eight domains are tuning knobs. Future GDDs should reference this document when listing their tuning knobs — they do not need to re-specify range/default for values that live here.
 
 **High-priority knobs for first playtest:**
 
@@ -232,7 +254,7 @@ All fields in all seven domains are tuning knobs. Future GDDs should reference t
 ## Acceptance Criteria
 
 **AC-1: Load on startup**
-Given a project with valid `.tres` files for all 7 domains,
+Given a project with valid `.tres` files for all 8 domains,
 When the game launches,
 Then `GameConfig` is in `LOADED` state before any other Autoload calls its `_ready()`.
 
@@ -276,9 +298,9 @@ Given a saved game file,
 When the file is inspected,
 Then it contains no config values — only game state (NPC belief states, faith power, etc.).
 
-**AC-10: All 7 domains accessible**
+**AC-10: All 8 domains accessible**
 Given `GameConfig` is `LOADED`,
-When each domain accessor is called (`GameConfig.conversion`, `GameConfig.traits`, `GameConfig.faith_spread`, `GameConfig.rival_faith`, `GameConfig.progression`, `GameConfig.ui_timing`, `GameConfig.portraits`),
+When each domain accessor is called (`GameConfig.conversion`, `GameConfig.traits`, `GameConfig.faith_spread`, `GameConfig.rival_faith`, `GameConfig.progression`, `GameConfig.ui_timing`, `GameConfig.portraits`, `GameConfig.map`),
 Then each returns a non-null Resource object with all required fields populated.
 
 ## Open Questions
