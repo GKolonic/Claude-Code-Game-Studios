@@ -533,7 +533,7 @@ The trait card used in the HARDENED Beat 1 is `revealed_trait_id` from the signa
 
 The UI owns all timer management. The system's state machine transitions on UI-fired events, not internal timers:
 
-- After approach button tap: start `approach_confirm_hold_sec` timer → on expiry, call `select_approach()` to advance state
+- On approach button tap: call `select_approach()` immediately (state advances to APPROACH_CONFIRMED); the approach line is emitted by DCS and held by the UI to the confirm-hold boundary (`approach_confirm_hold_sec` elapses)
 - After approach line is displayed: start `dialogue_line_hold_sec` timer → on expiry, advance to RESOLVING
 - After outcome line is displayed: start `outcome_display_hold_sec` timer → on expiry, advance to SESSION_COMPLETE
 - For HARDENED Beat 1 (trait reveal): start `hardened_reveal_hold_sec` timer → on expiry, place outcome line
@@ -761,7 +761,7 @@ All timing values are read from `UITimingConfig` at the time the timer is starte
 ## Open Questions
 
 **OQ-1. Implicit approach-count warning cue — what form does it take?**
-The system exposes `approach_count` for the UI to read, and Rule 7 states that when one approach remains (`approach_count == max_approaches_per_npc - 1`) the UI surfaces "observable character cues." The exact cue form — expression shift, atmospheric change, subtle dialogue tint — is deferred to the UX spec. Resolution: run `/ux-design conversation-screen` before implementing the Conversion UI.
+The system exposes `approach_count` for the UI to read, and Rule 7 states that when one approach remains (`approach_count == max_approaches_per_npc - 1`) the UI surfaces "observable character cues." The exact cue form — expression shift, atmospheric change, subtle dialogue tint — is deferred to the UX spec. **RESOLVED (2026-08-09):** the Conversion UI GDD (system #12, Rule 12) defines the cue as a **−150K background mood-lighting cooling** from the session baseline at session open — no numbers, no text. Form fixed at MVP; subject to `/ux-design` post-MVP (Conversion UI OQ-1).
 
 **OQ-2. Mid-play stale pending record (EC-7) — is the player notified?**
 When `begin_session()` is called with a stale `status: "pending"` record (EC-7), the sentinel fires and the stale NPC receives a RESISTED outcome silently. The current spec does not state whether the player sees a brief notification or whether the stale processing is fully invisible. If the player notices their previous NPC now has a cooldown they don't remember applying, they may perceive a bug. Decision needed: silent (current spec) or brief map-layer notice?

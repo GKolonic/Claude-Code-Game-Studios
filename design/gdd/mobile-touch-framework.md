@@ -155,7 +155,7 @@ RESOLVING
 
 | Consuming System | Gestures Used | Registration Notes |
 |---|---|---|
-| Conversion UI | `tapped` (NPC portrait, approach buttons); `swiped` (card scroll) | Registers approach buttons and portrait; pushes blocking layer when Conversion UI is open |
+| Conversion UI | `tapped` (approach buttons, Inspect, back); `swiped` (card scroll) | Registers approach buttons, Inspect, back, and the trait-card scroll container — the portrait is NOT registered (P&E UI Req); pushes blocking layer when Conversion UI is open |
 | Village Map View | `tapped` (select NPC/village position) | Registers map interaction areas; blocked when Conversion UI is active |
 | HUD & Progress System | `tapped` (faith meter detail) | Always registered; lowest priority tier |
 | Accessibility System | Observer only — connects to framework signals for haptic/audio augmentation | No `register()` calls |
@@ -330,7 +330,7 @@ If the registered area count exceeds `MAX_REGISTERED_AREAS` at registration time
 
 | System | What it receives |
 |--------|-----------------|
-| Conversion UI (System 12) | `tapped` (approach buttons, NPC portrait); `swiped` (card scroll); calls `push_blocking_layer` / `pop_blocking_layer` when Conversion UI opens/closes |
+| Conversion UI (System 12) | `tapped` (approach buttons, Inspect, back); `swiped` (card scroll); calls `push_blocking_layer` / `pop_blocking_layer` when Conversion UI opens/closes |
 | Village Map View (System 13) | `tapped` (select NPC or village position); blocked when Conversion UI layer is active |
 | HUD & Progress System (System 14) | `tapped` (faith meter detail); always registered at lowest priority tier |
 | Accessibility System (System 19) | Observer only — connects to `tapped`, `long_press_started`, `swiped`, `touch_cancelled` for haptic/audio augmentation; makes no `register()` calls |

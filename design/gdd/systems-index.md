@@ -32,7 +32,7 @@ The system architecture has two tiers. The NPC layer (19 systems) is built aroun
 | 9 | Rival Faith System | Gameplay | MVP | Designed | design/gdd/rival-faith-system.md | NPC Character System, Dialogue & Conversion System |
 | 10 | Save & Load System (inferred) | Persistence | MVP | Designed | design/gdd/save-load-system.md | Game State Manager, NPC Character System |
 | 11 | Portrait & Expression System (inferred) | UI | MVP | Designed | design/gdd/portrait-expression-system.md | NPC Character System |
-| 12 | Conversion UI | UI | MVP | Not Started | — | Dialogue & Conversion System, Portrait & Expression System, Mobile Touch Framework |
+| 12 | Conversion UI | UI | MVP | Designed | design/gdd/conversion-ui.md | Dialogue & Conversion System, Portrait & Expression System, Mobile Touch Framework |
 | 13 | Village Map View | UI | MVP | Not Started | — | NPC Character System, Mobile Touch Framework |
 | 14 | HUD & Progress System (inferred) | UI | MVP | Not Started | — | Game State Manager, Mobile Touch Framework |
 | 15 | Faith Spread System | Gameplay | Vertical Slice | Not Started | — | NPC Character System, Game State Manager |
@@ -175,10 +175,10 @@ The system architecture has two tiers. The NPC layer (19 systems) is built aroun
 | Metric | Count |
 |--------|-------|
 | Total systems identified | 27 (19 NPC layer + 8 macro layer) |
-| Design docs started | 11 (Game Config, NPC Trait Database, Dialogue Content Database, Mobile Touch Framework, NPC Character System, Conversion Logic Engine, Game State Manager, Dialogue & Conversion System, Rival Faith System, Save & Load System, Portrait & Expression System) |
+| Design docs started | 12 (Game Config, NPC Trait Database, Dialogue Content Database, Mobile Touch Framework, NPC Character System, Conversion Logic Engine, Game State Manager, Dialogue & Conversion System, Rival Faith System, Save & Load System, Portrait & Expression System, Conversion UI) |
 | Design docs reviewed | 0 |
 | Design docs approved | 0 |
-| MVP systems designed | 11 / 14 (NPC layer) |
+| MVP systems designed | 12 / 14 (NPC layer) |
 | Vertical Slice systems designed | 0 / 5 (3 NPC layer + 2 macro layer) |
 | Alpha systems designed | 0 / 6 (2 NPC layer + 4 macro layer) |
 

@@ -3,7 +3,7 @@
 <!-- STATUS -->
 Epic: Pre-Production
 Feature: Design Documentation
-Task: Portrait & Expression System GDD — Designed (complete draft approved)
+Task: Conversion UI System GDD — Designed (complete draft approved)
 <!-- /STATUS -->
 
 ## Current Task
@@ -11,7 +11,7 @@ Completing full pre-production phase:
 1. ✅ Engine configured — Godot 4.6 / GDScript / Mobile / Turn-based
 2. ✅ Systems index written — 27 systems total (19 NPC layer + 8 macro layer)
 3. ✅ Art Bible — complete (design/art/art-bible.md, all 9 sections)
-4. 🔄 System GDDs — 11/14 MVP done:
+4. 🔄 System GDDs — 12/14 MVP done:
    - ✅ Game Config (design/gdd/game-config.md)
    - ✅ NPC Trait Database (design/gdd/npc-trait-database.md)
    - ✅ Dialogue Content Database (design/gdd/dialogue-content-database.md)
@@ -23,6 +23,7 @@ Completing full pre-production phase:
    - ✅ Rival Faith System (design/gdd/rival-faith-system.md)
    - ✅ Save & Load System (design/gdd/save-load-system.md)
    - ✅ Portrait & Expression System (design/gdd/portrait-expression-system.md)
+   - ✅ Conversion UI (design/gdd/conversion-ui.md)
 5. ⬜ Architecture plan
 6. ⬜ Sprint plan
 
@@ -48,8 +49,12 @@ Completing full pre-production phase:
 - ✅ design/gdd/game-config.md — PortraitConfig domain added (7th domain: Rule 2 "six domains"→seven, field ranges table, AC-10 "6 domains"→7, Interactions row) — applied 2026-08-09
 - ✅ design/gdd/npc-character-system.md — `portrait_asset_path` format contract added under Rule 3 (directory path, six expression files, debug validation) — applied 2026-08-09
 - ✅ design/gdd/npc-trait-database.md — archetypes note (`portrait_asset_path` + `social_influence_weight` owned by NPC Character System GDD) + P&E consumer row marked prospective — applied 2026-08-09
+- ✅ design/gdd/game-config.md — UITimingConfig: `approach_confirm_hold_sec`, `hardened_reveal_hold_sec`, `trait_card_reveal_ms` added — applied 2026-08-09
+- ✅ design/gdd/mobile-touch-framework.md — Conversion UI consuming-table row corrected (portrait NOT registered; P&E UI Req) — applied 2026-08-09
+- ✅ design/gdd/dialogue-conversion-system.md — Timer Ownership wording fixed (tap calls `select_approach()` immediately); OQ-1 resolved (Conversion UI GDD Rule 12, −150K lighting cue) — applied 2026-08-09
+- ✅ design/gdd/systems-index.md — row 12 → Designed; tracker 11/14 → 12/14 — applied 2026-08-09
 
 ## Next
-Design Conversion UI GDD (system #12 in systems-index) — use /design-system conversion-ui
-Deps complete: Dialogue & Conversion System ✅, Portrait & Expression System ✅, Mobile Touch Framework ✅
-MVP systems remaining: Conversion UI, Village Map View, HUD & Progress
+Design Village Map View GDD (system #13 in systems-index) — use /design-system village-map-view
+Deps complete: NPC Character System ✅, Mobile Touch Framework ✅
+MVP systems remaining: Village Map View, HUD & Progress

@@ -137,10 +137,15 @@ if loaded_value != file_value:
 
 | Field | Min | Max | Default | Required |
 |---|---|---|---|---|
+| `approach_confirm_hold_sec` | 0.3 | 1.2 | 0.6 | Yes |
+| `hardened_reveal_hold_sec` | 0.5 | 1.5 | 1.0 | Yes |
 | `dialogue_line_hold_sec` | 0.5 | 5.0 | 2.0 | Yes |
 | `outcome_display_hold_sec` | 0.5 | 5.0 | 2.5 | Yes |
 | `scene_transition_duration_sec` | 0.1 | 2.0 | 0.5 | Yes |
 | `portrait_expression_hold_frames` | 1 | 120 | 30 | Yes |
+| `trait_card_reveal_ms` | 200 | 600 | 350 | Yes |
+
+*Fields `approach_confirm_hold_sec` and `hardened_reveal_hold_sec` proposed by the DCS GDD; `trait_card_reveal_ms` proposed by the Conversion UI GDD (system #12, F3) — all three consumed by the Conversion UI. Added 2026-08-09.*
 
 **PortraitConfig**
 
