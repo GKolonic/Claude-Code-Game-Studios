@@ -216,7 +216,7 @@ No variables, no ranges, no balance values. All numeric parameters in this syste
 
 `SaveLoadSystem` must be initialized after `NPCRegistry` and `GameStateManager` in Project Settings, because `load_game()` calls both `NPCRegistry.deserialize()` and `GameStateManager.restore_from_save()` — both Autoloads must be present before `load_game()` executes.
 
-**Required order:** `NPCRegistry` → `GameStateManager` → `DialogueConversionSystem` → `SaveLoadSystem`
+**Required order:** `NPCRegistry` → `DialogueConversionSystem` → `GameStateManager` → `SaveLoadSystem`
 
 ## Tuning Knobs
 

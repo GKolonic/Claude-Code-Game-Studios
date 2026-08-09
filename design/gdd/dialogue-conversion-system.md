@@ -287,7 +287,7 @@ if recent[key].size() > W:
 | Outcome lines | `(npc_id: String, approach: DialogueApproach, outcome: ConversionOutcome)` | Per-NPC, per approach–outcome pair |
 | Inspect lines | `archetype: NPCArchetype` | Per-archetype (shared across all NPCs of that archetype in this village) |
 
-**Recency state lifetime:** All three recency pools are scoped to the current village. When the Game State Manager calls `NPCRegistry.clear_village()`, this system's recency state is reset to empty. Recency does not persist across villages or playthroughs — each new village starts with a clean selection history.
+**Recency state lifetime:** All three recency pools are scoped to the current village. When the Game State Manager emits the `village_cleared` signal (this system subscribes), this system's recency state is reset to empty. Recency does not persist across villages or playthroughs — each new village starts with a clean selection history.
 
 **Defensive rule — empty eligible:** If `eligible.is_empty()` (L ≤ W invariant violation — bad data or save corruption), clear `recent[key]` and select from the full pool `{0, 1, ..., L-1}` uniformly. Log a warning. Never crash or return an out-of-range index.
 

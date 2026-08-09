@@ -233,7 +233,8 @@ constants:
       Logic Engine (output type), Conversion UI (outcome display), Rival Faith System (rival
       outcome application). CONVERTED was renamed to PERSUADED (flagged in NPC Character
       System GDD Rule 9) to eliminate naming collision with BeliefState.CONVERTED.
-      All systems must use these four values — do not add variants without updating this registry."
+      All systems must use these four values — do not add variants without updating this registry.
+      Single source: GameEnums shared class (src/core/game_enums.gd) per architecture plan D9 / ADR-0002."
     added: 2026-04-20
     revised: "2026-04-26"
 
@@ -285,8 +286,9 @@ constants:
     unit: "Resource path"
     notes: "Domain: aggression_interval_turns, reharden_strength, counter_approach_random_weight.
       Consumed by Rival Faith System. HUD reads aggression_interval_turns as its F2 window W.
-      NOTE: aggression_interval_turns default is 6 here vs 3 in rival-faith-system.md — flagged
-      for /consistency-check (2026-08-09), not edited."
+      NOTE: aggression_interval_turns default remains 6 — game-config.md is the authoritative
+      config owner; rival-faith-system.md lists 3 (RFS GDD correction pending via
+      /consistency-check, 2026-08-09). Value untouched."
     added: 2026-04-20
     revised: "2026-08-09"
 
@@ -357,6 +359,147 @@ constants:
       top_strip_height_dp, chronicle_card_hold_sec, chronicle_card_fade_ms,
       chronicle_card_fade_in_ms, reduced_motion_card_fade_ms. Consumed by HUD & Progress System;
       top_strip_height_dp is a cross-system layout contract consumed by Village Map View (F1)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: PortraitConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+      - design/gdd/portrait-expression-system.md
+    value: "res://assets/data/config/portrait_config.tres"
+    unit: "Resource path"
+    notes: "Config domain: dissolve_duration_ms, conversion_dissolve_duration_ms,
+      conversion_overlay_color, conversion_overlay_surge_alpha, surge/hold/fade timings,
+      reduced_motion_dissolve_ms, reduced_motion_overlay_fade_ms. Consumed by Portrait &
+      Expression System. Registered per architecture plan Appendix D (2026-08-09)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: VillageMapConfig
+    status: active
+    source: design/gdd/game-config.md
+    referenced_by:
+      - design/gdd/game-config.md
+      - design/gdd/village-map-view.md
+      - design/gdd/hud-progress-system.md
+    value: "res://assets/data/config/village_map_config.tres"
+    unit: "Resource path"
+    notes: "Config domain: map_grid_columns, map_grid_rows, ink_bleed_duration_ms,
+      ink_bleed_opacity, ink_bleed_color, ink_bleed_max_radius_dp, rival_marker_dwell_sec,
+      rival_marker_fade_ms, return_halo_*, reduced_motion_ink_fade_ms. Consumed by Village Map
+      View and HUD & Progress System. Registered per architecture plan Appendix D (2026-08-09)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: GameEnums
+    status: active
+    source: docs/architecture/architecture.md
+    referenced_by:
+      - docs/architecture/architecture.md
+      - design/gdd/npc-character-system.md
+      - design/gdd/dialogue-content-database.md
+      - design/gdd/game-state-manager.md
+    value: "src/core/game_enums.gd (class_name GameEnums)"
+    unit: "GDScript shared enum class"
+    notes: "Single resolvable home for all cross-system enums (architecture plan D9, ADR-0002):
+      BeliefState, DialogueApproach, ConversionOutcome, TraitRarity, RelationshipType,
+      NPCArchetype, OutcomeCaller, AlignmentSignal, GSMState, SwipeDirection. Resolves
+      cross-GDD enum coupling and the PERSUADED rename (NPC CS Rule 9)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: BeliefState
+    status: active
+    source: design/gdd/npc-character-system.md
+    referenced_by:
+      - design/gdd/npc-character-system.md
+      - design/gdd/village-map-view.md
+      - design/gdd/hud-progress-system.md
+    value: "STEADFAST | OPEN | WAVERING | CONVERTED"
+    unit: "GDScript enum (GameEnums)"
+    notes: "Four-state belief enum for NPCs. Compiled single source: GameEnums.BeliefState
+      (architecture plan D9, ADR-0002). Consumed by NPC Character System, Village Map View
+      (thumbnail belief-key), HUD (snapshot reads)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: DialogueApproach
+    status: active
+    source: design/gdd/dialogue-content-database.md
+    referenced_by:
+      - design/gdd/dialogue-content-database.md
+      - design/gdd/dialogue-conversion-system.md
+      - design/gdd/conversion-logic-engine.md
+      - design/gdd/rival-faith-system.md
+    value: "GRIEF | AMBITION | DOUBT | FEAR"
+    unit: "GDScript enum (GameEnums)"
+    notes: "Four dialogue approaches. Compiled single source: GameEnums.DialogueApproach
+      (architecture plan D9, ADR-0002). Consumed by DCS, CLE, Rival Faith System, Conversion UI."
+    added: 2026-08-09
+    revised: ""
+
+  - name: NPCArchetype
+    status: active
+    source: design/gdd/npc-character-system.md
+    referenced_by:
+      - design/gdd/npc-character-system.md
+      - design/gdd/portrait-expression-system.md
+      - design/gdd/dialogue-conversion-system.md
+    value: "LABORER | ELDER | MERCHANT | SOLDIER | SCHOLAR | WIDOW | NOBLE"
+    unit: "GDScript enum (GameEnums)"
+    notes: "Seven MVP archetypes (+5 post-MVP). Compiled single source: GameEnums.NPCArchetype
+      (architecture plan D9, ADR-0002). Drives portrait asset paths and inspect-line recency keys."
+    added: 2026-08-09
+    revised: ""
+
+  - name: NpcRecord
+    status: active
+    source: design/gdd/npc-character-system.md
+    referenced_by:
+      - design/gdd/npc-character-system.md
+      - design/gdd/dialogue-conversion-system.md
+      - design/gdd/save-load-system.md
+      - design/gdd/village-map-view.md
+    value: "Resource class (src/resources/npc_record.gd)"
+    unit: "GDScript Resource class"
+    notes: "Per-NPC runtime record: npc_id, archetype, assigned/revealed traits, belief_state,
+      cooldown, approach history, social connections, map_position, access_gate. social_influence_weight
+      NOT on the record — read via get_archetype_definition() (NPC CS Rule 1). Serialized by
+      Save & Load System. Registered per architecture plan Appendix D (2026-08-09)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: NPCArchetypeDefinition
+    status: active
+    source: design/gdd/npc-character-system.md
+    referenced_by:
+      - design/gdd/npc-character-system.md
+      - design/gdd/dialogue-content-database.md
+      - design/gdd/portrait-expression-system.md
+    value: "Resource class (src/resources/npc_archetype_definition.gd); authored res://assets/data/npcs/archetypes.tres (7)"
+    unit: "GDScript Resource class"
+    notes: "Archetype data: archetype_id, display_name, role_description, social_influence_weight
+      (0.1–5.0), trait_weight_bonuses, portrait_asset_path (dir contract res://assets/portraits/{archetype_id}/, 6 files).
+      Registered per architecture plan Appendix D (2026-08-09)."
+    added: 2026-08-09
+    revised: ""
+
+  - name: VillageDefinition
+    status: active
+    source: docs/architecture/architecture.md
+    referenced_by:
+      - docs/architecture/architecture.md
+      - design/gdd/npc-character-system.md
+      - design/gdd/village-map-view.md
+      - design/gdd/save-load-system.md
+    value: "Resource class (src/resources/village_definition.gd); authored res://assets/data/villages/village_01.tres"
+    unit: "GDScript Resource class"
+    notes: "PROPOSED (architecture plan D10, ADR-0002): village_id, npc_definitions
+      (Array[Dictionary]), map_art_path, rng_seed. Hand-authored per village; feeds
+      NPCRegistry.initialize_village(). Schema confirmation pending Creative Director
+      (architecture plan Open Question #4). Registered per Appendix D (2026-08-09)."
     added: 2026-08-09
     revised: ""
 
