@@ -1,5 +1,9 @@
 extends Node
-## TraitDatabase — Autoload placeholder, ADR-0001 slot 2.
+## TraitDatabase — Autoload stub, ADR-0001 slot 2.
 ## Foundation: loads res://assets/data/traits/trait_database.tres (16 traits).
-## Real logic lands in Sprint 1 task 1-11; ADR-0001 dependency assertions are
-## completed in task 1-6.
+## Real logic lands in Sprint 1 task 1-11. Boot-order shell: asserts GameConfig
+## (slot 1) is already booted (ADR-0001 — foundation boot chain).
+
+func _ready() -> void:
+	assert(is_instance_valid(GameConfig),
+		"TraitDatabase (slot 2): GameConfig (slot 1) must boot first (ADR-0001)")

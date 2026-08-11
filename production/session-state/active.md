@@ -5,6 +5,7 @@ Epic: Pre-Production
 Feature: Design Documentation
 Task: Sprint plan + QA plan accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
 Note: Task 1-1 engine install spike ✅ — Godot 4.6.x installed at ~/.local/bin/godot (local install primary; CI 1-21 as clean-room fallback)
+Note: Tasks 1-3..1-6 ✅ — M0 scaffold, GameEnums, GUT (v9.6.1), boot test — see Sprint 1 Execution Records below
 <!-- /STATUS -->
 
 ## Current Task
@@ -51,7 +52,16 @@ Completing full pre-production phase:
 - **Safe-area API spike (Task 1-2) RESOLVED (2026-08-11)** — runtime-probed against installed Godot 4.6.stable (official 89cea1439). Exact 4.6 call signature **verified**: `DisplayServer.get_display_safe_area() -> Rect2i` (const, **no parameters**); official 4.6 docs: "Returns the unobscured area of the display where interactive controls should be rendered." Headless probe output: `[P: (0, 0), S: (0, 0)]` — empty rect expected in headless (no real display; real values on device). Bonus verified: `DisplayServer.get_display_cutouts() -> Array[Rect2]` (Android-only, per-cutout bounding rects). **No fallback needed — no open question remains for R1 at M6**; Viewport-inset / per-device notch table stays as device-evidence backup only. Probe: `/tmp/safe-area-probe/probe.gd` + minimal `project.godot` (temp, outside repo); finding feeds ADR-0011 at M6. VMV OQ-1 / Conversion UI OQ-3 / HUD OQ-7 all resolved by this probe.
 - ⚠️ **Pre-existing inconsistency flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default is **6** in game-config.md vs **3** in rival-faith-system.md — the two GDDs must agree before implementation; game-config.md is the authoritative config owner (scheduled for Creative Director ruling via task 1-18)
 
+## Sprint 1 Execution Records (2026-08-11)
+
+- **Task 1-3 M0 scaffold ✅** (commit f61bc47): project.godot with the 10 Autoloads in EXACT ADR-0001 order + portrait/mobile settings (720×1280, orientation=1, canvas_items, Compatibility renderer); full §7 directory tree; main.tscn; SCAF test. Verified: `godot --headless --quit --path .` exit 0, zero errors. NOTE: 1-3 ships minimal autoload placeholder shells so the project boots per AC — the ADR-0001 dependency assertions + boot test land with 1-6.
+- **Task 1-4 GameEnums ✅** (commit 4805a59): src/core/game_enums.gd — 10 enums per architecture §4.2/ADR-0002, ConversionOutcome.PERSUADED (no CONVERTED). Probe verified: compiles; all members/order match; ENUM-1..5 green in GUT.
+- **Task 1-5 GUT setup ✅** (commit f565469): vendored **GUT v9.6.1** at addons/gut/ (decision recorded in tests/README.md: v9.7.1 REJECTED — stub_params.gd typed getter returns null for StringName-inferred property → parse error on 4.6, would break double()/stub()); tests/gdunit4_runner.gd (subclass of GUT's official CLI entry) + .gutconfig.json; `godot --headless --script tests/gdunit4_runner.gd` green (12/12 at final state), exit 0.
+- **Task 1-6 M0 boot test ✅**: all 10 stub Autoloads upgraded with `_ready()` dependency assertions per ADR-0001; GSM connects DCS signals via `call_deferred("_connect_signals")` (never misses session_begun); tests/integration/m0_boot_test.gd (BOOT-1..4). Verified: headless boot exit 0, zero errors; full GUT suite 12/12 green. One test-fix during execution: BOOT-3 initially queried `GameStateManager.is_connected` (wrong object — the emitter is DCS); corrected to `DialogueConversionSystem.is_connected(...)`.
+
 ## Files Modified This Session
+
+- production/session-state/active.md — this file (task 1-3..1-6 execution records)
 - docs/architecture/architecture.md — NEW master architecture document (Accepted, version 1, 2026-08-09)
 - docs/architecture/adr-0001.md — NEW Autoload architecture & initialization order (Accepted)
 - docs/architecture/adr-0002.md — NEW data resource model: GameEnums, VillageDefinition (Accepted)
@@ -100,7 +110,7 @@ Remaining pre-production items:
 1. ✅ **Architecture plan** — docs/architecture/architecture.md Accepted; ADR-0001…0004 Accepted (M0 foundation)
 2. ✅ **Sprint plan** — 7-sprint roadmap accepted 2026-08-11; Sprint 1: Scaffold & Foundation (M0+M1, 2026-08-17 → 2026-09-04); `production/sprints/sprint-1.md` + `production/sprint-status.yaml` committed
 3. ✅ **QA plan for Sprint 1** — `production/qa/qa-plan-sprint-1.md` approved 2026-08-11; OQ-A…OQ-H resolved per draft recommendations (no emulator layer, local WSL headless evidence, automated assert + export spot-check, two test-only fixtures, AC-6 static scan, V_total=100 automation, process stories as Config/Data, fixed filename); sprint DoD item 3 satisfied
-4. **Sprint 1 execution (2026-08-17 → 2026-09-04)** — NEXT. In-sprint tasks 1-1…1-23 (15 Must / 5 Should / 3 Nice): **engine install spike 1-1 on Day 1**; **gate-check 1-7, control manifest 1-16, TR registry + architecture review 1-17 are in-sprint tasks**; then safe-area spike (1-2), scaffold (1-3), ADR-0005/0006 at sprint start (1-8/1-9), GameConfig/TraitDB/DCD/MTF (1-10…1-13), regression + milestone records (1-14/1-15); Should: R2 ruling (1-18), VillageDefinition sign-off (1-19), dialogue authoring format (1-20); Nice: CI (1-21), boot/title sketch (1-22), placeholder art (1-23)
+4. **Sprint 1 execution (2026-08-17 → 2026-09-04)** — IN PROGRESS. In-sprint tasks 1-1…1-23 (15 Must / 5 Should / 3 Nice): ✅ engine install spike 1-1; ✅ safe-area spike 1-2; ✅ M0 scaffold 1-3; ✅ GameEnums 1-4; ✅ GUT setup 1-5; ✅ M0 boot test 1-6. NEXT: gate-check 1-7, ADR-0005/0006 (1-8/1-9, Accepted before 1-10/1-13), then GameConfig/TraitDB/DCD/MTF (1-10…1-13), regression + milestone records (1-14/1-15); Should: control manifest 1-16, TR registry 1-17, R2 ruling 1-18, VillageDefinition sign-off 1-19, dialogue authoring format 1-20; Nice: CI 1-21, boot/title sketch 1-22, placeholder art 1-23
 5. **UX spec** — `/ux-design` for `design/ux/hud.md` (HUD UI requirements — flagged in the HUD GDD; needed before M6)
 6. **Asset specs** — `/asset-spec` per system once the Art Bible is approved (HUD flagged: system:hud-progress-system; needed before M5/M6)
 MVP systems remaining: none — design phase complete.
