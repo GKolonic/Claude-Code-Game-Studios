@@ -3,7 +3,7 @@
 <!-- STATUS -->
 Epic: Pre-Production
 Feature: Design Documentation
-Task: Sprint plan — accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
+Task: Sprint plan + QA plan accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
 <!-- /STATUS -->
 
 ## Current Task
@@ -46,6 +46,7 @@ Completing full pre-production phase:
 - **Autoload-order conflict resolved: DCS before GSM** (GSM Rule 10 authority; Save&Load GDD architectural note corrected to `NPCRegistry → DCS → GSM → SaveLoad`)
 - **ADR-0001…0004 ACCEPTED** (M0 foundation, 2026-08-09): ADR-0001 Autoload architecture & init order; ADR-0002 data resource model (GameEnums, VillageDefinition); ADR-0003 signal architecture & communication discipline; ADR-0004 scene ownership & CanvasLayer stack. ADR-0005…0011 milestone-gated (M1–M6).
 - **Sprint plan ACCEPTED** (2026-08-11) — Sprint 1: Scaffold & Foundation (M0+M1), 2026-08-17 → 2026-09-04; `production/sprints/sprint-1.md` + `production/sprint-status.yaml` committed. 9 OQ resolutions (recommended rulings accepted): OQ-1 **7 sprints** (S1 = M0+M1, S2–S6 = M2–M6, S7 = M7); OQ-2 **solo full-time, 3-week sprint = 15 total / 3 buffer / 12 available**; OQ-3 **engine install = Day-1 spike task 1-1** (local 4.6 binary via /mnt/c or Linux headless; CI 1-21 as fallback); OQ-4 **safe-area spike = task 1-2** (0.5d runtime probe); OQ-5 **QA plan [A] — `production/qa/qa-plan-sprint-1.md` created before implementation**; OQ-6 **ADR-0005/0006 at Sprint 1 start (tasks 1-8/1-9)**, Accepted before 1-10/1-13; OQ-7 **`/scope-check` baseline before implementation** + standing guardrail (untraceable stories need Creative Director approval); OQ-8 **control manifest (1-16) + TR registry/architecture review (1-17) + gate-check (1-7) in-sprint**; OQ-9 **keep 3-week cadence** — Sprint 7 may shift to 2027-01-04 (winter-holiday overlap)
+- **QA plan ACCEPTED** (2026-08-11) — `production/qa/qa-plan-sprint-1.md` approved before implementation (sprint DoD item 3). 8 OQ resolutions (draft recommendations accepted): OQ-A **no device-emulator layer at MVP** — Godot `Input.parse_input_event` with constructed InputEventScreenTouch/Drag; thin test helper only if suites prove flaky; revisit at M5/M6; OQ-B **local WSL headless = primary evidence** for Sprint 1 (Godot version + WSL env recorded in every evidence path); CI evidence mandatory from Sprint 2; OQ-C **automated assert + ONE manual export spot-check** for MTF AC-14 (no golden-screenshot infra until M5); OQ-D **two test-only dialogue fixtures** — `tests/fixtures/dialogue/underfilled.tres` + `empty_descriptor.tres`, created during story 1-12 (production DB stays pristine); OQ-E **GameConfig AC-6 as static scan** — numeric-literal sweep of src/gameplay/ + src/core/ in 1-14 REG-3 + control-manifest Forbidden rule (1-16); OQ-F **automate V_total == 100 audit** — GUT/script in DCD-2 (doubles as the R8 audit); OQ-G **process stories (1-7/1-8/1-9/1-15/1-16/1-17/1-18/1-19/1-20) classified Config/Data** — manual evidence = produced artifact + checklist sign-off, no unit-test files demanded; OQ-H **fixed filename `production/qa/qa-plan-sprint-1.md`** (matches DoD + OQ-5 [A]; date lives in the header)
 - ⚠️ **Pre-existing inconsistency flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default is **6** in game-config.md vs **3** in rival-faith-system.md — the two GDDs must agree before implementation; game-config.md is the authoritative config owner (scheduled for Creative Director ruling via task 1-18)
 
 ## Files Modified This Session
@@ -90,12 +91,12 @@ Completing full pre-production phase:
 - ⬜ **Flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default 6 (game-config.md, authoritative) vs 3 (rival-faith-system.md) — ruling scheduled as task 1-18
 
 ## Next
-Pre-production design documentation is COMPLETE — all 14/14 MVP GDDs designed; MVP Architecture Plan accepted (ADR-0001…0004 Accepted); Sprint 1 plan accepted (2026-08-11).
+Pre-production design documentation is COMPLETE — all 14/14 MVP GDDs designed; MVP Architecture Plan accepted (ADR-0001…0004 Accepted); Sprint 1 plan + QA plan accepted (2026-08-11).
 Remaining pre-production items:
 1. ✅ **Architecture plan** — docs/architecture/architecture.md Accepted; ADR-0001…0004 Accepted (M0 foundation)
 2. ✅ **Sprint plan** — 7-sprint roadmap accepted 2026-08-11; Sprint 1: Scaffold & Foundation (M0+M1, 2026-08-17 → 2026-09-04); `production/sprints/sprint-1.md` + `production/sprint-status.yaml` committed
-3. **QA plan for Sprint 1** — per OQ-5 [A], run `/qa-plan sprint` BEFORE implementation starts (creates `production/qa/qa-plan-sprint-1.md`); the sprint's DoD requires it
-4. **Sprint 1 execution (2026-08-17 → 2026-09-04)** — in-sprint tasks 1-1…1-23 (15 Must / 5 Should / 3 Nice): Day-1 engine spike (1-1), safe-area spike (1-2), scaffold (1-3), ADR-0005/0006 at sprint start (1-8/1-9), GameConfig/TraitDB/DCD/MTF (1-10…1-13), gate-check (1-7), regression + milestone records (1-14/1-15); Should: control manifest (1-16), TR registry + architecture review (1-17), R2 ruling (1-18), VillageDefinition sign-off (1-19), dialogue authoring format (1-20); Nice: CI (1-21), boot/title sketch (1-22), placeholder art (1-23)
+3. ✅ **QA plan for Sprint 1** — `production/qa/qa-plan-sprint-1.md` approved 2026-08-11; OQ-A…OQ-H resolved per draft recommendations (no emulator layer, local WSL headless evidence, automated assert + export spot-check, two test-only fixtures, AC-6 static scan, V_total=100 automation, process stories as Config/Data, fixed filename); sprint DoD item 3 satisfied
+4. **Sprint 1 execution (2026-08-17 → 2026-09-04)** — NEXT. In-sprint tasks 1-1…1-23 (15 Must / 5 Should / 3 Nice): **engine install spike 1-1 on Day 1**; **gate-check 1-7, control manifest 1-16, TR registry + architecture review 1-17 are in-sprint tasks**; then safe-area spike (1-2), scaffold (1-3), ADR-0005/0006 at sprint start (1-8/1-9), GameConfig/TraitDB/DCD/MTF (1-10…1-13), regression + milestone records (1-14/1-15); Should: R2 ruling (1-18), VillageDefinition sign-off (1-19), dialogue authoring format (1-20); Nice: CI (1-21), boot/title sketch (1-22), placeholder art (1-23)
 5. **UX spec** — `/ux-design` for `design/ux/hud.md` (HUD UI requirements — flagged in the HUD GDD; needed before M6)
 6. **Asset specs** — `/asset-spec` per system once the Art Bible is approved (HUD flagged: system:hud-progress-system; needed before M5/M6)
 MVP systems remaining: none — design phase complete.
