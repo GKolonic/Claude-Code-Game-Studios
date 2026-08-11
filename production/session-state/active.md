@@ -4,6 +4,7 @@
 Epic: Pre-Production
 Feature: Design Documentation
 Task: Sprint plan + QA plan accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
+Note: Task 1-1 engine install spike ✅ — Godot 4.6.x installed at ~/.local/bin/godot (local install primary; CI 1-21 as clean-room fallback)
 <!-- /STATUS -->
 
 ## Current Task
@@ -67,6 +68,7 @@ Completing full pre-production phase:
 - design/gdd/systems-index.md — row 14 → Designed; tracker 13/14 → 14/14; design docs started 13 → 14
 - design/registry/entities.yaml — HUDConfig constant + F1/F2/F3 formulas + referenced_by updates (earlier)
 - production/session-state/active.md — this file (earlier)
+- production/session-state/active.md — Task 1-1 engine install spike record: Godot 4.6-stable (official build 89cea1439) downloaded from official GitHub releases (`Godot_v4.6-stable_linux.x86_64.zip`, SHA512 verified against release `SHA512-SUMS.txt`), installed to `~/.local/bin/godot` (bare name, ~/.local/bin already on PATH); `godot --version` → `4.6.stable.official.89cea1439` exit 0; `godot --headless --quit` exit 0 — R12 resolved
 
 ## Cross-System Updates Pending
 - ✅ design/gdd/dialogue-conversion-system.md — §Formulas recency state lifetime: "When GSM calls NPCRegistry.clear_village()" → "When GSM emits village_cleared signal (DCS subscribes)" — applied 2026-08-09
