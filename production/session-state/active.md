@@ -3,7 +3,7 @@
 <!-- STATUS -->
 Epic: Pre-Production
 Feature: Design Documentation
-Task: Architecture plan — accepted; ADR-0001…0004 accepted
+Task: Sprint plan — accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
 <!-- /STATUS -->
 
 ## Current Task
@@ -27,7 +27,7 @@ Completing full pre-production phase:
    - ✅ Village Map View (design/gdd/village-map-view.md)
    - ✅ HUD & Progress System (design/gdd/hud-progress-system.md) — FINAL MVP GDD
 5. ✅ Architecture plan — accepted (docs/architecture/architecture.md, 2026-08-09)
-6. ⬜ Sprint plan
+6. ✅ Sprint plan — accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
 
 ## Key Decisions Made (this session)
 - Divine Dominion GDD reviewed — MAJOR REVISION NEEDED verdict
@@ -45,7 +45,8 @@ Completing full pre-production phase:
 - **MVP Architecture Plan ACCEPTED** (2026-08-09) — 10 Autoloads + 4 scenes + signal-driven orchestration. Key decisions (D1–D10): 10-Autoload order (GameConfig first, DCS before GSM), 4 scenes (`conversation_screen`, `village_map`, `hud_progress`, `main`), PortraitController as scene node, DCS owns conversation flow, Conversion UI sole expression driver, GSM exclusive NPC-lifecycle caller, MTF sole input boundary + Conversion UI only blocking-layer owner, **FaithSpread no-op stub at GSM Step 4 (MVP)**, GameEnums shared class, VillageDefinition Resource (proposed)
 - **Autoload-order conflict resolved: DCS before GSM** (GSM Rule 10 authority; Save&Load GDD architectural note corrected to `NPCRegistry → DCS → GSM → SaveLoad`)
 - **ADR-0001…0004 ACCEPTED** (M0 foundation, 2026-08-09): ADR-0001 Autoload architecture & init order; ADR-0002 data resource model (GameEnums, VillageDefinition); ADR-0003 signal architecture & communication discipline; ADR-0004 scene ownership & CanvasLayer stack. ADR-0005…0011 milestone-gated (M1–M6).
-- ⚠️ **Pre-existing inconsistency flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default is **6** in game-config.md vs **3** in rival-faith-system.md — the two GDDs must agree before implementation; game-config.md is the authoritative config owner
+- **Sprint plan ACCEPTED** (2026-08-11) — Sprint 1: Scaffold & Foundation (M0+M1), 2026-08-17 → 2026-09-04; `production/sprints/sprint-1.md` + `production/sprint-status.yaml` committed. 9 OQ resolutions (recommended rulings accepted): OQ-1 **7 sprints** (S1 = M0+M1, S2–S6 = M2–M6, S7 = M7); OQ-2 **solo full-time, 3-week sprint = 15 total / 3 buffer / 12 available**; OQ-3 **engine install = Day-1 spike task 1-1** (local 4.6 binary via /mnt/c or Linux headless; CI 1-21 as fallback); OQ-4 **safe-area spike = task 1-2** (0.5d runtime probe); OQ-5 **QA plan [A] — `production/qa/qa-plan-sprint-1.md` created before implementation**; OQ-6 **ADR-0005/0006 at Sprint 1 start (tasks 1-8/1-9)**, Accepted before 1-10/1-13; OQ-7 **`/scope-check` baseline before implementation** + standing guardrail (untraceable stories need Creative Director approval); OQ-8 **control manifest (1-16) + TR registry/architecture review (1-17) + gate-check (1-7) in-sprint**; OQ-9 **keep 3-week cadence** — Sprint 7 may shift to 2027-01-04 (winter-holiday overlap)
+- ⚠️ **Pre-existing inconsistency flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default is **6** in game-config.md vs **3** in rival-faith-system.md — the two GDDs must agree before implementation; game-config.md is the authoritative config owner (scheduled for Creative Director ruling via task 1-18)
 
 ## Files Modified This Session
 - docs/architecture/architecture.md — NEW master architecture document (Accepted, version 1, 2026-08-09)
@@ -57,6 +58,8 @@ Completing full pre-production phase:
 - design/gdd/save-load-system.md — architectural note order corrected: `NPCRegistry → DCS → GSM → SaveLoad` (reconciles GSM Rule 10)
 - design/gdd/dialogue-conversion-system.md — §Formulas recency lifetime: GSM emits `village_cleared` signal (DCS subscribes)
 - production/session-state/active.md — this file
+- production/sprints/sprint-1.md — NEW Sprint 1 plan (Scaffold & Foundation, M0+M1, 2026-08-17 → 2026-09-04); OQ-5 resolved [A]; DoD requires QA plan
+- production/sprint-status.yaml — NEW machine-readable story status (23 stories; Must → ready-for-dev, Should/Nice → backlog)
 - design/gdd/hud-progress-system.md — NEW GDD (system #14), 8 sections + V/A + UI Req + OQs resolved + appendix
 - design/gdd/game-config.md — HUDConfig 9th domain (Rule 2 nine domains, field ranges table, Interactions row, AC-1/AC-10, Tuning Knobs note)
 - design/gdd/village-map-view.md — F1 top inset → `HUD.get_top_strip_height_dp()` (formula + output range + UI Req row)
@@ -83,17 +86,16 @@ Completing full pre-production phase:
 - ✅ design/gdd/village-map-view.md — F1 top inset → `HUD.get_top_strip_height_dp()` (formula, output range, UI Req row) — applied 2026-08-09
 - ✅ design/gdd/systems-index.md — row 14 → Designed; tracker 13/14 → 14/14; design docs started 13 → 14 — applied 2026-08-09
 - ✅ design/registry/entities.yaml — HUDConfig constant + conversion_fraction/rival_activity_rate/chronicle_card_alpha formulas + referenced_by updates — applied 2026-08-09
-- ⬜ **Flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default 6 (game-config.md, authoritative) vs 3 (rival-faith-system.md)
-- ⬜ **Open Questions from architecture plan §9** (noted for resolution): safe-area API spike (M0), VillageDefinition schema confirmation (OQ-4), dialogue authoring format (OQ-5), boot/title flow (OQ-6), RNG persistence (OQ-7), FaithSpreadConfig shipping (OQ-10), engine install/CI (OQ-9, R12)
+- ✅ Open Questions from architecture plan §9 — now scheduled as Sprint 1 tasks per the accepted plan (engine install 1-1; safe-area spike 1-2; FaithSpreadConfig ships with 1-10 per OQ-10; VillageDefinition sign-off 1-19; dialogue authoring format 1-20; boot/title flow 1-22); RNG persistence (architecture §9 OQ-7) remains open, deferred to M4 save/load — applied 2026-08-11
+- ⬜ **Flagged for `/consistency-check`** (NOT edited): `RivalFaithConfig.aggression_interval_turns` default 6 (game-config.md, authoritative) vs 3 (rival-faith-system.md) — ruling scheduled as task 1-18
 
 ## Next
-Pre-production design documentation is COMPLETE — all 14/14 MVP GDDs designed; MVP Architecture Plan accepted (ADR-0001…0004 Accepted).
+Pre-production design documentation is COMPLETE — all 14/14 MVP GDDs designed; MVP Architecture Plan accepted (ADR-0001…0004 Accepted); Sprint 1 plan accepted (2026-08-11).
 Remaining pre-production items:
 1. ✅ **Architecture plan** — docs/architecture/architecture.md Accepted; ADR-0001…0004 Accepted (M0 foundation)
-2. **Sprint plan** — break MVP into implementation sprints (foundation → core → feature → presentation); ADR-0005…0011 are milestone-gated (M1–M6) and should be written as their milestones approach
-3. **Control manifest** — run `/create-control-manifest` (after foundational ADRs; date-stamped `Manifest Version:`)
-4. **TR registry + architecture review** — run `/architecture-review` (Phase 8 populates tr-registry.yaml; writes architecture-review report)
-5. **Gate-check** — run `/gate-check pre-production` (validates GDDs complete, systems index updated, config domains consistent, session state current)
-6. **UX spec** — `/ux-design` for `design/ux/hud.md` (HUD UI requirements — flagged in the HUD GDD)
-7. **Asset specs** — `/asset-spec` per system once the Art Bible is approved (HUD flagged: system:hud-progress-system)
+2. ✅ **Sprint plan** — 7-sprint roadmap accepted 2026-08-11; Sprint 1: Scaffold & Foundation (M0+M1, 2026-08-17 → 2026-09-04); `production/sprints/sprint-1.md` + `production/sprint-status.yaml` committed
+3. **QA plan for Sprint 1** — per OQ-5 [A], run `/qa-plan sprint` BEFORE implementation starts (creates `production/qa/qa-plan-sprint-1.md`); the sprint's DoD requires it
+4. **Sprint 1 execution (2026-08-17 → 2026-09-04)** — in-sprint tasks 1-1…1-23 (15 Must / 5 Should / 3 Nice): Day-1 engine spike (1-1), safe-area spike (1-2), scaffold (1-3), ADR-0005/0006 at sprint start (1-8/1-9), GameConfig/TraitDB/DCD/MTF (1-10…1-13), gate-check (1-7), regression + milestone records (1-14/1-15); Should: control manifest (1-16), TR registry + architecture review (1-17), R2 ruling (1-18), VillageDefinition sign-off (1-19), dialogue authoring format (1-20); Nice: CI (1-21), boot/title sketch (1-22), placeholder art (1-23)
+5. **UX spec** — `/ux-design` for `design/ux/hud.md` (HUD UI requirements — flagged in the HUD GDD; needed before M6)
+6. **Asset specs** — `/asset-spec` per system once the Art Bible is approved (HUD flagged: system:hud-progress-system; needed before M5/M6)
 MVP systems remaining: none — design phase complete.
