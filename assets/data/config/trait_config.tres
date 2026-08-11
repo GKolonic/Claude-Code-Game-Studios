@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TraitConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/trait_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+common_trait_weight = 60
+uncommon_trait_weight = 30
+rare_trait_weight = 10
+traits_per_npc_min = 2
+traits_per_npc_max = 4

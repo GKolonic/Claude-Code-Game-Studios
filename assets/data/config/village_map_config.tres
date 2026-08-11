@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="VillageMapConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/village_map_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+map_grid_columns = 4
+map_grid_rows = 6
+ink_bleed_duration_ms = 1750
+ink_bleed_opacity = 0.35
+ink_bleed_color = Color(0.901961, 0.745098, 0.392157, 1)
+ink_bleed_max_radius_dp = 260
+rival_marker_dwell_sec = 4.0
+rival_marker_fade_ms = 300
+return_halo_advance_color = Color(0.94902, 0.756863, 0.305882, 1)
+return_halo_regress_color = Color(0.352941, 0.478431, 0.603922, 1)
+return_halo_max_alpha = 0.12
+reduced_motion_ink_fade_ms = 100

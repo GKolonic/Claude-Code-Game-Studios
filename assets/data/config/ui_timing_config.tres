@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UITimingConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/ui_timing_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+approach_confirm_hold_sec = 0.6
+hardened_reveal_hold_sec = 1.0
+dialogue_line_hold_sec = 2.0
+outcome_display_hold_sec = 2.5
+scene_transition_duration_sec = 0.5
+portrait_expression_hold_frames = 30
+trait_card_reveal_ms = 350

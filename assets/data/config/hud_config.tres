@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HUDConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/hud_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+top_strip_height_dp = 56
+chronicle_card_hold_sec = 4.0
+chronicle_card_fade_ms = 400
+chronicle_card_fade_in_ms = 250
+reduced_motion_card_fade_ms = 100

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProgressionConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/progression_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+faith_power_per_conversion = 10
+missionary_unlock_threshold = 100
+court_unlock_threshold = 250
+crusade_unlock_threshold = 500
+village_win_conversion_pct = 0.75

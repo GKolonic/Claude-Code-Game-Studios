@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FaithSpreadConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/faith_spread_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+passive_spread_radius = 2
+spread_rate_per_tick = 0.05
+attrition_rate_per_tick = 0.02
+spread_tick_interval_sec = 30.0

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RivalFaithConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/rival_faith_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+aggression_interval_turns = 6
+reharden_strength = 0.4
+counter_approach_random_weight = 0.3

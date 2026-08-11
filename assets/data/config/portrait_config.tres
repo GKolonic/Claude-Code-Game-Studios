@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PortraitConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/config/portrait_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+dissolve_duration_ms = 350
+conversion_dissolve_duration_ms = 400
+conversion_overlay_color = Color(0.94902, 0.639216, 0.235294, 1)
+conversion_overlay_surge_alpha = 0.55
+conversion_overlay_surge_ms = 150
+conversion_overlay_hold_ms = 50
+conversion_overlay_fade_ms = 500
+reduced_motion_dissolve_ms = 0
+reduced_motion_overlay_fade_ms = 100
