@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TraitDatabaseCatalogue" load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://src/resources/trait_database_catalogue.gd" id="0"]
+[ext_resource type="Resource" path="res://assets/data/traits/bereaved.tres" id="1"]
+[ext_resource type="Resource" path="res://assets/data/traits/ambitious.tres" id="2"]
+[ext_resource type="Resource" path="res://assets/data/traits/superstitious.tres" id="3"]
+[ext_resource type="Resource" path="res://assets/data/traits/proud.tres" id="4"]
+[ext_resource type="Resource" path="res://assets/data/traits/dutiful.tres" id="5"]
+[ext_resource type="Resource" path="res://assets/data/traits/lonely.tres" id="6"]
+[ext_resource type="Resource" path="res://assets/data/traits/fearful.tres" id="7"]
+[ext_resource type="Resource" path="res://assets/data/traits/grievously_wronged.tres" id="8"]
+[ext_resource type="Resource" path="res://assets/data/traits/cynical.tres" id="9"]
+[ext_resource type="Resource" path="res://assets/data/traits/status_hungry.tres" id="10"]
+[ext_resource type="Resource" path="res://assets/data/traits/mortal_minded.tres" id="11"]
+[ext_resource type="Resource" path="res://assets/data/traits/intellectually_restless.tres" id="12"]
+[ext_resource type="Resource" path="res://assets/data/traits/loyal_to_community.tres" id="13"]
+[ext_resource type="Resource" path="res://assets/data/traits/seeker.tres" id="14"]
+[ext_resource type="Resource" path="res://assets/data/traits/broken_by_loss.tres" id="15"]
+[ext_resource type="Resource" path="res://assets/data/traits/visionary.tres" id="16"]
+
+[resource]
+script = ExtResource("0")
+traits = Array[TraitData]([ExtResource("1"), ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("14"), ExtResource("15"), ExtResource("16")])

@@ -6,99 +6,99 @@ goal: "M0+M1 foundation: bootable Godot 4.6 skeleton, GameConfig (9 .tres), Trai
 start: "2026-08-17"
 end: "2026-09-04"
 generated: "2026-08-11"
-updated: "2026-08-11"
+updated: "2026-08-12"
 
 stories:
   - id: "1-1"
     name: "Engine install spike (R12)"
     file: "production/stories/sprint-1/1-1-engine-install-spike.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "devops-engineer"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-2"
     name: "Safe-area API spike (R1)"
     file: "production/stories/sprint-1/1-2-safe-area-api-spike.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "godot-gdscript-specialist"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-3"
     name: "M0 project scaffold"
     file: "production/stories/sprint-1/1-3-m0-project-scaffold.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "engine-programmer"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-4"
     name: "GameEnums class"
     file: "production/stories/sprint-1/1-4-game-enums.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "godot-gdscript-specialist"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-5"
     name: "GUT test framework setup"
     file: "production/stories/sprint-1/1-5-gut-setup.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "tools-programmer"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-6"
     name: "M0 boot test (autoload order)"
     file: "production/stories/sprint-1/1-6-m0-boot-test.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "engine-programmer"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-7"
     name: "Pre-production gate-check"
     file: "production/stories/sprint-1/1-7-preproduction-gate-check.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "qa-lead"
     estimate_days: 0.25
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-8"
     name: "ADR-0005 Config system (Accept)"
     file: "production/stories/sprint-1/1-8-adr-0005-config-system.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "technical-director"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-9"
     name: "ADR-0006 Input architecture (Accept)"
     file: "production/stories/sprint-1/1-9-adr-0006-input-architecture.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "technical-director"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-11"
   - id: "1-10"
     name: "GameConfig autoload + 9 resources + 9 .tres"
     file: "production/stories/sprint-1/1-10-game-config.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "godot-gdscript-specialist"
     estimate_days: 1.5
     blocker: "ADR-0005 acceptance (story blocked while Proposed)"
-    completed: ""
+    completed: "2026-08-12"
   - id: "1-11"
     name: "TraitDatabase + 16 traits"
     file: "production/stories/sprint-1/1-11-trait-database.md"
