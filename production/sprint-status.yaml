@@ -6,7 +6,7 @@ goal: "M0+M1 foundation: bootable Godot 4.6 skeleton, GameConfig (9 .tres), Trai
 start: "2026-08-17"
 end: "2026-09-04"
 generated: "2026-08-11"
-updated: "2026-08-12"
+updated: "2026-08-18"
 
 stories:
   - id: "1-1"
@@ -103,20 +103,20 @@ stories:
     name: "TraitDatabase + 16 traits"
     file: "production/stories/sprint-1/1-11-trait-database.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "godot-gdscript-specialist"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-12"
   - id: "1-12"
     name: "DialogueDatabase + 100 scaffold strings"
     file: "production/stories/sprint-1/1-12-dialogue-database.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "narrative-director / godot-gdscript-specialist"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-13"
     name: "MTF gesture engine"
     file: "production/stories/sprint-1/1-13-mobile-touch-framework.md"

@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="DialogueDatabaseCatalogue" format=3]
+
+[ext_resource type="Script" path="res://src/resources/npc_flavour_data.gd" id="1_vi3or"]
+[ext_resource type="Script" path="res://src/resources/dialogue_database_catalogue.gd" id="2_jpow4"]
+
+[sub_resource type="Resource" id="Resource_3ov5s"]
+script = ExtResource("1_vi3or")
+short_descriptor = "A laborer with calloused hands and a habit of measuring the sky before he trusts the day."
+inspect_lines = Array[String](["His shoulders carry a load he set down long ago.", "She wipes her tools with the same cloth every evening, fold by fold.", "He speaks to his ox by name and settles the yoke before the bell."])
+
+[sub_resource type="Resource" id="Resource_mr4xm"]
+script = ExtResource("1_vi3or")
+archetype = 1
+short_descriptor = "An elder who keeps the village's memory in the tilt of her head when someone speaks."
+inspect_lines = Array[String](["She chooses her bench by the sun and stays until the light moves.", "He repeats every story as if hearing it for the first time.", "Her hands settle on her knees like the end of an argument."])
+
+[sub_resource type="Resource" id="Resource_54alw"]
+script = ExtResource("1_vi3or")
+archetype = 2
+short_descriptor = "A merchant whose scales weigh words as carefully as grain."
+inspect_lines = Array[String](["He counts rope ends and greets each customer by what they bought last time.", "Her stall is arranged so nothing is hidden and everything is measured.", "He pauses a heartbeat before the deal, then shakes as if the matter were settled."])
+
+[sub_resource type="Resource" id="Resource_7tt5m"]
+script = ExtResource("1_vi3or")
+archetype = 3
+short_descriptor = "A soldier who stands in the shade with his back to every wall."
+inspect_lines = Array[String](["Her hand finds the knife hilt whenever the crowd parts to let someone through.", "He keeps watch on the road and names every rider from dust alone.", "His scars are counted by the village children like a memorised lesson."])
+
+[sub_resource type="Resource" id="Resource_2pj5q"]
+script = ExtResource("1_vi3or")
+archetype = 4
+short_descriptor = "A scholar who reads in the doorway where the light is best and the gossip loudest."
+inspect_lines = Array[String](["She corrects the town crier's dates under her breath from memory.", "His fingers turn the page corner before the thought finishes.", "She argues with a book, marking passages and answering them in the margin."])
+
+[sub_resource type="Resource" id="Resource_kp7n2"]
+script = ExtResource("1_vi3or")
+archetype = 5
+short_descriptor = "A widow who keeps her husband's hammer on the sill, clean and waiting."
+inspect_lines = Array[String](["She sets two cups on the table and takes one down before she remembers.", "Her shawl is pinned with the bone pin her husband carved.", "She turns at the sound of his name at the market and stands still a moment."])
+
+[sub_resource type="Resource" id="Resource_opulx"]
+script = ExtResource("1_vi3or")
+archetype = 6
+short_descriptor = "A noble who visits the village like a guest of his own estate."
+inspect_lines = Array[String](["His boots are clean though the road has not been dry for a week.", "She reads the tribute list slowly, then signs with a flourish.", "He gives the priest a coin and pockets the receipt with a bow."])
+
+[resource]
+script = ExtResource("2_jpow4")
+approach_lines = {
+0: ["You carried them to the grave yourself; I know the weight of that walk.", "The house is quieter now, and the quiet has its own voice."],
+1: ["You will outgrow this street before the year is done.", "The loom you dream of will turn under your own roof.", "One season of good fortune and you will never again stand in another man's shadow."],
+2: ["Have you counted how often the temple's answer fits every question?", "What stays when the priest's words and your own eyes disagree?", "Why does the holy book grow thinner in your hands each year?"],
+3: ["The fever does not pause while the village finishes its prayers.", "Every unmarked grave in this valley holds someone's certainty.", "The night you sleep without prayer is the night nothing answers."]
+}
+outcome_lines = {
+"0_0": ["She set the mourning cloth aside and took your hand.", "The tears stopped mid-breath; he nodded once and stood.", "She carried her husband's coat to the kindling pile and let it burn."],
+"0_1": ["He spoke of the empty chair in a voice that had softened.", "She let the grief-veil fall from her brow but kept it in her fingers.", "He repeated your words under his breath and looked toward the window."],
+"0_2": ["She folded her arms and turned her face to the wall.", "He answered with the old prayer, word for word, without looking up.", "She wiped her eyes and reminded you that mourning has its proper time."],
+"0_3": ["He slammed the shutter closed and spoke of the dead as strangers.", "She threw the mourning bread into the yard for the dogs.", "He laughed once at your words and picked up the axe again."],
+"1_0": ["He unfurled the parchment of his plans and pointed at the signature line.", "She straightened her back and looked at the market road as if it had changed.", "He counted the coins in his purse aloud, then set them on the table between you."],
+"1_1": ["She listened to the promise and her fingers drummed the counter once.", "He asked how much it would cost to begin, then turned the question over.", "She measured your words against the ledger open before her."],
+"1_2": ["He shook his head and closed the shop ledger with both hands.", "She quoted the old contract and reminded you who held the deeds.", "He pointed at the boundary stone and returned to his mending."],
+"1_3": ["She burned the flyer she had drafted and spat on the embers.", "He stood between you and his ambitions as if you meant to steal them.", "She called what you offered a thief's bargain and barred the door."],
+"2_0": ["He set the holy book aside and asked a question of his own.", "She closed her eyes, stayed silent, then nodded — no prayer, no argument.", "He traced a doubt in the dust with his boot and left the mark."],
+"2_1": ["She asked you to repeat the question, and this time she waited for the answer.", "He turned the catechism page and read it twice more in silence.", "She set down the knife and let the question rest between you."],
+"2_2": ["He answered your question with the catechism's exact words.", "She laughed and said the question was older than the faith itself.", "He closed the book mid-page and walked out with it under his arm."],
+"2_3": ["He quoted the heresy law and reminded you that questions cost more than answers.", "She snapped the book shut and stood so quickly the chair tilted.", "He made the sign of the ward against you and would not be questioned."],
+"3_0": ["She took down her grandfather's charms and handed them to you without a word.", "He knelt at the threshold and told you the dream that woke him each night.", "She drew a line of salt across the sill, then wiped it away and opened the door."],
+"3_1": ["He whispered the warning he had rehearsed, and his voice broke at the end.", "She kept the lamp lit and asked you to stay until it burned low.", "He looked at the nail-studded door and unlatched it a finger's width."],
+"3_2": ["She pulled the threshold charm from her pocket and pressed it into your palm.", "He recited the night-watch prayer and did it twice for safety.", "She checked the locks in order and told you the dark has its own masters."],
+"3_3": ["He barred the window as you spoke and drove the nails deeper.", "She smeared ash across her door lintel and knelt to the old signs.", "He refused the threshold and met you in the road with two armed cousins."]
+}
+npc_flavour = Array[ExtResource("1_vi3or")]([SubResource("Resource_3ov5s"), SubResource("Resource_mr4xm"), SubResource("Resource_54alw"), SubResource("Resource_7tt5m"), SubResource("Resource_2pj5q"), SubResource("Resource_kp7n2"), SubResource("Resource_opulx")])
+rival_lines = {
+0: ["The rival missionary knelt beside the grave and spoke of the mother's silence as a comfort.", "The rival told the widow that grief is the price of a faith without love.", "The rival pressed a white stone into the griever's hand and promised the sky would answer."],
+1: ["The rival missionary spoke of land grants to every family who would kneel by spring.", "The other prophet promised the merchant a tax exemption, sealed with a handshake.", "The rival lined the young men up at the ford and told them the new temple would need guards."],
+2: ["The rival missionary asked the scholars why their book contradicted itself and left the page open.", "The other prophet whispered that the old rites were invented by dead men for dead times.", "The rival scattered the village council's questions with a single argument about the sky-god's silence."],
+3: ["The rival missionary told the elders the flood would come again and the old gods would not answer.", "The other prophet warned the laborers that the mine roof would hold only for the faithful.", "The rival named the sickness that was coming and offered the cure to those who would follow."]
+}
