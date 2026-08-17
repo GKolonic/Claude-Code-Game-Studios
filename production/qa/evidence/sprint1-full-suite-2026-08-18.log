@@ -1,0 +1,380 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+---  GUT  ---
+[1m[INFO]:  [0musing [/home/gk-admin/.local/share/godot/app_userdata/The Faithful - Divine Dominion] for temporary output.
+Godot version:  4.6.0
+GUT version:  9.6.1
+[4m
+
+res://tests/unit/core/game_enums_test.gd
+[0m* test_enum_1_script_compiles_headless
+* test_enum_2_all_ten_enum_names_present
+* test_enum_3_values_match_architecture_s4_2
+* test_enum_4_persuaded_present
+* test_enum_5_no_converted_collision
+[1m5/5 passed.
+[0m[4m
+
+res://tests/unit/dialogue_database/dialogue_database_test.gd
+[0m* test_dcd_1_loads_at_startup_no_errors
+* test_dcd_2_content_audit_v_total_is_100
+* test_dcd_3_approach_pools_correct_for_all_four
+* test_dcd_4_outcome_pools_correct_for_all_sixteen
+* test_dcd_5_flavour_valid_for_all_seven_archetypes
+* test_dcd_6_rival_pools_correct_for_all_four
+* test_dcd_7_invalid_approach_returns_empty_without_crash
+WARNING: DialogueDatabase WARN: invalid approach key GRIEF — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_approach_lines (res://src/autoload/dialogue_database.gd:179)
+         [2] test_dcd_7_invalid_approach_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:88)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: DialogueDatabase WARN: invalid approach key FEAR — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_approach_lines (res://src/autoload/dialogue_database.gd:179)
+         [2] test_dcd_7_invalid_approach_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:89)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_dcd_8_invalid_outcome_combination_returns_empty_without_crash
+WARNING: DialogueDatabase WARN: invalid approach key GRIEF — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:190)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:94)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: DialogueDatabase WARN: invalid outcome key HARDENED — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:193)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:95)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: DialogueDatabase WARN: invalid approach key FEAR — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:190)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:96)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: DialogueDatabase WARN: invalid approach key GRIEF — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:190)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:97)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_dcd_9_invalid_archetype_returns_null_without_crash
+WARNING: DialogueDatabase WARN: invalid archetype key LABORER — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_npc_flavour (res://src/autoload/dialogue_database.gd:205)
+         [2] test_dcd_9_invalid_archetype_returns_null_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:102)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: DialogueDatabase WARN: invalid archetype key NOBLE — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_npc_flavour (res://src/autoload/dialogue_database.gd:205)
+         [2] test_dcd_9_invalid_archetype_returns_null_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:103)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_dcd_10_underfilled_slot_sets_unloaded_and_warns
+WARNING: DialogueDatabase WARN: approach slot GRIEF has 2 lines — minimum is 3
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_underfilled (res://src/autoload/dialogue_database.gd:124)
+         [1] _validate_slots (res://src/autoload/dialogue_database.gd:87)
+         [2] _load_from (res://src/autoload/dialogue_database.gd:72)
+         [3] test_dcd_10_underfilled_slot_sets_unloaded_and_warns (res://tests/unit/dialogue_database/dialogue_database_test.gd:110)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [6] test_scripts (res://addons/gut/gut.gd:1047)
+         [7] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [8] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [9] main (res://addons/gut/cli/gut_cli.gd:297)
+         [10] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_dcd_11_getters_safe_when_unloaded
+WARNING: DialogueDatabase WARN: approach slot GRIEF has 2 lines — minimum is 3
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_underfilled (res://src/autoload/dialogue_database.gd:124)
+         [1] _validate_slots (res://src/autoload/dialogue_database.gd:87)
+         [2] _load_from (res://src/autoload/dialogue_database.gd:72)
+         [3] test_dcd_11_getters_safe_when_unloaded (res://tests/unit/dialogue_database/dialogue_database_test.gd:122)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [6] test_scripts (res://addons/gut/gut.gd:1047)
+         [7] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [8] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [9] main (res://addons/gut/cli/gut_cli.gd:297)
+         [10] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_dcd_12_empty_descriptor_warns_but_returns_struct
+WARNING: DialogueDatabase WARN: archetype ELDER has an empty short_descriptor — content error; consumer must use a fallback
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] get_npc_flavour (res://src/autoload/dialogue_database.gd:213)
+         [1] test_dcd_12_empty_descriptor_warns_but_returns_struct (res://tests/unit/dialogue_database/dialogue_database_test.gd:139)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [4] test_scripts (res://addons/gut/gut.gd:1047)
+         [5] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [6] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [7] main (res://addons/gut/cli/gut_cli.gd:297)
+         [8] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_dcd_13_get_npc_flavour_returns_copy_not_shared_ref
+* test_dcd_api_accessors_return_lines_not_shared_arrays
+* test_r8_no_slot_below_three_per_min_across_production_db
+[1m15/15 passed.
+[0m[4m
+
+res://tests/unit/game_config/game_config_test.gd
+[0m* test_gcf_1_gameconfig_autoload_is_loaded
+* test_gcf_8_all_nine_domains_accessible_and_typed
+* test_gcf_2_typed_access_field_sweep
+* test_gcf_3_out_of_range_clamps_with_warning
+WARNING: GameConfig: conversion.base_success_chance clamped from 1.5 to 0.95
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _validate_domain (res://src/autoload/game_config.gd:141)
+         [1] _load_domain (res://src/autoload/game_config.gd:106)
+         [2] test_gcf_3_out_of_range_clamps_with_warning (res://tests/unit/game_config/game_config_test.gd:118)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_gcf_3_clamp_at_exact_boundary_is_accepted
+WARNING: GameConfig: conversion.base_success_chance clamped from 1.5 to 0.95
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _validate_domain (res://src/autoload/game_config.gd:141)
+         [1] _load_domain (res://src/autoload/game_config.gd:106)
+         [2] test_gcf_3_clamp_at_exact_boundary_is_accepted (res://tests/unit/game_config/game_config_test.gd:128)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_gcf_4_missing_required_field_halts_naming_field
+* test_gcf_5_missing_file_halts_naming_path
+* test_gcf_7_hot_reload_swaps_value_and_emits_signal
+WARNING: GameConfig: conversion.base_success_chance clamped from 1.5 to 0.95
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _validate_domain (res://src/autoload/game_config.gd:141)
+         [1] _hot_reload_domain (res://src/autoload/game_config.gd:189)
+         [2] test_gcf_7_hot_reload_swaps_value_and_emits_signal (res://tests/unit/game_config/game_config_test.gd:163)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_gcf_7_failed_hot_reload_retains_last_valid_and_no_signal
+WARNING: GameConfig: hot-reload of res://tests/fixtures/config/missing_field_conversion_config.tres invalid (GameConfig: Required field 'base_success_chance' missing in res://tests/fixtures/config/missing_field_conversion_config.tres.) — retaining last valid state.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _hot_reload_domain (res://src/autoload/game_config.gd:191)
+         [1] test_gcf_7_failed_hot_reload_retains_last_valid_and_no_signal (res://tests/unit/game_config/game_config_test.gd:178)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [4] test_scripts (res://addons/gut/gut.gd:1047)
+         [5] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [6] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [7] main (res://addons/gut/cli/gut_cli.gd:297)
+         [8] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_gcf_8_no_watcher_in_export_build
+[1m10/10 passed.
+[0m[4m
+
+res://tests/unit/m0_scaffold_test.gd
+[0m* test_scaf_1_project_godot_autoload_list_matches_adr_0001
+* test_scaf_2_directory_tree_matches_architecture_s7
+* test_scaf_3_gitignore_ignores_godot_cache
+[1m3/3 passed.
+[0m[4m
+
+res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd
+[0m* test_ac_1_tap_hit_emits_once_with_target_and_haptic
+* test_ac_2_tap_miss_emits_nothing
+* test_ac_3_tap_target_inflation_44dp_floor
+WARNING: MTF: target /root/GutRunner/@Node@25/SmallTarget measures 20.0x20.0dp (below 44dp minimum) — hit rect inflated; visual size unchanged
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] register (res://src/autoload/mobile_touch_framework.gd:247)
+         [2] _register (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:60)
+         [3] test_ac_3_tap_target_inflation_44dp_floor (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:134)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [6] test_scripts (res://addons/gut/gut.gd:1047)
+         [7] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [8] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [9] main (res://addons/gut/cli/gut_cli.gd:297)
+         [10] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_ac_4_long_press_starts_at_600ms_and_releases
+* test_ac_5_dead_band_emits_nothing
+* test_tap_boundary_at_350ms
+* test_dead_band_at_351ms
+* test_ac_6_swipe_classification_four_directions
+* test_ac_7_swipe_velocity_gate_rejects_slow_drag
+* test_swipe_sector_boundaries
+* test_ac_8_second_finger_discarded_gesture_continues
+* test_ac_9_blocking_layer_suppresses_lower_priority
+* test_ac_9_unregister_resumes_immediately_after_pop
+* test_blocking_layer_subtree_controls_disabled_and_restored
+* test_blocking_layer_stack_ordering_and_clear
+* test_ac_10_gesture_timeout_emits_touch_cancelled
+* test_ac_11_debounce_discards_bounce_tap_within_100ms
+* test_ac_12_dpi_fallback_for_zero_or_implausible
+WARNING: MTF: implausible detected DPI 0 — falling back to 160 DPI (pixels_per_dp = 1.0)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] _compute_pixels_per_dp (res://src/autoload/mobile_touch_framework.gd:393)
+         [2] test_ac_12_dpi_fallback_for_zero_or_implausible (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:441)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: MTF: implausible detected DPI -5 — falling back to 160 DPI (pixels_per_dp = 1.0)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] _compute_pixels_per_dp (res://src/autoload/mobile_touch_framework.gd:393)
+         [2] test_ac_12_dpi_fallback_for_zero_or_implausible (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:444)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+WARNING: MTF: implausible detected DPI 641 — falling back to 160 DPI (pixels_per_dp = 1.0)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] _compute_pixels_per_dp (res://src/autoload/mobile_touch_framework.gd:393)
+         [2] test_ac_12_dpi_fallback_for_zero_or_implausible (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:445)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+* test_ac_13_dp_conversion_accuracy_at_390_dpi
+* test_ac_14_no_visual_output_in_release_builds
+* test_ec_8_long_press_transitions_to_swipe_without_released
+* test_r3_handled_mark_only_for_consumed_gestures
+* test_mtf_15_no_src_code_reads_input_outside_mtf
+* test_mtf_16_set_input_as_handled_lives_only_in_mtf
+[1m24/24 passed.
+[0m[4m
+
+res://tests/unit/trait_database/trait_database_test.gd
+[0m* test_ac_1_database_loads_at_startup
+* test_ac_2_trait_lookup_by_id_returns_correct_data
+* test_ac_3_affinity_times_weight_matches_gdd_example
+* test_ac_7_unknown_trait_id_returns_null_without_crash
+* test_ac_8_all_traits_have_four_valid_affinities
+* test_ac_9_get_affinity_returns_zero_for_unknown_trait
+* test_ac_10_all_sixteen_mvp_traits_present
+* test_ac_11_rarity_distribution_matches_design
+* test_rule_7_get_traits_for_archetype_unions_agnostic
+* test_ac_4_trait_assignment_respects_rarity_weights
+* test_ac_5_and_6_assignment_never_duplicates_and_respects_count
+[1m11/11 passed.
+[0m[4m
+
+res://tests/integration/game_config/game_config_order_test.gd
+[0m* test_gcf_1_gameconfig_loaded_before_other_autoloads_ready
+* test_gcf_1_gameconfig_is_first_autoload_in_project_settings
+[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/m0_boot_test.gd
+[0m* test_boot_1_all_autoloads_instantiate
+* test_boot_2_autoload_dependencies_resolve
+* test_boot_3_gsm_deferred_connect_fires_after_dcs
+* test_boot_4_main_scene_instantiates
+[1m4/4 passed.
+[0m
+
+
+
+[33m==============================================
+[0m[33m= Run Summary
+[0m[33m==============================================
+[0m
+Totals
+------
+Scripts               8
+Tests                74
+Passing Tests        74
+Asserts            4810
+Time              0.539s
+
+
+[32m---- All tests passed! ----
+[0m
+SUITE_EXIT=0

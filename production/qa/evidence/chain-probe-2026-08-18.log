@@ -1,0 +1,17 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PROBE GameEnums: OK (ConversionOutcome.PERSUADED = 0)
+PROBE Autoload /root/GameConfig (slot 1): OK
+PROBE Autoload /root/TraitDatabase (slot 2): OK
+PROBE Autoload /root/DialogueDatabase (slot 3): OK
+PROBE Autoload /root/MobileTouchFramework (slot 4): OK
+PROBE GameConfig.is_loaded(): true
+PROBE GameConfig 9 domains: all non-null
+PROBE TraitDatabase.is_loaded(): true; traits = 16
+PROBE DialogueDatabase.is_loaded(): true; V_total = 100
+PROBE MTF.pixels_per_dp = 0.6
+PROBE MTF state = 0
+PROBE DCS<->GSM session_begun/session_complete wiring: OK
+PROBE sole-input-boundary scan: OK (files scanned: 24)
+CHAIN_PROBE_RESULT: PASS
+PROBE_EXIT=0
