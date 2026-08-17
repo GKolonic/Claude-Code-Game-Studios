@@ -121,11 +121,11 @@ stories:
     name: "MTF gesture engine"
     file: "production/stories/sprint-1/1-13-mobile-touch-framework.md"
     priority: must-have
-    status: ready-for-dev
+    status: completed
     owner: "ui-programmer"
     estimate_days: 1.5
     blocker: "ADR-0006 acceptance (story blocked while Proposed)"
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-14"
     name: "Foundation regression pass"
     file: "production/stories/sprint-1/1-14-foundation-regression.md"
