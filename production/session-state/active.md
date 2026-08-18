@@ -2,35 +2,21 @@
 
 <!-- STATUS -->
 Epic: Pre-Production
-Feature: Design Documentation
-Task: Sprint plan + QA plan accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
-Note: Task 1-1 engine install spike ✅ — Godot 4.6.x installed at ~/.local/bin/godot (local install primary; CI 1-21 as clean-room fallback)
-Note: Tasks 1-3..1-6 ✅ — M0 scaffold, GameEnums, GUT (v9.6.1), boot test; 1-7..1-10 ✅ — gate-check PASS, ADR-0005/0006 Accepted, GameConfig + 9 domains; 1-11 ✅ committed (TraitDatabase + 16 traits); 1-12 ✅ (DialogueDatabase + 100 scaffold strings, 2026-08-18); 1-13 ✅ (MTF gesture engine, commit 04cce1a, 2026-08-18); 1-14 ✅ (foundation regression: 74/74 suite, 4810 asserts, M1 AC coverage audit 47/48 mapped, 1 gap by design); 1-15 ✅ (milestone records M0+M1); 1-16 ✅ (control manifest, manifest-2026.1); 1-17 ✅ (TR registry 55 M1 IDs + architecture review CONCERNS); 1-18 ✅ (R2 ruling applied); 1-20 ✅ (dialogue authoring format) — ALL 15 Must + 5 Should + 3 Nice COMPLETE (2026-08-18)
-Note: Batch 5 (final): 1-19 ✅ (VillageDefinition schema approved by Creative Director ruling 2026-08-18 — applied to ADR-0002; village_01.tres authorship scheduled pre-M2, NOT authored now); 1-21 ✅ (CI pipeline: .github/workflows/ci.yml, actionlint-validated); 1-22 ✅ (boot/title scaffold: main.gd + main.tscn title + SaveLoadSystem.load_game() idempotent stub, probe PASS); 1-23 ✅ (43 placeholder PNGs: 42 portraits contract-valid + village_map.png, load-probe PASS). **Sprint 1 COMPLETE — all 23 stories done.** NEXT: Sprint 2 planning (M2 Core data & math; village_01.tres authorship lands pre-M2 with NPCRegistry)
+Feature: Sprint 2 — M2 Core data & math
+Task: Sprint 2 plan APPROVED + written (2026-08-18); decisions recorded; Must-Have execution starting (2-1)
+Note: **Sprint 1 CLOSED (2026-08-18)** — all 23 stories complete (HEAD e60e6e8, clean tree). Sprint 2 run **2026-08-24 → 2026-09-11** (15 total / 3 buffer / 12 available days; Must 9.25d = 77% of available)
+Note: **Sprint 2 plan approved by Creative Director delegation 2026-08-18 ("decide what's best")** — all 10 recommended decisions locked. Decisions: (1) dates/capacity accepted as proposed, no second village; (2) ADR-0007 = Determinism & RNG strategy; (3) OQ-7: runtime RNG NOT persisted at MVP, ruling deferred to ADR-0009 (M4); (4) OQ-8: trait_revealed ships with zero MVP subscribers; (5) village_01 roster approved — 1 ELDER / 2 LABORER / 1 MERCHANT / 1 SOLDIER / 1 SCHOLAR / 1 WIDOW / 1 NOBLE (8 NPCs), NOBLE gated behind ELDER; (6) 9 CLE fields added to ConversionConfig (game-config.md authoritative, code + .tres match); (7) QA plan [A] — qa-plan-sprint-2.md before implementation; (8) first CI run at M2 milestone (2-11); (9) process fixes — sprint-2 story files (2-13) + risk-register before Sprint 3; (10) FaithSpread stub confirmed, no M2 action
+Note: Sprint 2 approved files: production/sprints/sprint-2.md + production/sprint-status.yaml (2-1…2-15 added; sprint 1 history kept)
 <!-- /STATUS -->
 
 ## Current Task
-Completing full pre-production phase:
-1. ✅ Engine configured — Godot 4.6 / GDScript / Mobile / Turn-based
-2. ✅ Systems index written — 27 systems total (19 NPC layer + 8 macro layer)
-3. ✅ Art Bible — complete (design/art/art-bible.md, all 9 sections)
-4. ✅ System GDDs — 14/14 MVP done:
-   - ✅ Game Config (design/gdd/game-config.md)
-   - ✅ NPC Trait Database (design/gdd/npc-trait-database.md)
-   - ✅ Dialogue Content Database (design/gdd/dialogue-content-database.md)
-   - ✅ Mobile Touch Framework (design/gdd/mobile-touch-framework.md)
-   - ✅ NPC Character System (design/gdd/npc-character-system.md)
-   - ✅ Conversion Logic Engine (design/gdd/conversion-logic-engine.md)
-   - ✅ Dialogue & Conversion System (design/gdd/dialogue-conversion-system.md)
-   - ✅ Game State Manager (design/gdd/game-state-manager.md) — COMPLETE
-   - ✅ Rival Faith System (design/gdd/rival-faith-system.md)
-   - ✅ Save & Load System (design/gdd/save-load-system.md)
-   - ✅ Portrait & Expression System (design/gdd/portrait-expression-system.md)
-   - ✅ Conversion UI (design/gdd/conversion-ui.md)
-   - ✅ Village Map View (design/gdd/village-map-view.md)
-   - ✅ HUD & Progress System (design/gdd/hud-progress-system.md) — FINAL MVP GDD
-5. ✅ Architecture plan — accepted (docs/architecture/architecture.md, 2026-08-09)
-6. ✅ Sprint plan — accepted (Sprint 1: Scaffold & Foundation, 2026-08-17 → 2026-09-04)
+Executing **Sprint 2 — M2 Core data & math** (2026-08-24 → 2026-09-11; approved plan `production/sprints/sprint-2.md`):
+1. ✅ Sprint 1 CLOSED — all 23 stories complete (2026-08-18, HEAD e60e6e8)
+2. ✅ Sprint 2 plan approved + written (2026-08-18) — plan file + sprint-status.yaml (2-1…2-15 added); all 10 Creative Director decisions recorded (see status block)
+3. ✅ QA plan — `production/qa/qa-plan-sprint-2.md` (approved decision #7; before implementation)
+4. 🔵 ADR-0007 — Determinism & RNG strategy (task 2-1, Must 0.5d, technical-director) — Accepted, unblocks 2-5/2-6/2-7
+5. 🔵 ConversionConfig field-set reconciliation — 9 CLE fields (task 2-2, Must 0.5d, systems-designer + godot-gdscript-specialist)
+6. ⏳ Remaining Must: 2-3 NPC resource classes → 2-4 village_01.tres (CD-approved roster) → 2-5 RNG helpers → 2-6 NPCRegistry → 2-7 CLE → 2-8 integration/regression/coverage → 2-9 milestone record M2
 
 ## Key Decisions Made (this session)
 - Divine Dominion GDD reviewed — MAJOR REVISION NEEDED verdict
@@ -189,12 +175,10 @@ Completing full pre-production phase:
 - ✅ **R2 resolved via Creative Director ruling** (applied 2026-08-18): `aggression_interval_turns` default 6 (game-config.md, authoritative); rival-faith-system.md corrected (default 6, safe range 3–12) — original ⬜ flag: default 6 (game-config.md, authoritative) vs 3 (rival-faith-system.md), ruling scheduled as task 1-18
 
 ## Next
-Pre-production design documentation is COMPLETE — all 14/14 MVP GDDs designed; MVP Architecture Plan accepted (ADR-0001…0004 Accepted); Sprint 1 plan + QA plan accepted (2026-08-11).
-Remaining pre-production items:
-1. ✅ **Architecture plan** — docs/architecture/architecture.md Accepted; ADR-0001…0004 Accepted (M0 foundation)
-2. ✅ **Sprint plan** — 7-sprint roadmap accepted 2026-08-11; Sprint 1: Scaffold & Foundation (M0+M1, 2026-08-17 → 2026-09-04); `production/sprints/sprint-1.md` + `production/sprint-status.yaml` committed
-3. ✅ **QA plan for Sprint 1** — `production/qa/qa-plan-sprint-1.md` approved 2026-08-11; OQ-A…OQ-H resolved per draft recommendations (no emulator layer, local WSL headless evidence, automated assert + export spot-check, two test-only fixtures, AC-6 static scan, V_total=100 automation, process stories as Config/Data, fixed filename); sprint DoD item 3 satisfied
-4. **Sprint 1 execution (2026-08-17 → 2026-09-04)** — **ALL 23 STORIES COMPLETE (2026-08-18)**: 15 Must (1-1…1-15) + 5 Should (1-16…1-20) + 3 Nice (1-21, 1-22, 1-23). Batch 5 (final): 1-19 VillageDefinition sign-off (Creative Director ruling applied — schema approved as-is, OQ-4 RESOLVED, village_01.tres authorship scheduled pre-M2 with NPCRegistry); 1-21 CI pipeline (headless GUT on push/PR, actionlint + PyYAML validated, first GitHub run pending next push); 1-22 boot/title scaffold (main.gd + TitleLabel + SaveLoadSystem.load_game() idempotent stub, smoke probe PASS); 1-23 placeholder art (42 portraits contract-valid + village_map.png, load probe PASS). NEXT: **Sprint 2 planning — M2 Core data & math (Resource classes incl. VillageDefinition + NPCRegistry + CLE; village_01.tres authored pre-M2 in this window; ADR-0007)**
-5. **UX spec** — `/ux-design` for `design/ux/hud.md` (HUD UI requirements — flagged in the HUD GDD; needed before M6)
-6. **Asset specs** — `/asset-spec` per system once the Art Bible is approved (HUD flagged: system:hud-progress-system; needed before M5/M6)
+Pre-production design documentation is COMPLETE — all 14/14 MVP GDDs designed; MVP Architecture Plan accepted (ADR-0001…0004 Accepted); Sprint 1 + Sprint 2 plans accepted.
+Sprint 2 execution (2026-08-24 → 2026-09-11):
+1. ✅ **Sprint 2 plan + QA plan + decisions** — approved 2026-08-18 (plan written, 10 decisions recorded; qa-plan-sprint-2.md created per decision #7)
+2. 🟦 **Execution batch 1 (this dispatch)**: ADR-0007 (2-1) + ConversionConfig field-set reconciliation (2-2) — committed + pushed
+3. ⏳ **Execution batches 2+ (next dispatches)**: 2-3 NPC resource classes → 2-4 village_01.tres → 2-5 RNG helpers → 2-6 NPCRegistry → 2-7 CLE → 2-8 integration/regression → 2-9 milestone record M2; then Should (2-10…2-13) + Nice (2-14…2-15)
+4. **Post-M2 remaining pre-production**: UX spec — `/ux-design` for `design/ux/hud.md` (needed before M6); Asset specs — `/asset-spec` per system (pre-M5/M6); risk register — `production/risk-register/` before Sprint 3 (decision #9)
 MVP systems remaining: none — design phase complete.
