@@ -1,0 +1,62 @@
+name: CI
+
+# Sprint 1 task 1-21 — CI pipeline (Nice-to-have, 1.0d).
+# Runs the project's canonical headless GUT suite on every push to `main`
+# and on every pull request, so test results surface as PR checks and the
+# suite must be green before anything lands on `main`.
+#
+# Engine pin: Godot 4.6-stable (docs/architecture/ci.md). This matches the
+# local dev engine 4.6.stable.official.89cea1439 (Sprint 1 task 1-1) and the
+# pinned reference docs/engine-reference/godot/VERSION.md (project pinned
+# 2026-02-12, Godot 4.6). If the pinned version changes, update BOTH the
+# `version` input below and docs/architecture/ci.md.
+#
+# Engine caching: the setup action (appsinacup/setup-godot-action) downloads
+# the official release binary once and caches it with actions/cache under
+# `godot-bin/` (key `godot-editor-<repo>-<version>-<mono>-<runner.os>`) when
+# `enable_cache: 'true'`. Subsequent runs restore the cache instead of
+# re-downloading (~60 MB).
+#
+# Action pin: appsinacup/setup-godot-action@<SHA> (main as of 2026-08-18).
+# Pinned to a full commit SHA (supply-chain practice); the marketplace README
+# documents `@main`, which this SHA currently corresponds to.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  headless-gut:
+    name: Headless GUT suite (Godot 4.6)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Godot 4.6 (cached)
+        uses: appsinacup/setup-godot-action@8eeed21ba847d6ace719525581d2ac4e398f117b
+        with:
+          version: '4.6-stable'
+          enable_cache: 'true'
+
+      - name: Verify pinned engine
+        run: |
+          "$GODOT4" --version
+
+      - name: First-run asset import
+        # .godot/ is gitignored; a fresh clone has no imported assets. Import
+        # once up front so the GUT run happens on fully imported resources.
+        run: |
+          "$GODOT4" --headless --path . --import
+
+      - name: Run headless GUT suite
+        # Canonical invocation per tests/gdunit4_runner.gd / CI rules
+        # (godot --headless --script tests/gdunit4_runner.gd). GUT
+        # should_exit=true: nonzero exit on any failure gates the job.
+        run: |
+          "$GODOT4" --headless --path . --script res://tests/gdunit4_runner.gd
