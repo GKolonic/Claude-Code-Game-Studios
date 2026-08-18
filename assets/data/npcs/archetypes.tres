@@ -1,0 +1,247 @@
+[gd_resource type="Resource" script_class="NPCArchetypeDatabaseCatalogue" load_steps=46 format=3]
+
+[ext_resource type="Script" path="res://src/resources/npc_archetype_database_catalogue.gd" id="0_cat"]
+[ext_resource type="Script" path="res://src/resources/npc_archetype_definition.gd" id="1_def"]
+[ext_resource type="Script" path="res://src/resources/npc_archetype_trait_bonus.gd" id="2_bonus"]
+
+[sub_resource type="Resource" id="bonus_laborer_1"]
+script = ExtResource("2_bonus")
+trait_id = "bereaved"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_laborer_2"]
+script = ExtResource("2_bonus")
+trait_id = "superstitious"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_laborer_3"]
+script = ExtResource("2_bonus")
+trait_id = "dutiful"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_laborer_4"]
+script = ExtResource("2_bonus")
+trait_id = "fearful"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_laborer_5"]
+script = ExtResource("2_bonus")
+trait_id = "grievously_wronged"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_laborer"]
+script = ExtResource("1_def")
+archetype_id = 0
+display_name = "Laborer"
+role_description = "Field worker, craftsperson, or servant — the village's majority, shaped by daily survival and physical work."
+social_influence_weight = 0.8
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_laborer_1"), SubResource("bonus_laborer_2"), SubResource("bonus_laborer_3"), SubResource("bonus_laborer_4"), SubResource("bonus_laborer_5")])
+portrait_asset_path = "res://assets/portraits/laborer/"
+
+[sub_resource type="Resource" id="bonus_elder_1"]
+script = ExtResource("2_bonus")
+trait_id = "dutiful"
+bonus_pct = 0.25
+
+[sub_resource type="Resource" id="bonus_elder_2"]
+script = ExtResource("2_bonus")
+trait_id = "loyal_to_community"
+bonus_pct = 0.3
+
+[sub_resource type="Resource" id="bonus_elder_3"]
+script = ExtResource("2_bonus")
+trait_id = "mortal_minded"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_elder_4"]
+script = ExtResource("2_bonus")
+trait_id = "bereaved"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_elder_5"]
+script = ExtResource("2_bonus")
+trait_id = "seeker"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_elder"]
+script = ExtResource("1_def")
+archetype_id = 1
+display_name = "Elder"
+role_description = "Village patriarch or matriarch, keeper of tradition, respected voice in community decisions. Older, harder to move, but high-impact when converted."
+social_influence_weight = 2.0
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_elder_1"), SubResource("bonus_elder_2"), SubResource("bonus_elder_3"), SubResource("bonus_elder_4"), SubResource("bonus_elder_5")])
+portrait_asset_path = "res://assets/portraits/elder/"
+
+[sub_resource type="Resource" id="bonus_merchant_1"]
+script = ExtResource("2_bonus")
+trait_id = "ambitious"
+bonus_pct = 0.25
+
+[sub_resource type="Resource" id="bonus_merchant_2"]
+script = ExtResource("2_bonus")
+trait_id = "cynical"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_merchant_3"]
+script = ExtResource("2_bonus")
+trait_id = "status_hungry"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_merchant_4"]
+script = ExtResource("2_bonus")
+trait_id = "fearful"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="bonus_merchant_5"]
+script = ExtResource("2_bonus")
+trait_id = "mortal_minded"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_merchant"]
+script = ExtResource("1_def")
+archetype_id = 2
+display_name = "Merchant"
+role_description = "Trader, shopkeeper, or traveling dealer who has seen more of the world than most; pragmatic and socially calculating."
+social_influence_weight = 1.5
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_merchant_1"), SubResource("bonus_merchant_2"), SubResource("bonus_merchant_3"), SubResource("bonus_merchant_4"), SubResource("bonus_merchant_5")])
+portrait_asset_path = "res://assets/portraits/merchant/"
+
+[sub_resource type="Resource" id="bonus_soldier_1"]
+script = ExtResource("2_bonus")
+trait_id = "dutiful"
+bonus_pct = 0.3
+
+[sub_resource type="Resource" id="bonus_soldier_2"]
+script = ExtResource("2_bonus")
+trait_id = "proud"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_soldier_3"]
+script = ExtResource("2_bonus")
+trait_id = "grievously_wronged"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_soldier_4"]
+script = ExtResource("2_bonus")
+trait_id = "broken_by_loss"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="bonus_soldier_5"]
+script = ExtResource("2_bonus")
+trait_id = "fearful"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_soldier"]
+script = ExtResource("1_def")
+archetype_id = 3
+display_name = "Soldier"
+role_description = "Guard, veteran, or militiaman — trained to obey, privately marked by what they have seen or done in service."
+social_influence_weight = 1.2
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_soldier_1"), SubResource("bonus_soldier_2"), SubResource("bonus_soldier_3"), SubResource("bonus_soldier_4"), SubResource("bonus_soldier_5")])
+portrait_asset_path = "res://assets/portraits/soldier/"
+
+[sub_resource type="Resource" id="bonus_scholar_1"]
+script = ExtResource("2_bonus")
+trait_id = "intellectually_restless"
+bonus_pct = 0.35
+
+[sub_resource type="Resource" id="bonus_scholar_2"]
+script = ExtResource("2_bonus")
+trait_id = "cynical"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_scholar_3"]
+script = ExtResource("2_bonus")
+trait_id = "seeker"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_scholar_4"]
+script = ExtResource("2_bonus")
+trait_id = "visionary"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="bonus_scholar_5"]
+script = ExtResource("2_bonus")
+trait_id = "proud"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_scholar"]
+script = ExtResource("1_def")
+archetype_id = 4
+display_name = "Scholar"
+role_description = "Priest of the old faith, scribe, or traveling tutor — educated, possibly skeptical, but potentially the most profoundly open."
+social_influence_weight = 1.8
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_scholar_1"), SubResource("bonus_scholar_2"), SubResource("bonus_scholar_3"), SubResource("bonus_scholar_4"), SubResource("bonus_scholar_5")])
+portrait_asset_path = "res://assets/portraits/scholar/"
+
+[sub_resource type="Resource" id="bonus_widow_1"]
+script = ExtResource("2_bonus")
+trait_id = "bereaved"
+bonus_pct = 0.4
+
+[sub_resource type="Resource" id="bonus_widow_2"]
+script = ExtResource("2_bonus")
+trait_id = "lonely"
+bonus_pct = 0.25
+
+[sub_resource type="Resource" id="bonus_widow_3"]
+script = ExtResource("2_bonus")
+trait_id = "broken_by_loss"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_widow_4"]
+script = ExtResource("2_bonus")
+trait_id = "mortal_minded"
+bonus_pct = 0.15
+
+[sub_resource type="Resource" id="bonus_widow_5"]
+script = ExtResource("2_bonus")
+trait_id = "superstitious"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_widow"]
+script = ExtResource("1_def")
+archetype_id = 5
+display_name = "Widow"
+role_description = "An NPC defined primarily by recent devastating loss — grief-shaped and somewhat isolated, yet emotionally resonant to convert."
+social_influence_weight = 0.9
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_widow_1"), SubResource("bonus_widow_2"), SubResource("bonus_widow_3"), SubResource("bonus_widow_4"), SubResource("bonus_widow_5")])
+portrait_asset_path = "res://assets/portraits/widow/"
+
+[sub_resource type="Resource" id="bonus_noble_1"]
+script = ExtResource("2_bonus")
+trait_id = "proud"
+bonus_pct = 0.3
+
+[sub_resource type="Resource" id="bonus_noble_2"]
+script = ExtResource("2_bonus")
+trait_id = "ambitious"
+bonus_pct = 0.2
+
+[sub_resource type="Resource" id="bonus_noble_3"]
+script = ExtResource("2_bonus")
+trait_id = "status_hungry"
+bonus_pct = 0.25
+
+[sub_resource type="Resource" id="bonus_noble_4"]
+script = ExtResource("2_bonus")
+trait_id = "intellectually_restless"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="bonus_noble_5"]
+script = ExtResource("2_bonus")
+trait_id = "loyal_to_community"
+bonus_pct = 0.1
+
+[sub_resource type="Resource" id="archetype_noble"]
+script = ExtResource("1_def")
+archetype_id = 6
+display_name = "Noble"
+role_description = "Minor lord, landowner, or administrator holding real power over the village; converting one can unlock or restrict access to parts of the village."
+social_influence_weight = 2.5
+trait_weight_bonuses = Array[ExtResource("2_bonus")]([SubResource("bonus_noble_1"), SubResource("bonus_noble_2"), SubResource("bonus_noble_3"), SubResource("bonus_noble_4"), SubResource("bonus_noble_5")])
+portrait_asset_path = "res://assets/portraits/noble/"
+
+[resource]
+script = ExtResource("0_cat")
+archetypes = Array[ExtResource("1_def")]([SubResource("archetype_laborer"), SubResource("archetype_elder"), SubResource("archetype_merchant"), SubResource("archetype_soldier"), SubResource("archetype_scholar"), SubResource("archetype_widow"), SubResource("archetype_noble")])
