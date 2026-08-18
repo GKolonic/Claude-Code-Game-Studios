@@ -175,11 +175,11 @@ stories:
     name: "VillageDefinition schema sign-off (OQ-4)"
     file: "production/stories/sprint-1/1-19-village-definition-signoff.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "technical-director / creative-director"
     estimate_days: 0.25
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-20"
     name: "Dialogue authoring format decision (OQ-5)"
     file: "production/stories/sprint-1/1-20-dialogue-authoring-format.md"
@@ -193,26 +193,26 @@ stories:
     name: "CI pipeline (headless GUT)"
     file: "production/stories/sprint-1/1-21-ci-pipeline.md"
     priority: nice-to-have
-    status: backlog
+    status: completed
     owner: "devops-engineer"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-22"
     name: "Boot/title flow sketch (OQ-6)"
     file: "production/stories/sprint-1/1-22-boot-title-flow.md"
     priority: nice-to-have
-    status: backlog
+    status: completed
     owner: "engine-programmer"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-23"
     name: "Placeholder art generation (R7)"
     file: "production/stories/sprint-1/1-23-placeholder-art.md"
     priority: nice-to-have
-    status: backlog
+    status: completed
     owner: "technical-artist"
     estimate_days: 1.0
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
