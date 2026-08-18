@@ -184,11 +184,11 @@ stories:
     name: "Dialogue authoring format decision (OQ-5)"
     file: "production/stories/sprint-1/1-20-dialogue-authoring-format.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "tools-programmer / narrative-director"
     estimate_days: 0.25
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-21"
     name: "CI pipeline (headless GUT)"
     file: "production/stories/sprint-1/1-21-ci-pipeline.md"

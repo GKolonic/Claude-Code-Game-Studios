@@ -299,6 +299,13 @@ requirements:
     created: 2026-08-18
     revised: ""
     status: active
+  - id: TR-DCD-014
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Dialogue content is authored in a source YAML file converted by a standalone pipeline (validator → .tres emitter) into the runtime .tres; runtime format and API remain intact (OQ-3; ADR-0005 Addendum 1; story 1-20)"
+    created: 2026-08-18
+    revised: ""
+    status: active
 
   # --- M1: Mobile Touch Framework (design/gdd/mobile-touch-framework.md) ---
   - id: TR-MOV-001
