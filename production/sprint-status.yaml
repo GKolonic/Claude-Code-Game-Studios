@@ -220,11 +220,11 @@ stories:
     name: "ADR-0007 — Determinism & RNG strategy (Accept)"
     file: "production/stories/sprint-2/2-1-adr-0007-determinism-rng-strategy.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "technical-director"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-2"
     name: "ConversionConfig field-set reconciliation (9 CLE fields)"
     file: "production/stories/sprint-2/2-2-conversion-config-field-set.md"
