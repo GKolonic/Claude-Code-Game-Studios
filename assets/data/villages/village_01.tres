@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="VillageDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/resources/village_definition.gd" id="1_vdef"]
+
+[resource]
+script = ExtResource("1_vdef")
+village_id = "village_01"
+npc_definitions = Array[Dictionary]([{
+"npc_id": "village_01_elder_1",
+"archetype": 1,
+"display_name": "Marun Blackvale",
+"map_position": Vector2i(1, 1),
+"social_connections": [{"target_npc_id": "village_01_scholar_1", "relationship_type": 2, "influence_weight": 0.8}, {"target_npc_id": "village_01_widow_1", "relationship_type": 4, "influence_weight": 0.7}, {"target_npc_id": "village_01_laborer_1", "relationship_type": 3, "influence_weight": 0.5}]
+}, {
+"npc_id": "village_01_laborer_1",
+"archetype": 0,
+"display_name": "Ada Fern",
+"map_position": Vector2i(0, 3),
+"social_connections": [{"target_npc_id": "village_01_laborer_2", "relationship_type": 0, "influence_weight": 0.9}, {"target_npc_id": "village_01_elder_1", "relationship_type": 3, "influence_weight": 0.5}, {"target_npc_id": "village_01_widow_1", "relationship_type": 3, "influence_weight": 0.4}]
+}, {
+"npc_id": "village_01_laborer_2",
+"archetype": 0,
+"display_name": "Bram Hooper",
+"map_position": Vector2i(1, 4),
+"social_connections": [{"target_npc_id": "village_01_laborer_1", "relationship_type": 0, "influence_weight": 0.9}, {"target_npc_id": "village_01_merchant_1", "relationship_type": 6, "influence_weight": 0.3}]
+}, {
+"npc_id": "village_01_merchant_1",
+"archetype": 2,
+"display_name": "Sellen Dyer",
+"map_position": Vector2i(3, 3),
+"social_connections": [{"target_npc_id": "village_01_laborer_2", "relationship_type": 6, "influence_weight": 0.6}, {"target_npc_id": "village_01_noble_1", "relationship_type": 6, "influence_weight": 0.3}, {"target_npc_id": "village_01_soldier_1", "relationship_type": 3, "influence_weight": 0.5}]
+}, {
+"npc_id": "village_01_soldier_1",
+"archetype": 3,
+"display_name": "Aldric Galeward",
+"map_position": Vector2i(2, 2),
+"social_connections": [{"target_npc_id": "village_01_merchant_1", "relationship_type": 3, "influence_weight": 0.5}, {"target_npc_id": "village_01_scholar_1", "relationship_type": 5, "influence_weight": 0.6}, {"target_npc_id": "village_01_widow_1", "relationship_type": 3, "influence_weight": 0.4}]
+}, {
+"npc_id": "village_01_scholar_1",
+"archetype": 4,
+"display_name": "Orin Cleremont",
+"map_position": Vector2i(3, 1),
+"social_connections": [{"target_npc_id": "village_01_elder_1", "relationship_type": 2, "influence_weight": 0.8}, {"target_npc_id": "village_01_soldier_1", "relationship_type": 5, "influence_weight": 0.6}, {"target_npc_id": "village_01_noble_1", "relationship_type": 6, "influence_weight": 0.3}]
+}, {
+"npc_id": "village_01_widow_1",
+"archetype": 5,
+"display_name": "Haleth Vale",
+"map_position": Vector2i(0, 4),
+"social_connections": [{"target_npc_id": "village_01_elder_1", "relationship_type": 4, "influence_weight": 0.7}, {"target_npc_id": "village_01_laborer_1", "relationship_type": 3, "influence_weight": 0.4}, {"target_npc_id": "village_01_soldier_1", "relationship_type": 3, "influence_weight": 0.4}]
+}, {
+"npc_id": "village_01_noble_1",
+"archetype": 6,
+"display_name": "Vessica Moreland",
+"map_position": Vector2i(1, 0),
+"social_connections": [{"target_npc_id": "village_01_merchant_1", "relationship_type": 6, "influence_weight": 0.6}, {"target_npc_id": "village_01_scholar_1", "relationship_type": 6, "influence_weight": 0.5}],
+"access_gate": {"required_belief_state": 3, "required_npc_ids": ["village_01_elder_1"]}
+}])
+map_art_path = "res://assets/maps/village_01/village_map.png"
+rng_seed = 20260818
