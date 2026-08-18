@@ -229,11 +229,11 @@ stories:
     name: "ConversionConfig field-set reconciliation (9 CLE fields)"
     file: "production/stories/sprint-2/2-2-conversion-config-field-set.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "systems-designer / godot-gdscript-specialist"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-3"
     name: "NPC Resource classes + archetypes data"
     file: "production/stories/sprint-2/2-3-npc-resource-classes.md"

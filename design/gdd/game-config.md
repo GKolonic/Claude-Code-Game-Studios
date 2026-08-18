@@ -2,7 +2,7 @@
 
 > **Status**: Designed
 > **Author**: Design session + systems-designer agent
-> **Last Updated**: 2026-08-09
+> **Last Updated**: 2026-08-18
 > **Implements Pillar**: All pillars (infrastructure — enables tuning without code changes)
 
 ## Summary
@@ -26,7 +26,7 @@ The player never directly experiences Game Config — they experience its effect
 1. **No hardcoded values.** Every numeric constant used in gameplay logic must be sourced from a GameConfig domain. The only exceptions are pure mathematical constants (e.g., `PI`, array indices, loop bounds) and strings used as dictionary keys. If a programmer hardcodes a balance value, it is a bug.
 
 2. **Nine config domains.** All tuning values are grouped into exactly nine `Resource` subclasses, each in its own `.tres` file:
-   - `ConversionConfig` — approach success rates, trait modifier weights, cooldown durations
+   - `ConversionConfig` — approach success rates (base/floor/ceiling), trait modifier weight & cap, belief-state modifiers, outcome band fractions, repeat penalties, cooldown durations
    - `TraitConfig` — trait rarity weights, archetype trait counts, modifier magnitudes
    - `FaithSpreadConfig` — passive spread radius, spread rate per tick, attrition rate
    - `RivalFaithConfig` — rival aggression interval, counter-approach selection weights, re-hardening strength
@@ -61,7 +61,7 @@ The game's `_ready()` calls in other Autoloads must not complete until `GameConf
 
 | System | Relationship | What GameConfig Provides |
 |---|---|---|
-| Conversion Logic Engine | Direct consumer | `ConversionConfig` — base rates, trait modifier weights, cooldown values |
+| Conversion Logic Engine | Direct consumer | `ConversionConfig` — base rates, trait modifier weight & cap, belief modifiers, outcome band fractions, repeat penalties, cooldown values |
 | NPC Character System | Direct consumer | `TraitConfig` — rarity weights, archetype trait counts |
 | Faith Spread System | Direct consumer | `FaithSpreadConfig` — spread radius, rate, attrition |
 | Rival Faith System | Direct consumer | `RivalFaithConfig` — aggression interval, counter-approach weights |
@@ -98,6 +98,17 @@ if loaded_value != file_value:
 | `approach_cooldown_turns` | 1 | 10 | 3 | Yes |
 | `hard_mode_base_modifier` | 0.5 | 1.0 | 0.8 | No |
 | `max_approaches_per_npc` | 1 | 20 | 5 | Yes |
+| `trait_modifier_cap` | 0.25 | 0.75 | 0.50 | Yes |
+| `min_success_chance` | 0.01 | 0.20 | 0.05 | Yes |
+| `max_success_chance` | 0.50 | 1.00 | 0.80 | Yes |
+| `belief_modifier_open` | 0.0 | 0.25 | 0.10 | Yes |
+| `belief_modifier_wavering` | 0.05 | 0.35 | 0.20 | Yes |
+| `softened_band_fraction` | 0.20 | 0.70 | 0.545 | Yes |
+| `resisted_band_fraction` | 0.20 | 0.60 | 0.455 | Yes |
+| `repeat_penalty_per_use` | 0.0 | 0.15 | 0.05 | Yes |
+| `max_repeat_penalty` | 0.0 | 0.30 | 0.15 | Yes |
+
+*Fields `trait_modifier_cap` through `max_repeat_penalty` are defined by the Conversion Logic Engine GDD Tuning Knobs and were added 2026-08-18 (Sprint 2 task 2-2 / approved decision #6; ADR-0005 Addendum 2). game-config.md is the authoritative range owner (ADR-0005 Decision 3) — the ranges above supersede the CLE GDD's advisory "Safe Range" column where the two differ (min_success_chance, max_success_chance, softened_band_fraction, repeat_penalty_per_use).*
 
 **TraitConfig**
 

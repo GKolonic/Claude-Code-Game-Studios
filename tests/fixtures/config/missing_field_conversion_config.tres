@@ -6,4 +6,14 @@
 script = ExtResource("1")
 trait_modifier_weight = 0.25
 approach_cooldown_turns = 3
+hard_mode_base_modifier = 0.8
 max_approaches_per_npc = 5
+trait_modifier_cap = 0.5
+min_success_chance = 0.05
+max_success_chance = 0.8
+belief_modifier_open = 0.1
+belief_modifier_wavering = 0.2
+softened_band_fraction = 0.545
+resisted_band_fraction = 0.455
+repeat_penalty_per_use = 0.05
+max_repeat_penalty = 0.15
