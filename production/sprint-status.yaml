@@ -238,47 +238,47 @@ stories:
     name: "NPC Resource classes + archetypes data"
     file: "production/stories/sprint-2/2-3-npc-resource-classes.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "godot-gdscript-specialist / systems-designer"
     estimate_days: 1.0
     blocker: "1-23 (portrait dirs), 1-11 (trait ids)"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-4"
     name: "VillageDefinition Resource + village_01.tres authorship"
     file: "production/stories/sprint-2/2-4-village-definition.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "systems-designer / creative-director / godot-gdscript-specialist"
     estimate_days: 1.0
     blocker: "2-3 (archetypes data); ADR-0002 accepted (Confirmed 2026-08-18)"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-5"
     name: "RNG helpers (seeded draws)"
     file: "production/stories/sprint-2/2-5-rng-helpers.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "godot-gdscript-specialist"
     estimate_days: 0.5
     blocker: "ADR-0007 acceptance (story blocked while Proposed)"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-6"
     name: "NPCRegistry Autoload"
     file: "production/stories/sprint-2/2-6-npc-registry.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "godot-gdscript-specialist"
     estimate_days: 2.5
     blocker: "2-3, 2-4, 2-5, ADR-0007 acceptance"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-7"
     name: "Conversion Logic Engine Autoload"
     file: "production/stories/sprint-2/2-7-conversion-logic-engine.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "systems-designer / godot-gdscript-specialist"
     estimate_days: 2.0
     blocker: "2-2 (config fields), 2-6, 2-5, ADR-0007 acceptance"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-8"
     name: "M2 integration + regression + coverage audit"
     file: "production/stories/sprint-2/2-8-m2-integration-regression.md"
