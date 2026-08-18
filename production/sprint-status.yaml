@@ -283,11 +283,11 @@ stories:
     name: "M2 integration + regression + coverage audit"
     file: "production/stories/sprint-2/2-8-m2-integration-regression.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "qa-lead"
     estimate_days: 1.0
     blocker: "2-5, 2-6, 2-7, 2-2"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-9"
     name: "Milestone record M2"
     file: "production/stories/sprint-2/2-9-milestone-record-m2.md"
