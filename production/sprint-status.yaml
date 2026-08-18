@@ -148,20 +148,20 @@ stories:
     name: "Control manifest"
     file: "production/stories/sprint-1/1-16-control-manifest.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "technical-director"
     estimate_days: 0.25
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-17"
     name: "TR registry + architecture review"
     file: "production/stories/sprint-1/1-17-tr-registry-architecture-review.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "technical-director"
     estimate_days: 0.5
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-18"
     name: "R2 consistency decision (aggression_interval_turns)"
     file: "production/stories/sprint-1/1-18-r2-consistency-decision.md"

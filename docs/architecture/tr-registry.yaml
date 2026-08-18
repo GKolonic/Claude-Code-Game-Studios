@@ -25,32 +25,398 @@
 # STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
 
 version: 1
-last_updated: ""
+last_updated: "2026-08-18"
 
-requirements: []
+requirements:
+  # --- M1: Game Config (design/gdd/game-config.md) ---
+  - id: TR-GCF-001
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Nine config domains load on startup, each a typed Resource subclass with exactly one .tres file (Rule 2, Rule 7; AC-1, AC-10)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-002
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "GameConfig Autoload reaches LOADED before any other Autoload's _ready() completes (Autoload order lists GameConfig first; Rule 2/EC-5; AC-1)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-003
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "No gameplay value is ever hardcoded in GDScript; every balance number/timing/threshold is sourced from a GameConfig domain (Rule 1; AC-6)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-004
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Pull pattern: systems read GameConfig.[domain].[field] at call time and never cache config values locally (Rule 3)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-005
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Every field validated against its declared min/max on load; out-of-range values clamp to boundary with a warning (Rule 6; AC-3)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-006
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Missing .tres file is a fatal startup error naming the exact file path; the game must not run in an unknown tuning state (EC-1; AC-5)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-007
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Missing required field is a fatal startup error naming the field; optional fields fall back to GDD default (EC-4; AC-4)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-008
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Editor-only hot-reload: saved .tres changes swap values within one frame and emit config_reloaded; no file watcher in export builds (Rule 5; AC-7, AC-8)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-009
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "All nine domain accessors return non-null typed Resources with in-range, populated fields (AC-2, AC-10)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-010
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Save files never contain config values — config is always reloaded from .tres at boot (AC-9; deferred to M4 by design)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-011
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "Single-file authority: one .tres per domain, no per-level/difficulty override files; difficulty scaling lives as fields inside domains (Rule 7)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-GCF-012
+    system: game-config
+    gdd: design/gdd/game-config.md
+    requirement: "GameConfig is the ONLY reader of config .tres files; no code reads .tres directly outside the owning Autoload (entities.yaml rule)"
+    created: 2026-08-18
+    revised: ""
+    status: active
 
-# --- EXAMPLE ENTRIES (remove when first real entries are added) ---
-#
-# - id: TR-combat-001
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Player takes damage from enemies based on attack power minus defence"
-#   created: 2026-03-10
-#   revised: ""
-#   status: active
-#
-# - id: TR-combat-002
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Combo window timing is 0.4 seconds between hits"
-#   created: 2026-03-10
-#   revised: "2026-04-01"
-#   status: active
-#
-# - id: TR-combat-003
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Old damage formula using raw stats"
-#   created: 2026-03-10
-#   revised: ""
-#   status: superseded-by: TR-combat-001
+  # --- M1: NPC Trait Database (design/gdd/npc-trait-database.md) ---
+  - id: TR-TDB-001
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Database loads at startup from res://assets/data/traits/trait_database.tres; is_loaded() true after _ready(), zero errors/warnings (AC-1)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-002
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Trait record structure: id, display_name, description, rarity (COMMON/UNCOMMON/RARE), approach_affinity keyed by all four DialogueApproach values, archetype_tags (Rule 1)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-003
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "get_trait(id) returns the full TraitData record, or null for unknown id without crash (Rule 7; AC-2, AC-7)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-004
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "get_affinity(trait_id, approach) returns the trait's affinity value, or 0.0 for missing/unknown inputs (Rule 7; AC-9)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-005
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Approach-trait affinity modifier formula: affinity_modifier = base_affinity_value x trait_modifier_weight, where trait_modifier_weight comes from GameConfig.conversion (Formulas)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-006
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Trait assignment formula: rarity-weighted random draw without replacement; trait_count in [traits_per_npc_min, traits_per_npc_max] (Formulas; AC-4, AC-5, AC-6)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-007
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "All four DialogueApproach keys must be present in every trait's affinity dictionary; missing key filled with 0.0 and warning naming trait/approach (EC-3)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-008
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Trait IDs are immutable: never removed or renamed post-MVP; deprecation path via deprecated flag; unknown_trait placeholder fallback when loading saved NPCs (EC-5)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-009
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Rarity weights sourced from GameConfig.traits (60/30/10 defaults) keep simulation assignment within Common 57-63%, Uncommon 27-33%, Rare 8-12% (AC-4)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-010
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "No NPC receives duplicate trait IDs; draw-without-replacement structurally prevents duplicates (AC-5)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-011
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Assigned trait count per NPC respects [traits_per_npc_min, traits_per_npc_max] from GameConfig.traits (AC-6)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-012
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "Every trait's affinity dictionary contains all four approach keys with values in [-1.0, 1.0] (AC-8)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-TDB-013
+    system: trait-database
+    gdd: design/gdd/npc-trait-database.md
+    requirement: "MVP catalogue contains exactly 16 traits: 7 COMMON, 6 UNCOMMON, 3 RARE (Rule 2; AC-10, AC-11)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+
+  # --- M1: Dialogue Content Database (design/gdd/dialogue-content-database.md) ---
+  - id: TR-DCD-001
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Database loads at startup from res://assets/data/dialogue/dialogue_database.tres; is_loaded() true after load, zero errors/warnings (AC-1)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-002
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Total string count matches V_total = (A x L_approach) + (A x O x L_outcome) + (R x (1 + L_inspect)) + (A x L_rival) = 100 at MVP (Formulas; AC-2, R8 audit)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-003
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Approach pool returns exactly 3 non-empty lines for each of the four approaches (Rule 5; AC-3)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-004
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Outcome pool keyed by approach-outcome pair returns exactly 3 non-empty lines for all 16 combinations (Rule 7; AC-4)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-005
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "NPC flavour data per archetype: non-empty short_descriptor + exactly 3 non-empty inspect lines, for all 7 archetypes (Rule 6; AC-5)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-006
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Rival faith pool returns exactly 3 non-empty lines per approach keyed by the same four approaches (Rule 8; AC-6)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-007
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Invalid approach/outcome/archetype enum inputs return empty array or null without crash (AC-7, AC-8, AC-9)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-008
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Under-filled slot (fewer than 3 lines) logs warning identifying the slot, sets is_loaded() false, returns empty array for that slot (EC-1; AC-10)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-009
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "All get_* methods return safely (empty array/null per contract) when is_loaded() is false (AC-11)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-010
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Empty short_descriptor triggers warning naming archetype but returns the struct, not null (EC-2; AC-12)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-011
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "get_npc_flavour() returns a copy (duplicate()), never a shared reference; mutating the returned object must not corrupt the database (EC-6; AC-13)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-012
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "All L_* pool sizes must exceed the DCS recency window W (W=2 at MVP, L_* >= 3); a W change must be verified against all pools (Cross-system constraint; Tuning Knobs)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-DCD-013
+    system: dialogue-content-database
+    gdd: design/gdd/dialogue-content-database.md
+    requirement: "Database resource carries a schema_version field checked at load time to make post-MVP schema changes migratable (OQ-1 recommended direction)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+
+  # --- M1: Mobile Touch Framework (design/gdd/mobile-touch-framework.md) ---
+  - id: TR-MOV-001
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "MTF is the sole input boundary: an Autoload reading raw touch in _input() (not _unhandled_input()); all touch flows through its gesture classification (Rule 1)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-002
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "No UI node, scene, or Autoload reads Input/InputEventScreenTouch/InputEventScreenDrag or calls set_input_as_handled(); MTF is the only consumer of raw input (Rules 1/9; ADR-0006)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-003
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Single-finger only: all events with finger_index != 0 silently discarded; SINGLE_FINGER_MODE = true (Rule 2; EC-1)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-004
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Tap: press+release within 350ms with movement <= 8dp resolves to the hit registered target; emits tapped(target, position) exactly once with correct target; haptic 80ms fires on hit (Rules 3/12; AC-1, AC-2)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-005
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Long press fires on threshold, not release: long_press_started at exactly 600ms hold; long_press_released on lift (Rule 8; AC-4)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-006
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Dead band 350-600ms: touch ending in that window without swipe threshold emits no signal and returns to IDLE (Rule 4; AC-5)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-007
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Swipe fires only when distance >= 40dp AND release velocity >= 150dp/s; classified into four cardinal directions by 45-degree sectors (Rules 3/7; F-3/F-4; AC-6, AC-7)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-008
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "44x44dp minimum tap target enforced at hit-test time via center-anchored rect inflation; debug warning names node path and actual dp size (Rule 5; F-2; AC-3)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-009
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "dp conversion is framework-owned: pixels_per_dp computed once from DisplayServer.screen_get_dpi() with 160-DPI fallback for 0/implausible values (Rules 5/11; F-1; AC-12, AC-13)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-010
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Blocking layers use a priority stack; registered areas below the blocking tier receive no signals; Conversion UI is the ONLY owner of push/pop/clear (Rule 9; AC-9; ADR-0003)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-011
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Gesture timeout: 800ms without touch-up emits touch_cancelled and returns to IDLE regardless of prior state (Rule 14; AC-10)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-012
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Input debounce: new touch within 100ms of previous touch ending at same position (+-10dp) is discarded (Rule 13; F-5; AC-11)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-013
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "set_input_as_handled() called ONLY when a registered target consumed the event; misses/dead-band/multi-finger left unhandled (Rule 1; R3 mitigation)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-014
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Framework renders NO visual feedback in production/release builds; debug overlay visible in dev builds only (Rule 12/14; AC-14)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-015
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Haptic is framework-level tap-only: 80ms Input.vibrate_handheld() on confirmed tap; long press/swipe/cancel emit no haptic (Rule 12; ADR-0006)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-016
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "All 15 Rule-15 constants (TAP_MAX_DURATION_MS 350, LONG_PRESS_MIN_DURATION_MS 600, TOUCH_SLOP_DP 8, SWIPE_MIN_DISTANCE_DP 40, SWIPE_MIN_VELOCITY_DP_S 150, TAP_TARGET_MIN_SIZE_DP 44, DEBOUNCE_INTERVAL_MS 100, GESTURE_TIMEOUT_MS 800, HAPTIC_TAP_DURATION_MS 80, etc.) are compile-time and non-overridable at MVP (Rule 15)"
+    created: 2026-08-18
+    revised: ""
+    status: active
+  - id: TR-MOV-017
+    system: mobile-touch-framework
+    gdd: design/gdd/mobile-touch-framework.md
+    requirement: "Hit-testing is event-driven, never polled in _process(); area registry supports max 32 registered areas with debug warning above (Rule 10; EC-10)"
+    created: 2026-08-18
+    revised: ""
+    status: active

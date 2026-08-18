@@ -23,6 +23,24 @@
 
 **QA-plan reconciliation:** §OUT of qa-plan-sprint-1.md deferred TraitDB AC-4/5/6 to Sprint 2; story 1-11 instead implemented them as local GDD-formula simulations (10,000-draw rarity bands AC-4; 1,000-NPC no-duplicates AC-5; 2–4 count AC-6). All three are COVERED here; the NPC Character System remains the production formula owner at M2.
 
+## TR IDs (story references — registered by story 1-17)
+
+Stable requirement IDs from `docs/architecture/tr-registry.yaml` (populated 2026-08-18, append-only).
+Stories 1-8…1-15 implement these; story FILES do not exist (`production/stories/sprint-1/` — pre-existing gap,
+flagged for Goran), so the references live here + in session state. Control manifest version: `manifest-2026.1`.
+
+| System | TR IDs (family, count) | Registering ADRs | Verifying tests |
+|--------|------------------------|------------------|-----------------|
+| GameConfig | TR-GCF-001…012 (12) | ADR-0005, ADR-0002, ADR-0001 | tests/unit/game_config/game_config_test.gd (10) + tests/integration/game_config/game_config_order_test.gd (2) |
+| TraitDatabase | TR-TDB-001…013 (13) | ADR-0002, ADR-0005 | tests/unit/trait_database/trait_database_test.gd (11) |
+| DialogueDatabase | TR-DCD-001…013 (13) | ADR-0002 | tests/unit/dialogue_database/dialogue_database_test.gd (15) |
+| MobileTouchFramework | TR-MOV-001…017 (17) | ADR-0006, ADR-0003 | tests/unit/mobile_touch_framework/mtf_gesture_test.gd (24) |
+| **Total** | **55** | 6 Accepted ADRs | 74/74 suite, 4810 asserts, exit 0 |
+
+Full per-ID requirement text + coverage status: `docs/architecture/architecture-review-2026-08-18.md`.
+⚠️ Partial TRs (scheduled, not blocking M1): TR-GCF-010 (M4 by design), TR-TDB-006/010 (ADR-0007 at M2),
+TR-TDB-008 (ADR-0009 at M4), TR-DCD-012 (ADR-0008 at M3), TR-DCD-013 (story 1-20).
+
 ## Verification evidence (2026-08-18, story 1-14)
 | Check | Command / file | Result |
 |-------|----------------|--------|
