@@ -292,11 +292,11 @@ stories:
     name: "Milestone record M2"
     file: "production/stories/sprint-2/2-9-milestone-record-m2.md"
     priority: must-have
-    status: backlog
+    status: completed
     owner: "qa-lead / engine-programmer"
     estimate_days: 0.25
     blocker: "2-8"
-    completed: ""
+    completed: "2026-08-18"
   - id: "2-10"
     name: "TR registry append + architecture review (M2-scoped)"
     file: "production/stories/sprint-2/2-10-tr-registry-architecture-review.md"
