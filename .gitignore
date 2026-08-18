@@ -39,8 +39,10 @@ dist/
 .godot/
 *.translation
 export_presets.cfg
-# Uncomment if using Godot:
-# *.import
+# Godot import sidecars are regenerated deterministically from defaults by
+# `godot --headless --path . --import` (CI step + local first run) — keep them
+# out of git to avoid editor-generated churn (active: Godot engine set).
+*.import
 
 # === Engine: Unity ===
 [Ll]ibrary/
