@@ -7,3 +7,4 @@ script = ExtResource("1")
 aggression_interval_turns = 6
 reharden_strength = 0.4
 counter_approach_random_weight = 0.3
+grace_window_turns = 2

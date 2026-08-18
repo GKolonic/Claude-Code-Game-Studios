@@ -10,6 +10,13 @@ extends Resource
 @export var aggression_interval_turns: int = 6
 @export var reharden_strength: float = 0.4
 @export var counter_approach_random_weight: float = 0.3
+# Grace window (NPC CS Rule 5 dagger / RFS GDD Rule 9): turns after a
+# conversion during which the rival can regress CONVERTED NPCs. At 0 the
+# mechanic is disabled. Added at 2-6 to close the drift between the two
+# GDD references and the authoritative game-config.md table (default 2,
+# range 0-5 per RFS GDD Tuning Knobs). Flagged for Creative Director
+# ratification — 2-2 precedent (GDD-authoritative table -> schema -> .tres).
+@export var grace_window_turns: int = 2
 
 ## Validation schema — design/gdd/game-config.md range table.
 static func get_validation_schema() -> Dictionary:
@@ -17,4 +24,5 @@ static func get_validation_schema() -> Dictionary:
 		"aggression_interval_turns": {"min": 2, "max": 20, "required": true},
 		"reharden_strength": {"min": 0.1, "max": 1.0, "required": true},
 		"counter_approach_random_weight": {"min": 0.0, "max": 1.0, "required": true},
+		"grace_window_turns": {"min": 0, "max": 5, "required": true},
 	}

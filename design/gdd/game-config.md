@@ -136,6 +136,7 @@ if loaded_value != file_value:
 | `aggression_interval_turns` | 2 | 20 | 6 | Yes |
 | `reharden_strength` | 0.1 | 1.0 | 0.4 | Yes |
 | `counter_approach_random_weight` | 0.0 | 1.0 | 0.3 | Yes |
+| `grace_window_turns` | 0 | 5 | 2 | Yes |
 
 **ProgressionConfig**
 
