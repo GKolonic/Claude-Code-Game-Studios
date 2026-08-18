@@ -1,0 +1,713 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+---  GUT  ---
+[1m[INFO]:  [0musing [/home/gk-admin/.local/share/godot/app_userdata/The Faithful - Divine Dominion] for temporary output.
+Godot version:  4.6.0
+GUT version:  9.6.1
+[4m
+
+res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd
+[0m* test_ac_1_1_determinism_same_seed_identical_outcome
+* test_ac_1_2_no_state_written_to_npc_registry
+* test_ac_1_3_no_gameconfig_side_effects
+* test_ac_2_1_single_aligned_trait
+* test_ac_2_2_stacking_no_cap
+* test_ac_2_3_stacking_cap_reached
+* test_ac_2_4_negative_cap
+* test_ac_2_5_zero_affinity
+* test_ac_2_6_empty_trait_list_ec_6
+* test_ac_2_7_widow_grief_worked_example
+* test_ac_3_1_steadfast_belief_modifier
+* test_ac_3_2_open_belief_modifier
+* test_ac_3_3_wavering_belief_modifier
+* test_ac_3_4_converted_fallback_ec_4
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_widow_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] _breakdown_for_public (res://src/autoload/conversion_logic_engine.gd:131)
+         [2] get_probability_breakdown (res://src/autoload/conversion_logic_engine.gd:112)
+         [3] test_ac_3_4_converted_fallback_ec_4 (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:247)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [6] test_scripts (res://addons/gut/gut.gd:1047)
+         [7] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [8] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [9] main (res://addons/gut/cli/gut_cli.gd:297)
+         [10] _init (res://addons/gut/gut_cmdln.gd:39)
+[34m[ExpectedError][0mExpected push_warning error containing 'EC-4'.  
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_widow_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+         [2] test_ac_3_4_converted_fallback_ec_4 (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:251)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+         [5] test_scripts (res://addons/gut/gut.gd:1047)
+         [6] run_tests (res://addons/gut/gui/GutRunner.gd:198)
+         [7] _run_tests (res://addons/gut/cli/gut_cli.gd:239)
+         [8] main (res://addons/gut/cli/gut_cli.gd:297)
+         [9] _init (res://addons/gut/gut_cmdln.gd:39)
+[34m[ExpectedError][0mExpected push_warning error containing 'EC-4'.  
+* test_ac_4_1_first_use_no_penalty
+* test_ac_4_2_second_use
+* test_ac_4_3_cap_at_third_use
+* test_ac_4_4_cap_holds_beyond_third_use
+* test_ac_4_5_zero_weight_penalty_config
+* test_ac_5_1_neutral_baseline
+* test_ac_5_2_floor_enforced
+* test_ac_5_3_ceiling_enforced
+* test_ac_5_4_max_theoretical_praw_clamped
+* test_ac_5_5_min_theoretical_praw_clamped
+* test_ac_5_6_four_component_sum
+* test_ac_6_1_persuaded_zone
+* test_ac_6_2_softened_zone
+* test_ac_6_3_resisted_zone
+* test_ac_6_4_hardened_zone
+* test_ac_6_5_no_hardened_at_ceiling_1000_rolls
+* test_ac_6_6_boundary_roll_equals_p_final_softened
+* test_ac_6_7_four_outcomes_distribution_10k
+* test_ac_7_1_negative_hardened_floor_clamp
+* test_ac_7_2_band_fractions_over_one_clamp
+ERROR: ConversionLogicEngine: softened_band_fraction + resisted_band_fraction = 0.700000 + 0.700000 > 1.0 (EC-2) — clamping resisted to 0.300000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:157)
+       [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+       [2] test_ac_7_2_band_fractions_over_one_clamp (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:469)
+       [3] _run_test (res://addons/gut/gut.gd:622)
+       [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'EC-2'.  
+ERROR: ConversionLogicEngine: softened_band_fraction + resisted_band_fraction = 0.700000 + 0.700000 > 1.0 (EC-2) — clamping resisted to 0.300000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:157)
+       [1] _breakdown_for_public (res://src/autoload/conversion_logic_engine.gd:131)
+       [2] get_probability_breakdown (res://src/autoload/conversion_logic_engine.gd:112)
+       [3] test_ac_7_2_band_fractions_over_one_clamp (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:474)
+       [4] _run_test (res://addons/gut/gut.gd:622)
+       [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'EC-2'.  
+* test_ac_7_3_unknown_npc_resisted
+ERROR: ConversionLogicEngine: npc_id 'nonexistent_id' not found in NPCRegistry (EC-3) — RESISTED
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] resolve (res://src/autoload/conversion_logic_engine.gd:76)
+       [1] test_ac_7_3_unknown_npc_resisted (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:482)
+       [2] _run_test (res://addons/gut/gut.gd:622)
+       [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'nonexistent_id'.  
+* test_ac_7_4_null_config_resisted
+ERROR: ConversionLogicEngine: GameConfig.conversion is null (EC-5) — RESISTED
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:145)
+       [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+       [2] test_ac_7_4_null_config_resisted (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:494)
+       [3] _run_test (res://addons/gut/gut.gd:622)
+       [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'null'.  
+* test_ac_7_5_invalid_approach_resisted
+ERROR: ConversionLogicEngine: invalid DialogueApproach 99 (EC-9) — RESISTED
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] resolve (res://src/autoload/conversion_logic_engine.gd:72)
+       [1] test_ac_7_5_invalid_approach_resisted (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:503)
+       [2] _run_test (res://addons/gut/gut.gd:622)
+       [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'EC-9'.  
+* test_ac_8_1_signature_compiles_and_autoload_available
+* test_ac_8_3_both_caller_stubs_succeed
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_widow_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+         [2] resolve_for_caller (res://tests/unit/conversion_logic_engine/stub_rfs_shaped.gd:16)
+         [3] test_ac_8_3_both_caller_stubs_succeed (res://tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd:535)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_ac_8_4_read_at_call_time
+* test_ec_7_zero_trait_weight_config
+[34m[ExpectedError][0mEC-7 must NOT log a warning
+* test_ec_11_resisted_pair_contract
+* test_ec_13_history_at_max_approaches
+[1m43/43 passed.
+[0m[4m
+
+res://tests/unit/core/game_enums_test.gd
+[0m* test_enum_1_script_compiles_headless
+* test_enum_2_all_ten_enum_names_present
+* test_enum_3_values_match_architecture_s4_2
+* test_enum_4_persuaded_present
+* test_enum_5_no_converted_collision
+[1m5/5 passed.
+[0m[4m
+
+res://tests/unit/dialogue_database/dialogue_database_test.gd
+[0m* test_dcd_1_loads_at_startup_no_errors
+* test_dcd_2_content_audit_v_total_is_100
+* test_dcd_3_approach_pools_correct_for_all_four
+* test_dcd_4_outcome_pools_correct_for_all_sixteen
+* test_dcd_5_flavour_valid_for_all_seven_archetypes
+* test_dcd_6_rival_pools_correct_for_all_four
+* test_dcd_7_invalid_approach_returns_empty_without_crash
+WARNING: DialogueDatabase WARN: invalid approach key GRIEF — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_approach_lines (res://src/autoload/dialogue_database.gd:179)
+         [2] test_dcd_7_invalid_approach_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:88)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: DialogueDatabase WARN: invalid approach key FEAR — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_approach_lines (res://src/autoload/dialogue_database.gd:179)
+         [2] test_dcd_7_invalid_approach_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:89)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_dcd_8_invalid_outcome_combination_returns_empty_without_crash
+WARNING: DialogueDatabase WARN: invalid approach key GRIEF — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:190)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:94)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: DialogueDatabase WARN: invalid outcome key HARDENED — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:193)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:95)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: DialogueDatabase WARN: invalid approach key FEAR — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:190)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:96)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: DialogueDatabase WARN: invalid approach key GRIEF — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_outcome_summary (res://src/autoload/dialogue_database.gd:190)
+         [2] test_dcd_8_invalid_outcome_combination_returns_empty_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:97)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_dcd_9_invalid_archetype_returns_null_without_crash
+WARNING: DialogueDatabase WARN: invalid archetype key LABORER — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_npc_flavour (res://src/autoload/dialogue_database.gd:205)
+         [2] test_dcd_9_invalid_archetype_returns_null_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:102)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: DialogueDatabase WARN: invalid archetype key NOBLE — returning empty
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_invalid (res://src/autoload/dialogue_database.gd:275)
+         [1] get_npc_flavour (res://src/autoload/dialogue_database.gd:205)
+         [2] test_dcd_9_invalid_archetype_returns_null_without_crash (res://tests/unit/dialogue_database/dialogue_database_test.gd:103)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_dcd_10_underfilled_slot_sets_unloaded_and_warns
+WARNING: DialogueDatabase WARN: approach slot GRIEF has 2 lines — minimum is 3
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_underfilled (res://src/autoload/dialogue_database.gd:124)
+         [1] _validate_slots (res://src/autoload/dialogue_database.gd:87)
+         [2] _load_from (res://src/autoload/dialogue_database.gd:72)
+         [3] test_dcd_10_underfilled_slot_sets_unloaded_and_warns (res://tests/unit/dialogue_database/dialogue_database_test.gd:110)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_dcd_11_getters_safe_when_unloaded
+WARNING: DialogueDatabase WARN: approach slot GRIEF has 2 lines — minimum is 3
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn_underfilled (res://src/autoload/dialogue_database.gd:124)
+         [1] _validate_slots (res://src/autoload/dialogue_database.gd:87)
+         [2] _load_from (res://src/autoload/dialogue_database.gd:72)
+         [3] test_dcd_11_getters_safe_when_unloaded (res://tests/unit/dialogue_database/dialogue_database_test.gd:122)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_dcd_12_empty_descriptor_warns_but_returns_struct
+WARNING: DialogueDatabase WARN: archetype ELDER has an empty short_descriptor — content error; consumer must use a fallback
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] get_npc_flavour (res://src/autoload/dialogue_database.gd:213)
+         [1] test_dcd_12_empty_descriptor_warns_but_returns_struct (res://tests/unit/dialogue_database/dialogue_database_test.gd:139)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_dcd_13_get_npc_flavour_returns_copy_not_shared_ref
+* test_dcd_api_accessors_return_lines_not_shared_arrays
+* test_r8_no_slot_below_three_per_min_across_production_db
+[1m15/15 passed.
+[0m[4m
+
+res://tests/unit/game_config/game_config_test.gd
+[0m* test_gcf_1_gameconfig_autoload_is_loaded
+* test_gcf_8_all_nine_domains_accessible_and_typed
+* test_gcf_2_typed_access_field_sweep
+* test_gcf_3_out_of_range_clamps_with_warning
+WARNING: GameConfig: conversion.base_success_chance clamped from 1.5 to 0.95
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _validate_domain (res://src/autoload/game_config.gd:141)
+         [1] _load_domain (res://src/autoload/game_config.gd:106)
+         [2] test_gcf_3_out_of_range_clamps_with_warning (res://tests/unit/game_config/game_config_test.gd:118)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_gcf_3_clamp_at_exact_boundary_is_accepted
+WARNING: GameConfig: conversion.base_success_chance clamped from 1.5 to 0.95
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _validate_domain (res://src/autoload/game_config.gd:141)
+         [1] _load_domain (res://src/autoload/game_config.gd:106)
+         [2] test_gcf_3_clamp_at_exact_boundary_is_accepted (res://tests/unit/game_config/game_config_test.gd:128)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_gcf_4_missing_required_field_halts_naming_field
+* test_gcf_5_missing_file_halts_naming_path
+* test_gcf_7_hot_reload_swaps_value_and_emits_signal
+WARNING: GameConfig: conversion.base_success_chance clamped from 1.5 to 0.95
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _validate_domain (res://src/autoload/game_config.gd:141)
+         [1] _hot_reload_domain (res://src/autoload/game_config.gd:189)
+         [2] test_gcf_7_hot_reload_swaps_value_and_emits_signal (res://tests/unit/game_config/game_config_test.gd:163)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_gcf_7_failed_hot_reload_retains_last_valid_and_no_signal
+WARNING: GameConfig: hot-reload of res://tests/fixtures/config/missing_field_conversion_config.tres invalid (GameConfig: Required field 'base_success_chance' missing in res://tests/fixtures/config/missing_field_conversion_config.tres.) — retaining last valid state.
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _hot_reload_domain (res://src/autoload/game_config.gd:191)
+         [1] test_gcf_7_failed_hot_reload_retains_last_valid_and_no_signal (res://tests/unit/game_config/game_config_test.gd:178)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_gcf_8_no_watcher_in_export_build
+[1m10/10 passed.
+[0m[4m
+
+res://tests/unit/m0_scaffold_test.gd
+[0m* test_scaf_1_project_godot_autoload_list_matches_adr_0001
+* test_scaf_2_directory_tree_matches_architecture_s7
+* test_scaf_3_gitignore_ignores_godot_cache
+[1m3/3 passed.
+[0m[4m
+
+res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd
+[0m* test_ac_1_tap_hit_emits_once_with_target_and_haptic
+* test_ac_2_tap_miss_emits_nothing
+* test_ac_3_tap_target_inflation_44dp_floor
+WARNING: MTF: target /root/GutRunner/@Node@27/SmallTarget measures 20.0x20.0dp (below 44dp minimum) — hit rect inflated; visual size unchanged
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] register (res://src/autoload/mobile_touch_framework.gd:247)
+         [2] _register (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:60)
+         [3] test_ac_3_tap_target_inflation_44dp_floor (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:134)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_ac_4_long_press_starts_at_600ms_and_releases
+* test_ac_5_dead_band_emits_nothing
+* test_tap_boundary_at_350ms
+* test_dead_band_at_351ms
+* test_ac_6_swipe_classification_four_directions
+* test_ac_7_swipe_velocity_gate_rejects_slow_drag
+* test_swipe_sector_boundaries
+* test_ac_8_second_finger_discarded_gesture_continues
+* test_ac_9_blocking_layer_suppresses_lower_priority
+* test_ac_9_unregister_resumes_immediately_after_pop
+* test_blocking_layer_subtree_controls_disabled_and_restored
+* test_blocking_layer_stack_ordering_and_clear
+* test_ac_10_gesture_timeout_emits_touch_cancelled
+* test_ac_11_debounce_discards_bounce_tap_within_100ms
+* test_ac_12_dpi_fallback_for_zero_or_implausible
+WARNING: MTF: implausible detected DPI 0 — falling back to 160 DPI (pixels_per_dp = 1.0)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] _compute_pixels_per_dp (res://src/autoload/mobile_touch_framework.gd:393)
+         [2] test_ac_12_dpi_fallback_for_zero_or_implausible (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:441)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: MTF: implausible detected DPI -5 — falling back to 160 DPI (pixels_per_dp = 1.0)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] _compute_pixels_per_dp (res://src/autoload/mobile_touch_framework.gd:393)
+         [2] test_ac_12_dpi_fallback_for_zero_or_implausible (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:444)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: MTF: implausible detected DPI 641 — falling back to 160 DPI (pixels_per_dp = 1.0)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/mobile_touch_framework.gd:472)
+         [1] _compute_pixels_per_dp (res://src/autoload/mobile_touch_framework.gd:393)
+         [2] test_ac_12_dpi_fallback_for_zero_or_implausible (res://tests/unit/mobile_touch_framework/mtf_gesture_test.gd:445)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_ac_13_dp_conversion_accuracy_at_390_dpi
+* test_ac_14_no_visual_output_in_release_builds
+* test_ec_8_long_press_transitions_to_swipe_without_released
+* test_r3_handled_mark_only_for_consumed_gestures
+* test_mtf_15_no_src_code_reads_input_outside_mtf
+* test_mtf_16_set_input_as_handled_lives_only_in_mtf
+[1m24/24 passed.
+[0m[4m
+
+res://tests/unit/npc_registry/npc_registry_test.gd
+[0m* test_ac_1_same_seed_identical_two_calls
+* test_ac_1_different_seed_generates_different_traits
+* test_ac_2_initial_state_is_clean
+* test_ac_3_assigned_traits_are_valid_for_archetype
+* test_ac_4_widow_bereaved_rate_beats_soldier
+* test_ac_5_three_persuaded_linear_progression
+* test_ac_6_hardened_on_steadfast_stays_floor
+* test_ac_7_persuaded_on_converted_is_terminal
+* test_ac_8_cooldown_and_counter_update
+* test_ac_9_advance_turn_decrements_cooldown_floor_zero
+* test_ac_9_grace_window_ticks_down
+* test_ac_10_cooldown_gate
+* test_ac_11_max_approaches_gate
+* test_ac_12_access_gate
+* test_ac_13_inspect_reveals_highest_affinity_trait
+* test_ac_14_dialogue_outcome_reveals_approach_trait
+* test_ac_15_full_reveal_is_noop_no_signal
+* test_ac_16_npc_state_changed_exact_once_per_transition
+* test_ac_17_cooldown_expired_exactly_once
+* test_ac_16_17_village_initialized_exactly_once
+* test_ac_18_serialize_clear_deserialize_roundtrip
+* test_ac_19_unknown_belief_state_loads_steadfast
+ERROR: NPCRegistry: unknown BeliefState 99 in save — defaulting to STEADFAST (AC-19/E4)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _restore_belief (res://src/autoload/npc_registry.gd:749)
+       [1] _restore_npc (res://src/autoload/npc_registry.gd:708)
+       [2] deserialize (res://src/autoload/npc_registry.gd:688)
+       [3] test_ac_19_unknown_belief_state_loads_steadfast (res://tests/unit/npc_registry/npc_registry_test.gd:523)
+       [4] _run_test (res://addons/gut/gut.gd:622)
+       [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'unknown BeliefState 99'.  AC-19: the unknown belief must be logged as an error
+ERROR: NPCRegistry: unknown BeliefState 99 in save — defaulting to STEADFAST (AC-19/E4)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _restore_belief (res://src/autoload/npc_registry.gd:749)
+       [1] _restore_npc (res://src/autoload/npc_registry.gd:708)
+       [2] deserialize (res://src/autoload/npc_registry.gd:688)
+       [3] test_ac_19_unknown_belief_state_loads_steadfast (res://tests/unit/npc_registry/npc_registry_test.gd:538)
+       [4] _run_test (res://addons/gut/gut.gd:622)
+       [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+ERROR: NPCRegistry: 'village_01_elder_1' connection unknown RelationshipType 999 — dropped (E4)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _restore_npc (res://src/autoload/npc_registry.gd:725)
+       [1] deserialize (res://src/autoload/npc_registry.gd:688)
+       [2] test_ac_19_unknown_belief_state_loads_steadfast (res://tests/unit/npc_registry/npc_registry_test.gd:538)
+       [3] _run_test (res://addons/gut/gut.gd:622)
+       [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'unknown BeliefState 99'.  the second load's unknown belief must also be logged
+[34m[ExpectedError][0mExpected push_error error containing 'unknown RelationshipType 999'.  E4: the unknown relationship must be logged as an error
+* test_ac_20_duplicate_id_guard
+WARNING: NPCRegistry: duplicate npc_id 'village_01_elder_1' — keeping the existing record (E1/AC-20)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/npc_registry.gd:796)
+         [1] _generate_npc (res://src/autoload/npc_registry.gd:432)
+         [2] initialize_village (res://src/autoload/npc_registry.gd:407)
+         [3] test_ac_20_duplicate_id_guard (res://tests/unit/npc_registry/npc_registry_test.gd:553)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_ac_21_unplayable_village_guard
+ERROR: NPCRegistry: unplayable village — every NPC has an access gate (E8/AC-21); cleared gate on 'village_01_elder_1'
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] initialize_village (res://src/autoload/npc_registry.gd:417)
+       [1] test_ac_21_unplayable_village_guard (res://tests/unit/npc_registry/npc_registry_test.gd:577)
+       [2] _run_test (res://addons/gut/gut.gd:622)
+       [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'unplayable village'.  AC-21: the unplayable-village guard must log an error
+* test_e1_duplicate_npc_id_returns_existing
+WARNING: NPCRegistry: duplicate npc_id 'village_01_elder_1' — keeping the existing record (E1/AC-20)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _warn (res://src/autoload/npc_registry.gd:796)
+         [1] _generate_npc (res://src/autoload/npc_registry.gd:432)
+         [2] initialize_village (res://src/autoload/npc_registry.gd:407)
+         [3] test_e1_duplicate_npc_id_returns_existing (res://tests/unit/npc_registry/npc_registry_test.gd:599)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_e2_dead_gate_ref_clears_gate
+ERROR: NPCRegistry: 'village_01_elder_1' access gate references unknown id — gate cleared (E2)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _materialize_gate (res://src/autoload/npc_registry.gd:562)
+       [1] _generate_npc (res://src/autoload/npc_registry.gd:457)
+       [2] initialize_village (res://src/autoload/npc_registry.gd:407)
+       [3] test_e2_dead_gate_ref_clears_gate (res://tests/unit/npc_registry/npc_registry_test.gd:608)
+       [4] _run_test (res://addons/gut/gut.gd:622)
+       [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'access gate references unknown id'.  E2: the dead gate ref must be logged as an error
+* test_e3_dead_connection_ref_dropped
+ERROR: NPCRegistry: 'village_01_soldier_1' connection targets unknown id 'village_01_ghost_1' — dropped (E3)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _materialize_connections (res://src/autoload/npc_registry.gd:536)
+       [1] _generate_npc (res://src/autoload/npc_registry.gd:456)
+       [2] initialize_village (res://src/autoload/npc_registry.gd:407)
+       [3] test_e3_dead_connection_ref_dropped (res://tests/unit/npc_registry/npc_registry_test.gd:624)
+       [4] _run_test (res://addons/gut/gut.gd:622)
+       [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'connection targets unknown id'.  E3: the dead connection must be logged as an error
+* test_e4_unknown_relationship_dropped_gracefully
+ERROR: NPCRegistry: 'village_01_soldier_1' connection unknown RelationshipType 77 — dropped (E4)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _restore_npc (res://src/autoload/npc_registry.gd:725)
+       [1] deserialize (res://src/autoload/npc_registry.gd:688)
+       [2] test_e4_unknown_relationship_dropped_gracefully (res://tests/unit/npc_registry/npc_registry_test.gd:653)
+       [3] _run_test (res://addons/gut/gut.gd:622)
+       [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'unknown RelationshipType 77'.  E4: the invalid relationship must be logged as an error
+* test_e5_hardened_on_steadfast_updates_counters
+* test_e6_rival_grace_window_regression_and_after_close
+* test_e7_all_at_max_approaches_list_empty
+* test_e8_unplayable_village_guard_clears_one_gate
+ERROR: NPCRegistry: unplayable village — every NPC has an access gate (E8/AC-21); cleared gate on 'village_01_widow_1'
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] initialize_village (res://src/autoload/npc_registry.gd:417)
+       [1] test_e8_unplayable_village_guard_clears_one_gate (res://tests/unit/npc_registry/npc_registry_test.gd:724)
+       [2] _run_test (res://addons/gut/gut.gd:622)
+       [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'unplayable village'.  E8: the unplayable-village guard must log an error
+* test_e9_mutation_allowed_on_gated_npc
+* test_e10_full_reveal_noop
+* test_e11_inspect_on_empty_traits_logs_error
+ERROR: NPCRegistry: trigger_inspect_reveal on 'village_01_widow_1' with empty assigned_traits — data error (E11)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] trigger_inspect_reveal (res://src/autoload/npc_registry.gd:334)
+       [1] test_e11_inspect_on_empty_traits_logs_error (res://tests/unit/npc_registry/npc_registry_test.gd:769)
+       [2] _run_test (res://addons/gut/gut.gd:622)
+       [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_error error containing 'empty assigned_traits'.  E11: the data error must be logged as an error (GDD wording)
+* test_e12_rival_pair_both_convert_same_turn_valid
+* test_e13_clear_village_with_active_cooldowns
+* test_e14_get_npc_unknown_returns_null
+* test_api_hidden_trait_count
+* test_api_get_npcs_by_belief
+* test_api_get_connections_and_archetype
+* test_api_approach_history_tracks_approaches
+[1m42/42 passed.
+[0m[4m
+
+res://tests/unit/npc_resources/npc_resources_test.gd
+[0m* test_rsrc_1_all_five_script_paths_load
+* test_rsrc_1_typed_instantiation_and_class_name_resolution
+* test_rsrc_2_npc_record_round_trip
+* test_rsrc_2_npc_connection_round_trip
+* test_rsrc_2_npc_access_gate_round_trip
+* test_rsrc_2_npc_archetype_definition_round_trip
+* test_rsrc_2_npc_archetype_trait_bonus_round_trip
+* test_rsrc_2_arrays_copied_separately_dcd_pattern
+* test_rsrc_3_archetypes_tres_loads_exactly_seven
+* test_rsrc_3_social_influence_weights_match_rule3_table
+* test_rsrc_3_archetype_ids_cover_all_seven_enums
+* test_rsrc_4_every_trait_id_resolves_in_trait_database
+* test_rsrc_4_bonus_pct_within_range_and_sanity_checks
+* test_rsrc_5_portrait_dirs_exist_with_six_contract_valid_pngs
+[1m14/14 passed.
+[0m[4m
+
+res://tests/unit/npc_resources/village_definition_test.gd
+[0m* test_vdef_1_parses_as_village_definition_with_expected_fields
+* test_vdef_2_roster_matches_approved_decision5
+* test_vdef_3_ids_archetypes_and_display_names_validate
+* test_vdef_4_map_positions_within_village_map_grid
+* test_vdef_5_connections_and_gates_resolve_with_no_dead_refs
+[1m5/5 passed.
+[0m[4m
+
+res://tests/unit/npc_rng/rng_helpers_test.gd
+[0m* test_rg_1_same_seed_identical_100_call_sequence
+* test_rg_2_different_seeds_diverge
+* test_rg_3_weighted_draw_respects_603010_bands
+* test_rg_3_real_16_pool_share_sanity
+* test_rg_4_draw_without_replacement_never_duplicates
+* test_rg_4_full_pool_drain_no_duplicates
+* test_rg_5_random_int_inclusive_bounds_reachable
+* test_rg_5_random_int_inclusive_max_equals_min
+* test_rg_5_random_int_inclusive_out_of_order_swaps
+WARNING: RNGHelpers: random_int_inclusive got min 20 > max 5 — swapping bounds (ADR-0007 warns, does not crash)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] random_int_inclusive (res://src/systems/npc/rng_helpers.gd:39)
+         [1] test_rg_5_random_int_inclusive_out_of_order_swaps (res://tests/unit/npc_rng/rng_helpers_test.gd:206)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_rg_6_rng_instances_are_functionally_isolated
+* test_edge_empty_pool_returns_empty_dict
+WARNING: RNGHelpers.weighted_random_choice: empty pool is a programmer error — returning {}
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] weighted_random_choice (res://src/systems/npc/rng_helpers.gd:62)
+         [1] test_edge_empty_pool_returns_empty_dict (res://tests/unit/npc_rng/rng_helpers_test.gd:234)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+WARNING: RNGHelpers.draw_without_replacement: asked for 3 but pool has 0 — clamping (trait-db EC-2 pattern)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] draw_without_replacement (res://src/systems/npc/rng_helpers.gd:98)
+         [1] test_edge_empty_pool_returns_empty_dict (res://tests/unit/npc_rng/rng_helpers_test.gd:236)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_edge_pool_smaller_than_draw_count_clamps
+WARNING: RNGHelpers.draw_without_replacement: asked for 5 but pool has 2 — clamping (trait-db EC-2 pattern)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] draw_without_replacement (res://src/systems/npc/rng_helpers.gd:98)
+         [1] test_edge_pool_smaller_than_draw_count_clamps (res://tests/unit/npc_rng/rng_helpers_test.gd:246)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_edge_zero_sum_pool_falls_back_uniform
+WARNING: RNGHelpers.weighted_random_choice: zero-sum pool — falling back to uniform pick (ADR-0007)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] weighted_random_choice (res://src/systems/npc/rng_helpers.gd:69)
+         [1] test_edge_zero_sum_pool_falls_back_uniform (res://tests/unit/npc_rng/rng_helpers_test.gd:258)
+         [2] _run_test (res://addons/gut/gut.gd:622)
+         [3] _test_the_scripts (res://addons/gut/gut.gd:835)
+* test_edge_negative_weights_clamped
+* test_edge_uniform_roll_in_expected_range
+[1m15/15 passed.
+[0m[4m
+
+res://tests/unit/trait_database/trait_database_test.gd
+[0m* test_ac_1_database_loads_at_startup
+* test_ac_2_trait_lookup_by_id_returns_correct_data
+* test_ac_3_affinity_times_weight_matches_gdd_example
+* test_ac_7_unknown_trait_id_returns_null_without_crash
+* test_ac_8_all_traits_have_four_valid_affinities
+* test_ac_9_get_affinity_returns_zero_for_unknown_trait
+* test_ac_10_all_sixteen_mvp_traits_present
+* test_ac_11_rarity_distribution_matches_design
+* test_rule_7_get_traits_for_archetype_unions_agnostic
+* test_ac_4_trait_assignment_respects_rarity_weights
+* test_ac_5_and_6_assignment_never_duplicates_and_respects_count
+[1m11/11 passed.
+[0m[4m
+
+res://tests/integration/game_config/game_config_order_test.gd
+[0m* test_gcf_1_gameconfig_loaded_before_other_autoloads_ready
+* test_gcf_1_gameconfig_is_first_autoload_in_project_settings
+[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/m0_boot_test.gd
+[0m* test_boot_1_all_autoloads_instantiate
+* test_boot_2_autoload_dependencies_resolve
+* test_boot_3_gsm_deferred_connect_fires_after_dcs
+* test_boot_4_main_scene_instantiates
+[1m4/4 passed.
+[0m[4m
+
+res://tests/integration/m2/m2_integration_chain_test.gd
+[0m* test_m2_int_1_full_chain_pair_contract_all_npcs_all_approaches
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_soldier_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+         [2] _run_full_chain (res://tests/integration/m2/m2_integration_chain_test.gd:116)
+         [3] test_m2_int_1_full_chain_pair_contract_all_npcs_all_approaches (res://tests/integration/m2/m2_integration_chain_test.gd:156)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_warning error containing 'EC-4'.  
+* test_m2_int_1_belief_transitions_per_rule_5_non_rival
+* test_m2_int_2_full_chain_determinism_same_seed
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_soldier_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+         [2] _run_full_chain (res://tests/integration/m2/m2_integration_chain_test.gd:116)
+         [3] test_m2_int_2_full_chain_determinism_same_seed (res://tests/integration/m2/m2_integration_chain_test.gd:237)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_warning error containing 'EC-4'.  
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_soldier_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+         [2] _run_full_chain (res://tests/integration/m2/m2_integration_chain_test.gd:116)
+         [3] test_m2_int_2_full_chain_determinism_same_seed (res://tests/integration/m2/m2_integration_chain_test.gd:240)
+         [4] _run_test (res://addons/gut/gut.gd:622)
+         [5] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_warning error containing 'EC-4'.  
+* test_m2_int_1_converted_npc_resolve_valid_and_apply_noop
+WARNING: ConversionLogicEngine: resolve on CONVERTED npc 'village_01_widow_1' — treated as STEADFAST, modifier 0.0 (EC-4)
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] _compute_breakdown (res://src/autoload/conversion_logic_engine.gd:193)
+         [1] resolve (res://src/autoload/conversion_logic_engine.gd:78)
+         [2] test_m2_int_1_converted_npc_resolve_valid_and_apply_noop (res://tests/integration/m2/m2_integration_chain_test.gd:273)
+         [3] _run_test (res://addons/gut/gut.gd:622)
+         [4] _test_the_scripts (res://addons/gut/gut.gd:835)
+[34m[ExpectedError][0mExpected push_warning error containing 'EC-4'.  
+[1m4/4 passed.
+[0m[4m
+
+res://tests/integration/npc_registry/village_lifecycle_test.gd
+[0m* test_vdef_6_initialize_village_yields_approved_roster
+* test_vdef_6_archetype_weight_read_via_archetype
+* test_real_village_determinism_same_seed
+* test_real_village_generation_contract_snapshot
+* test_real_village_connections_and_gates_materialized
+* test_real_village_persistence_roundtrip
+* test_real_village_noble_gate_unlocks_after_elder
+[1m7/7 passed.
+[0m
+
+
+
+[33m==============================================
+[0m[33m= Run Summary
+[0m[33m==============================================
+[0m
+Totals
+------
+Scripts              15
+Tests               204
+Passing Tests       204
+Asserts           22711
+Time              1.178s
+
+
+[32m---- All tests passed! ----
+[0m
+
+real	0m1.901s
+user	0m1.509s
+sys	0m0.040s
+
+=== Sprint 2 task 2-8 REG-1 evidence footer (appended by qa-lead) ===
+Engine: Godot 4.6.stable.official.89cea1439 (headless, local WSL — QA plan OQ-B primary evidence)
+Suite: 15 scripts, 204/204 tests passing, 22711 asserts, exit 0
+SUITE_WALL_CLOCK: 1.901s (real; user 1.509s sys 0.040s) — GUT-reported test time 1.178s
+BOOT: godot --headless --quit --path . -> exit 0, zero errors, wall-clock 229ms (separate run)
+CI-watch note (QA plan OQ-QA1): suite wall-clock ~1.9s — far below the ~2 min warning line;
+  statistical tests (AC-4 100 villages, AC-6.5 1000 rolls, AC-6.7 10k rolls) kept in-suite as required.
+Prior baseline: 74/74 (Sprint 1, 1-14). Post-M2 prior suite was 200/200 (2-6/2-7 commits); 2-8 adds
+  tests/integration/m2/m2_integration_chain_test.gd (4 tests, M2-INT-1/2 + CONVERTED no-op) -> 204/204.
