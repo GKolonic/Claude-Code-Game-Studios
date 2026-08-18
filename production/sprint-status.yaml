@@ -166,11 +166,11 @@ stories:
     name: "R2 consistency decision (aggression_interval_turns)"
     file: "production/stories/sprint-1/1-18-r2-consistency-decision.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "systems-designer / creative-director"
     estimate_days: 0.25
     blocker: ""
-    completed: ""
+    completed: "2026-08-18"
   - id: "1-19"
     name: "VillageDefinition schema sign-off (OQ-4)"
     file: "production/stories/sprint-1/1-19-village-definition-signoff.md"

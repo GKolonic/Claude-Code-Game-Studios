@@ -2,7 +2,7 @@
 
 > **Status**: In Design
 > **Author**: Design session + agents
-> **Last Updated**: 2026-04-26
+> **Last Updated**: 2026-08-18
 > **Implements Pillar**: Pillar 1 — Every Soul Has a Story; Pillar 3 — The Arc Must Feel Earned; Pillar 4 — History Writes Itself
 
 ## Overview
@@ -297,11 +297,13 @@ The NPC Character System GDD (Interactions table) already lists the Rival Faith 
 
 ## Tuning Knobs
 
+> **Default and range authority:** All `RivalFaithConfig` values are governed by `design/gdd/game-config.md` — Creative Director ruling (task 1-18, 2026-08-18; architecture.md §8 R2). game-config.md is authoritative; this GDD's tuning table is maintained for design context and any conflict resolves to game-config.md.
+
 ### From `GameConfig.rival` (RivalFaithConfig — owned by this GDD)
 
 | Knob | Default | Safe Range | Effect | What Breaks at Extremes |
 |---|---|---|---|---|
-| `aggression_interval_turns` | 3 | 1–5 | How often (in player turns) the rival acts. Lower = more frequent pressure. At 1, rival acts every turn. | Below 1: invalid (modulo 0 or always-true). Above 5: rival is imperceptible; converts feel permanent and wins feel unearned. |
+| `aggression_interval_turns` | 6 | 3–12 | How often (in player turns) the rival acts. Lower = more frequent pressure (at the out-of-range hypothetical 1, every turn). | Below 3: rival pressure escalates sharply; converts feel perpetually contested. Above 12: rival is imperceptible; converts feel permanent and wins feel unearned. |
 | `reharden_strength` | 1.0 | 0.5–1.5 | Scales how likely the rival's CLE outcome is promoted toward HARDENED (above 1.0) or demoted toward PERSUADED (below 1.0). At 1.0: no bias — rival uses raw CLE math. | Below 0.5: rival almost never achieves HARDENED; pressure is very low. Above 1.5: 50% promotion rate; rival feels frustratingly effective and unpredictable. |
 | `counter_approach_random_weight` | 0.0 | 0.0–0.40 | Probability the rival ignores Formula 1 and picks a random approach instead. At 0.0: rival always picks the best approach (legible, strategic). | Above 0.40: rival becomes erratic and unpredictable — feels arbitrary. At 1.0: rival is completely random; strategic depth is eliminated. |
 | `grace_window_turns` | 2 | 0–5 | Turns after conversion during which the rival can regress CONVERTED NPCs. At 0: mechanic disabled. At 2: player has 1 full protected turn after the conversion turn (due to `advance_turn()` decrement firing before rival). | Above 5: converts feel perpetually vulnerable; winning feels impossible. At 1 or below: rival gets 0 effective shots per convert (see Edge Cases). |
@@ -315,7 +317,7 @@ The NPC Character System GDD (Interactions table) already lists the Rival Faith 
 
 ### Knob Interaction Warnings
 
-**`grace_window_turns` × `aggression_interval_turns`:** The effective rival opportunity count per convert is approximately `floor((grace_window_turns - 1) / aggression_interval_turns)`. At defaults (grace=2, interval=3), the rival gets at most 1 shot per convert. At grace=4 and interval=1, the rival gets 3 shots per convert — very high pressure on newly converted NPCs. Tune these together.
+**`grace_window_turns` × `aggression_interval_turns`:** The effective rival opportunity count per convert is approximately `floor((grace_window_turns - 1) / aggression_interval_turns)`. At defaults (grace=2, interval=6), `floor((2-1)/6) = 0` — the rival gets **0 full shots per convert inside the grace window**; a convert is only at risk on the action turn itself (an interval turn), when the same-turn Step 5 evaluation can still target it (Core Rule 9). At hypothetical grace=4 and interval=1, `floor((4-1)/1) = 3` — the rival gets 3 shots per convert — very high pressure on newly converted NPCs. Tune these together; lowering the interval or raising the grace window increases regress pressure.
 
 **`reharden_strength` × omniscient approach scoring:** The rival's danger comes from two independent sources: accurate approach selection (Formula 1) plus outcome promotion bias (Formula 2). Setting `reharden_strength = 1.25` while using default omniscient selection creates a rival that is both accurate and has a 25% chance of promoting its outcome by one rank. Test both in combination, not in isolation.
 
@@ -340,7 +342,7 @@ This system exposes no query methods for UI consumption beyond the `rival_acted`
 
 ## Acceptance Criteria
 
-**AC-01 — Interval firing.** Given `aggression_interval_turns = 3`, the rival calls `apply_conversion_outcome()` exactly on turns 3, 6, 9, … and does not call it on any other turn. On turn 0 and on turns 1, 2, 4, 5, `process_turn()` returns without calling any NPCRegistry or CLE method.
+**AC-01 — Interval firing.** Given the default `aggression_interval_turns = 6` (game-config.md), the rival calls `apply_conversion_outcome()` exactly on turns 6, 12, 18, … and does not call it on any other turn. On turn 0 and on turns 1–5 and 7–11, `process_turn()` returns without calling any NPCRegistry or CLE method.
 
 **AC-02 — Target priority: CONVERTED before WAVERING before OPEN.** Given one eligible NPC in each state (CONVERTED within grace window, WAVERING, OPEN), the rival selects the CONVERTED NPC. If the CONVERTED NPC is removed, the rival selects the WAVERING NPC. If both are removed, it selects the OPEN NPC.
 
