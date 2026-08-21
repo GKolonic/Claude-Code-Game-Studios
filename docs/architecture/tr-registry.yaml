@@ -25,7 +25,7 @@
 # STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
 
 version: 1
-last_updated: "2026-08-18"
+last_updated: "2026-08-21"
 
 requirements:
   # --- M1: Game Config (design/gdd/game-config.md) ---
@@ -425,5 +425,553 @@ requirements:
     gdd: design/gdd/mobile-touch-framework.md
     requirement: "Hit-testing is event-driven, never polled in _process(); area registry supports max 32 registered areas with debug warning above (Rule 10; EC-10)"
     created: 2026-08-18
+    revised: ""
+    status: active
+
+  # --- M2: NPC Character System (design/gdd/npc-character-system.md) ---
+  # One TR per AC-1..21 + E-series edge cases that are distinct testable requirements.
+  # Verifying: tests/unit/npc_registry/npc_registry_test.gd; tests/integration/npc_registry/village_lifecycle_test.gd; tests/integration/m2/m2_integration_chain_test.gd
+  - id: TR-NPC-001
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "initialize_village() with the same rng_seed produces byte-identical NpcRecord arrays (traits, belief states, connections) across repeated calls (AC-1; ADR-0007 determinism)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-002
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Every generated NpcRecord starts belief_state=STEADFAST, cooldown_turns_remaining=0, approach_count=0, revealed_traits=[] on fresh init (AC-2; clean initial state)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-003
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Every NpcRecord.assigned_traits entry resolves in TraitDatabase and is tagged for the archetype (or is archetype-agnostic); no invalid trait IDs (AC-3; schema integrity)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-004
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Archetype trait bias: Widow 'bereaved' rate > Soldier 'bereaved' rate across 100 seeded villages (AC-4; ADR-0007 statistical determinism)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-005
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "apply_conversion_outcome(PERSUADED, approach) progresses STEADFAST -> OPEN -> WAVERING -> CONVERTED over three calls (Rule 5; AC-5 linear progression)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-006
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "HARDENED on a STEADFAST NPC is a belief-state no-op; floor holds (Rule 5; AC-6)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-007
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Any outcome on a CONVERTED NPC is terminal for PLAYER/FAITH_SPREAD callers: belief unchanged and no npc_state_changed emitted (Rule 5/E6; AC-7)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-008
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Any non-no-op outcome sets cooldown_turns_remaining = approach_cooldown_turns and increments approach_count by 1 (Rule 5; AC-8)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-009
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "N advance_turn() calls decrement cooldown_turns_remaining (and recently_converted_turns_remaining) by N, floor 0 each, for all NPCs (Rule 8; AC-9 turn tick)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-010
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "cooldown_turns_remaining > 0 excludes an NPC from get_approachable_npcs() (Rule 6; AC-10 cooldown gate)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-011
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "approach_count == max_approaches_per_npc excludes an NPC from get_approachable_npcs() (Rule 6; AC-11 max-approaches gate)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-012
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Access gate: a gated NPC is excluded from get_approachable_npcs() until all access_gate.required_npc_ids reach required_belief_state; then included (Rule 6; AC-12)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-013
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "trigger_inspect_reveal() reveals exactly one trait: the hidden trait with highest absolute affinity across all four approaches; ties by index in assigned_traits (Rule 7; AC-13)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-014
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "A non-RESISTED dialogue outcome using approach X reveals exactly one trait: the hidden trait with highest affinity magnitude for approach X (Rule 7; AC-14)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-015
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Reveal when all traits already revealed is a no-op: revealed_traits unchanged and no trait_revealed emitted (Rule 7/E10; AC-15, OQ-8)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-016
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "npc_state_changed emitted exactly once per belief transition carrying correct npc_id/old_state/new_state; never on no-op outcomes (Rule 5; AC-16 signal accuracy)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-017
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "npc_cooldown_expired emitted exactly once per NPC per cooldown cycle, on the advance_turn() that brings cooldown_turns_remaining to 0 (Rule 8; AC-17)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-018
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "serialize() -> clear_village() -> deserialize() round-trips an identical NpcRecord state incl. revealed_traits, belief_state, approach_count, cooldown_turns_remaining (Rule 8; AC-18)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-019
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "deserialize() with an unknown BeliefState value does not crash; the affected NPC loads as STEADFAST (E4; AC-19 graceful schema migration)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-020
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "A scene definition with a duplicate npc_id registers exactly one NpcRecord for that ID and logs a warning (E1; AC-20 duplicate guard)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-021
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "A scene where all NPCs have access_gate != null clears exactly one access gate at init and logs an error (E8; AC-21 unplayable-village guard)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-022
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "access_gate referencing a non-existent npc_id is cleared to null at init (treated as no gate); NPC becomes immediately approachable; no crash (E2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-023
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "social_connection referencing a non-existent target_npc_id is dropped at init; the NPC's remaining connections stay intact (E3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-024
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "deserialize() with an unknown RelationshipType drops that connection without crashing (E4; distinct from the AC-19 BeliefState path)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-025
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "RIVAL caller within the grace window (recently_converted_turns_remaining > 0) regresses CONVERTED -> WAVERING on PERSUADED/SOFTENED; RESISTED/HARDENED always no-op; window closes at 0 (Rule 5/E6)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-026
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Village exhaustion: get_approachable_npcs() returns an empty array when every NPC is at max_approaches_per_npc or unconvertible (E7)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-027
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "apply_conversion_outcome() does not enforce approachability gates — valid for the Rival caller on cooldown-/access-gated NPCs; caller checks gates for player actions (E9)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-028
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "trigger_inspect_reveal() with empty assigned_traits (data error) logs an error and returns without mutation (E11)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-029
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "Two RIVAL-connected NPCs converted in the same Faith Spread pass both end CONVERTED; the first conversion is terminal and is not regressed (E12)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-030
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "clear_village() with active cooldowns removes all NpcRecords and discards cooldown state; no timers/callbacks retain NpcRecord references (E13)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-NPC-031
+    system: npc-character-system
+    gdd: design/gdd/npc-character-system.md
+    requirement: "get_npc() with an unregistered npc_id returns null; callers must null-check before dereferencing (E14)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+
+  # --- M2: Conversion Logic Engine (design/gdd/conversion-logic-engine.md) ---
+  # One TR per AC-1.1..AC-8.4 sub-criterion + EC-series edge cases that are distinct
+  # testable requirements (EC-7, EC-8, EC-11, EC-13). Other ECs are subsumed by AC-2.6/3.4/5.4/6.6/7.x.
+  # Verifying: tests/unit/conversion_logic_engine/conversion_logic_engine_test.gd; tests/integration/m2/m2_integration_chain_test.gd (EC-8 resolve->apply)
+  - id: TR-CLE-001
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "resolve() is deterministic: same RNG seed + unchanged NPCRegistry/GameConfig returns the identical ConversionOutcome (AC-1.1; ADR-0007)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-002
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "resolve() writes no state: NPCRegistry.get_npc(npc_id) is byte-identical before and after (belief, approach history, cooldown unchanged) (AC-1.2 pure function)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-003
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "resolve() has no side effects on GameConfig: all conversion fields read identically before and after (AC-1.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-004
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1: one trait at affinity +1.0, W=0.25, cap=0.50 -> trait_subtotal = +0.25 (AC-2.1)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-005
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1: two traits at +1.0 each -> +0.50 (sum 0.50, no clamp) (AC-2.2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-006
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1: four traits at +1.0 each -> +0.50 (sum 1.0, clamped to cap) (AC-2.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-007
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1: four traits at -1.0 each -> trait_subtotal = -0.50 (negative cap) (AC-2.4)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-008
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1: all-zero affinities -> trait_subtotal = 0.0 (AC-2.5)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-009
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1 over an empty assigned_traits -> 0.0; resolve() completes without error (EC-6; AC-2.6)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-010
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 1 Widow/GRIEF worked example (bereaved +1.0, lonely +1.0, mortal_minded +0.5, superstitious 0.0) -> +0.50 (sum 0.625 clamped) (AC-2.7)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-011
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 2: STEADFAST -> belief_modifier = 0.0 (AC-3.1)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-012
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 2: OPEN -> belief_modifier = +0.10 at defaults (AC-3.2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-013
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 2: WAVERING -> belief_modifier = +0.20 at defaults (AC-3.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-014
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 2: CONVERTED treated as STEADFAST (modifier 0.0) with a warning logged; resolve() still returns a valid outcome (EC-4; AC-3.4)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-015
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 3: first use (approach_history 0) -> repeat_penalty = 0.0 (AC-4.1)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-016
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 3: second use (history 1) @ 0.05/0.15 -> repeat_penalty = 0.05 (AC-4.2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-017
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 3: third use (history 3) -> repeat_penalty = min(0.15, 0.15) = 0.15 (cap reached) (AC-4.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-018
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 3: cap holds beyond third use (history 10 -> 0.15; penalty does not increase) (AC-4.4)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-019
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 3: repeat_penalty_per_use = 0.0 -> repeat_penalty = 0.0 regardless of use count (AC-4.5)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-020
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 4: neutral baseline (STEADFAST, zero-affinity traits, first use, defaults) -> P_final = 0.35 (AC-5.1)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-021
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 4: floor enforced — P_raw < 0.05 clamps P_final to the 0.05 floor (AC-5.2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-022
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 4: ceiling enforced — P_raw > 0.80 clamps P_final to the 0.80 ceiling (AC-5.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-023
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 4: max theoretical P_raw (base 0.35 + trait 0.50 + belief 0.20 - repeat 0.0 = 1.05) -> P_final = 0.80 ceiling (AC-5.4; EC-12)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-024
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 4: min theoretical P_raw (base 0.35 - trait 0.50 + belief 0.0 - repeat 0.15 = -0.30) -> P_final = 0.05 floor (AC-5.5)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-025
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 4: all four components sum correctly to expected P_final within floating-point tolerance (+-0.0001) (AC-5.6)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-026
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: P_final = 0.60, roll = 0.50 -> PERSUADED (AC-6.1)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-027
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: roll in [0.60, 0.60 + P_softened) -> SOFTENED (AC-6.2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-028
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: roll in [0.60 + P_softened, 0.60 + P_softened + P_resisted) -> RESISTED (AC-6.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-029
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: P_final = 0.05 (floor), roll = 0.99 -> HARDENED; HARDENED zone is reachable at the floor (AC-6.4)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-030
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: HARDENED is impossible at the ceiling (P_final = 0.80 with softened+resisted fractions summing to 1.0) — no HARDENED over 1000 seeded rolls (AC-6.5)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-031
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: roll exactly equal to P_final -> SOFTENED (strict '<' on the first comparison) (AC-6.6; EC-10)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-032
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Formula 5: all four outcomes cover the full range; 10,000-roll empirical distribution at P_final = 0.35 matches expected bands within +-3% (AC-6.7; ADR-0007)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-033
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-1: negative HARDENED zone (softened+resisted rounding to 1.0000000001) is floor-clamped to 0.0; no HARDENED returned, no crash (AC-7.1)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-034
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-2: band fractions summing > 1.0 logs an error, clamps resisted_band_fraction to 1.0 - softened_band_fraction, then returns a valid outcome (AC-7.2)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-035
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-3: unknown npc_id logs an error identifying the ID and returns ConversionOutcome.RESISTED as a safe sentinel (AC-7.3; NPC E14)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-036
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-5: a null required GameConfig.conversion field logs an error and returns RESISTED; single validation pass at entry (AC-7.4)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-037
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-9: an invalid (out-of-enum) approach value logs an error and returns RESISTED (AC-7.5)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-038
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-10: boundary ownership — a roll exactly equal to P_final yields SOFTENED, not PERSUADED; all comparisons are strict '<' (AC-7.6)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-039
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Signature: ConversionLogicEngine.resolve(approach: DialogueApproach, npc_id: String) -> ConversionOutcome compiles and is callable without type errors (AC-8.1; ADR-0007 threaded RNG arg)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-040
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Autoload availability: resolve() callable from any script project-wide without additional imports or scene dependencies (AC-8.2; ADR-0001 slot 6)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-041
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "Both a Dialogue & Conversion System-shaped stub and a Rival Faith System-shaped stub call resolve() in the same run without conflict or shared-state leakage (AC-8.3)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-042
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "GameConfig read-at-call-time: mutating a conversion field between two resolve() calls with identical NPC inputs changes P_final, proving values are not cached (AC-8.4; ADR-0005 pull pattern)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-043
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-7: trait_modifier_weight = 0.0 is valid configuration — traits become cosmetic (trait_subtotal 0.0 for any set); the Engine does not warn against it (EC-7)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-044
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-8: the Engine is stateless — resolve() without a follow-up apply_conversion_outcome() leaves no internal inconsistency; the caller must call apply in a finally-equivalent block (R9; EC-8; M2-INT-1 pair contract)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-045
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-11: RESISTED is the only outcome with no benefit — it increments approach_count and sets cooldown while providing neither a trait reveal nor a belief-state advance (EC-11)"
+    created: 2026-08-21
+    revised: ""
+    status: active
+  - id: TR-CLE-046
+    system: conversion-logic-engine
+    gdd: design/gdd/conversion-logic-engine.md
+    requirement: "EC-13: the reset-to-farm exploit is bounded structurally by max_approaches_per_npc, not by the Engine (EC-13; NPC approach counter)"
+    created: 2026-08-21
     revised: ""
     status: active
