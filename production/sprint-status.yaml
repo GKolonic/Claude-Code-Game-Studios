@@ -6,7 +6,7 @@ goal: "M2 Core data & math: NPC Resource classes + village_01.tres, NPCRegistry 
 start: "2026-08-24"
 end: "2026-09-11"
 generated: "2026-08-18"
-updated: "2026-08-18"
+updated: "2026-08-21"
 
 stories:
   - id: "1-1"
@@ -301,11 +301,11 @@ stories:
     name: "TR registry append + architecture review (M2-scoped)"
     file: "production/stories/sprint-2/2-10-tr-registry-architecture-review.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "technical-director"
     estimate_days: 0.75
     blocker: "2-1, 2-6, 2-7"
-    completed: ""
+    completed: "2026-08-21"
   - id: "2-11"
     name: "First CI run on GitHub Actions"
     file: "production/stories/sprint-2/2-11-first-ci-run.md"
