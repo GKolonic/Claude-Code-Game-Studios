@@ -310,11 +310,11 @@ stories:
     name: "First CI run on GitHub Actions"
     file: "production/stories/sprint-2/2-11-first-ci-run.md"
     priority: should-have
-    status: backlog
+    status: completed
     owner: "devops-engineer"
     estimate_days: 1.0
     blocker: "2-8, user approval to push"
-    completed: ""
+    completed: "2026-08-21"
   - id: "2-12"
     name: "entities.yaml + GDD consistency micro-fixes"
     file: "production/stories/sprint-2/2-12-entities-gdd-consistency.md"
